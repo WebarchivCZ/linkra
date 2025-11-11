@@ -1,0 +1,72 @@
+package components
+
+import (
+	"linkra/entities"
+	"path"
+)
+
+type GroupViewData struct {
+	Heading string
+	Group *entities.SeedsGroup
+}
+
+func NewGroupViewData(seedsGroup *entities.SeedsGroup) *GroupViewData {
+	return &GroupViewData{
+		Group: seedsGroup,
+	}
+}
+
+templ groupHeader() {
+	<div class="header">
+		<h1><span class="blue-text">Přehled</span> semínek</h1>
+		<p>Zde můžete sledovat stav vašich semínek</p>
+	</div>
+	<hr class="no-bottom-margin">
+}
+
+templ groupView(data *GroupViewData) {
+<div class="flex-content-column">
+	<h2>Přehled stavu semínek</h2>
+	<div class="flex-row">
+		<p>Odkaz na přehled: <a href={ groupViewLink(data.Group) } id="group-link">{ data.Group.ShadowID }</a></p>
+		<button type="button" id="copy-group-link">Kopírovat odkaz</button>
+	</div>
+	<div class="flex-row">
+		<p>Exportovat do:</p>
+		<div class="flex-row group-export-buttons">
+			<form method="get" action={ path.Join(Constants().GetGroupPath(), "/export/excel/", data.Group.ShadowID) }>
+				<button type="submit">Excel</button>
+			</form>
+			<form method="get" action={ path.Join(Constants().GetGroupPath(), "/export/csv/", data.Group.ShadowID) }>
+				<button type="submit">CSV</button>
+			</form>
+		</div>
+	</div>
+	<table id="group-info-table">
+		<thead>
+			<tr>
+				<th>URL</th>
+				<th>Zkrácená archivní URL</th>
+				<th>Stav</th>
+			</tr>
+		</thead>
+		<tbody>
+		for _, seed := range data.Group.Seeds {
+			<tr>
+				<td><a href={ seedViewLink(seed) }>{ seed.URL }</a></td>
+				<td><a href={ shortWaybackLink(seed) }>{ shortWaybackLink(seed) }</a></td>
+				<td>{ prettyPrintCaptureState(seed.State) }</td>
+			</tr>
+		}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td><button type="button" id="copy-urls">Kopírovat adresy</button></td>
+				<td><button type="button" id="copy-ids">Kopírovat adresy</button></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+<script src={ fullStaticPath("group-main.js") }></script>
+}

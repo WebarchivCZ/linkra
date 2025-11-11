@@ -1,0 +1,140 @@
+package components
+
+templ generatorView() {
+	<!-- Output -->
+	<div class="flex-content-column citation">
+		<section>
+			<h2>Citace:</h2>
+			<p id="citation"></p>
+		</section>
+	</div>
+	<div class="flex-content-column">
+		<span class="inline-step"><i>A. Doplňte data a zobrazí se vám citace podle předpřipravené šablony</i></span>
+		<section>
+			<form id="generator">
+				<!-- Controls -->
+				<div class="flex-row hidden" id="form-controls" hidden>
+					<button type="button" id="prev">Předchozí</button>
+					<p><span id="cit-data-num"></span> z <span id="cit-data-count"></span></p>
+					<button type="button" id="next">Další</button>
+				</div>
+				
+
+				<hr>
+				<div class="flex-row">
+					<button type="button" id="add-author">Přidat autora</button>
+					<button type="button" id="remove-author">Odebrat autora</button>
+				</div>
+				<!-- Data -->
+				<div id="authors">
+					<fieldset data-author-id="0">
+						<legend>Autor 1</legend>
+						<div class="flex-row cit-gen-fields">
+							<div class="flex-column cit-gen-labels">
+								<label for="příjmení">Příjmení:</label>
+								<label for="jméno">Jméno:</label>
+							</div>
+							<div class="flex-column cit-gen-inputs">
+								<input type="text" name="příjmení">
+								<input type="text" name="jméno">
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				
+				<div class="flex-row cit-gen-fields">
+					<div class="flex-column cit-gen-labels">
+						// <label for="příjmení">Příjmení:</label>
+						// <label for="jméno">Jméno:</label>
+						<label for="název">Název&nbsp;webu:</label>
+						<label for="součást">Součást:</label>
+						<label for="místo-vydání">Místo&nbsp;vydání:</label>
+						<label for="datum-vydání">Datum&nbsp;vydání:</label>
+						<label for="url">URL&nbsp;webu:</label>
+						<label for="archivní-url">Archivní&nbsp;URL:</label>
+						<label for="datum-archivace">Datum&nbsp;archivace:</label>
+						<label for="datum-citace">Datum&nbsp;citace:</label>
+					</div>
+					<div class="flex-column cit-gen-inputs">
+						// <input type="text" id="příjmení" data-citationfield="příjmení">
+						// <input type="text" id="jméno" data-citationfield="jméno">
+						<input type="text" id="název" data-citationfield="název">
+						<input type="text" id="součást" data-citationfield="součást">
+						<input type="text" id="místo-vydání" data-citationfield="místo-vydání">
+						<span class="flex-row max-flex">
+							<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-vydání" data-citationfield="datum-vydání">
+							<input type="datetime-local" step="1" id="datum-vydání-datetime">
+						</span>
+						<input type="text" id="url" data-citationfield="url">
+						<input type="text" id="archivní-url" data-citationfield="archivní-url">
+						<span class="flex-row max-flex">
+							<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-archivace" data-citationfield="datum-archivace">
+							<input type="datetime-local" step="1" id="datum-archivace-datetime">
+						</span>
+						<span class="flex-row max-flex">
+							<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-citace" data-citationfield="datum-citace">
+							<input type="datetime-local" step="1" id="datum-citace-datetime">
+						</span>
+						<script>
+							const input = document.getElementById("datum-citace");
+							input.value = (new Date).toLocaleDateString("en-CA");
+							// Don't question this. This is what gods of javascript wanted. Please give me TemporalAPI soon.
+						</script>
+					</div>
+				</div>
+
+				<!-- Template -->
+				<div class="flex-row">
+					<label for="template">Šablona:</label>
+					<input type="text" id="template" value="{{autoři}}. {{kurzíva název}} Online {{místo-vydání}} [{{datum-vydání}}]. Dostupné z: {{url}}. [cit. {{datum-citace}}]">
+				</div>
+			</form>
+			<hr>
+		</section>
+
+		<section>
+			<span class="inline-step"><i>B. Upravte si šablonu podle potřeby. Upravte existující pole, nebo přidejte nová. Šablonu použijete tlačítkem níže.</i></span>
+			<form id="builder-controls" class="flex-row">
+				<div class="flex-row field-chooser">
+					<select id="field-type">
+						<option value="autoři">Autoři</option>
+						// <option value="příjmení">Příjmení</option>
+						// <option value="jméno">Jméno</option>
+						<option value="název">Název webu</option>
+						<option value="součást">Součást</option>
+						<option value="místo-vydání">Místo vydání</option>
+						<option value="datum-vydání">Datum vydání</option>
+						<option value="url">URL</option>
+						<option value="archivní-url">Archivní URL</option>
+						<option value="datum-archivace">Datum archivace</option>
+						<option value="datum-citace">Datum citace</option>
+						<option value="text">Text</option>
+					</select>
+					<button type="button" id="add-field">Přidat&nbsp;pole</button>
+				</div>
+				<button type="button" id="remove-all-fields">Odebrat všechna pole</button>
+			</form>
+		</section>
+		<section id="builder">
+			<i id="builder-placeholder">Tady budou vidět přidaná pole</i>
+		</section>
+		// <span class="inline-step"><i>C. Vygenerujte šablonu a použijte pro aktuální citaci</i></span>
+		<button type="button" id="build-template" form="builder-controls">Použít&nbsp;šablonu</button>
+		// <hr>
+		
+	</div>
+
+	<script type="application/json" id="input-data">
+		[{
+			"autoři": [
+				{
+					"příjmení": "",
+					"jméno": ""
+				}
+			]
+		}]
+	</script>
+	<script src={ fullStaticPath("handlebars.min-v4.7.8.js") }></script>
+	<script src={ fullStaticPath("luxon.min.js") }></script>
+	<script src={ fullStaticPath("generator.js") }></script>
+}

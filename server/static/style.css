@@ -1,0 +1,417 @@
+/* variables */
+:root {
+    --clr-webarchiv-blue: #00f;
+    --clr-text-main: var(--clr-black);
+    --clr-background-main: var(--clr-white);
+    --clr-background-secondary: #f5f5f5;
+    --clr-focus: var(--clr-black);
+    --clr-error: hsl(0 90 50);
+    --clr-black: #000;
+    --clr-gray: hsl(0 0 50);
+    --clr-white: #fff;
+
+    --font-serif: "Times New Roman", serif;
+    --font-sans: "Roboto", sans-serif;
+
+    --font-size: 1.2rem;
+
+    --paragraph-width: 1000px;
+}
+
+/* global */
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--clr-text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: auto;
+    font-size: var(--font-size);
+    font-weight: 400;
+    padding: 0 0.5rem;
+    background-color: var(--clr-background-main);
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol {
+    margin-bottom: 16px;
+}
+hr,
+section,
+article,
+header {
+    margin-bottom: 2rem;
+}
+main > section:last-of-type,
+main > article:last-of-type {
+    margin-bottom: 0;
+}
+.no-bottom-margin {
+    margin-bottom: 0;
+}
+
+header {
+    margin-top: 1rem;
+}
+
+p {
+    line-height: 24px;
+}
+
+.blue-text {
+    color: var(--clr-webarchiv-blue);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-serif);
+    color: var(--clr-webarchiv-blue);
+    font-weight: 500;
+}
+h1 {
+    font-size: 3.75rem;
+    color: var(--clr-text-main);
+}
+h2 {
+    font-size: 2rem;
+    font-style: italic;
+}
+h3 {
+    font-size: 2rem;
+    font-style: italic;
+}
+h4 {
+    font-size: 2rem;
+}
+
+ul {
+    list-style-type: none;
+}
+li {
+    padding-left: 2rem;
+}
+
+hr {
+    height: 3px;
+    background-color: var(--clr-black);
+    border: 0;
+}
+
+a {
+    color: var(--clr-webarchiv-blue);
+    text-decoration: underline;
+    text-decoration-color: var(--clr-webarchiv-blue);
+}
+a:hover {
+    text-decoration: none;
+    color: var(--clr-webarchiv-blue);
+}
+a:visited {
+    color: var(--clr-webarchiv-blue);
+}
+/* This makes underline on the h1 links more consistent across browsers */
+h1 a {
+    text-decoration-thickness: 3px;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: 100%;
+    padding: 4px 8px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    border: 3px solid var(--clr-webarchiv-blue);
+    background-color: var(--clr-background-secondary);
+    font-size: 1.35rem;
+    /* margin: 4px 0; */
+    margin-bottom: 16px;
+}
+textarea {
+    min-height: 5rem;
+    resize: vertical;
+}
+input:focus,
+textarea:focus {
+    outline: 3px solid var(--clr-webarchiv-blue);
+}
+
+output {
+    border: 3px solid var(--clr-webarchiv-blue);
+}
+
+button {
+    background-color: var(--clr-webarchiv-blue);
+    border: 3px solid var(--clr-webarchiv-blue);
+    color: var(--clr-white);
+}
+button:hover {
+    background-color: var(--clr-white);
+    color: var(--clr-webarchiv-blue);
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+    background-color: var(--clr-background-main);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    text-align: center;
+    min-width: var(--paragraph-width);
+}
+thead {
+    border-bottom: 2px solid var(--clr-black);
+    /* border-top: 2px solid var(--clr-black); */
+}
+td {
+    padding: 1rem;
+}
+th {
+    padding: 1rem 0.5rem 0.5rem;
+    font-weight: 400;
+    font-size: 1.25rem;
+}
+tbody > tr:nth-of-type(odd) {
+    background-color: var(--clr-background-secondary);
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+.flex-row input {
+    margin-bottom: 0;
+}
+.flex-row label {
+    margin-right: 8px;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-content-column {
+    display: flex;
+    flex-direction: column;
+    width: var(--paragraph-width);
+}
+
+.long-button {
+    width: 100%;
+}
+
+/* pagination */
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 8px 0;
+}
+.pagination-link {
+    font-size: 2rem;
+    padding: 4px 12px;
+    /* margin-top: 3px;
+    margin-bottom: 4px; */
+    margin: 3px 4px 0
+}
+.pagination-active {
+    padding: 4px 9px;
+    border: 3px solid var(--clr-webarchiv-blue);
+    margin-top: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+/* Hide element */
+.hidden {
+    display: none;
+}
+
+/* header */
+
+/* nav */
+.nav {
+    margin: 1rem 0;
+    width: var(--paragraph-width);
+    justify-content: center;
+}
+.nav > a {
+    margin: 0 0.5rem;
+}
+
+/* main */
+/* main - index */
+.error-output {
+    color: var(--clr-error);
+    text-decoration: underline;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* main - result */
+.status-code {
+    color: var(--clr-gray);
+    margin-left: 8px;
+}
+
+.group-export-buttons > form {
+    margin-left: 1rem;
+}
+
+/* footer */
+.footer {
+    margin: 16px 0;
+    align-items: start;
+    width: var(--paragraph-width);
+}
+
+/* citation generator */
+
+.cit-gen-fields {
+    align-items: stretch;
+}
+
+.cit-gen-labels {
+    justify-content: space-around;
+    align-items: end;
+}
+.cit-gen-labels > label {
+    margin-bottom: 0.5rem;
+}
+
+.cit-gen-inputs {
+    flex: 1;
+    justify-content: space-around;
+}
+.cit-gen-inputs > input {
+    margin-bottom: 0.5rem;
+}
+
+.field-chooser > select {
+    margin: 0 4px;
+}
+
+.max-flex {
+    flex: 1;
+    align-self: stretch;
+    /* padding-right: auto; */
+}
+
+.field {
+    background-color: var(--clr-background-secondary);
+    border: var(--clr-webarchiv-blue) solid 3px;
+    align-items: center;
+}
+.field span:first-of-type {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.field .flex-row {
+    margin-bottom: 0;
+    justify-content: space-around;
+}
+.field button {
+    align-self: stretch;
+    padding-top: auto;
+    padding-bottom: auto;
+}
+.field input,
+.field select {
+    margin: 4px;
+    background-color: var(--clr-background-main);
+    border-color: var(--clr-black);
+    font-size: var(--font-size);
+    padding: 4px;
+}
+.field .format-controls,
+.field .case-controls {
+    margin: 4px 0;
+}
+.field hr {
+    border: 0;
+    border-top: var(--clr-black) solid 2px;
+    margin: 0;
+    margin-right: 1rem;
+}
+.f-start {
+    flex: 1;
+}
+.f-middle {
+    flex: 5;
+}
+
+.citation {
+    position: sticky;
+    top: 0;
+}
+.citation > section {
+    background-color: var(--clr-background-main);
+    border-top: var(--clr-webarchiv-blue) solid 3px;
+    border-bottom: var(--clr-webarchiv-blue) solid 3px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.citation p {
+    font-size: 1.35rem;
+}
+
+.inline-step {
+    margin-bottom: 0.5rem;
+    font-size: 1.35rem;
+    display: inline-block;
+}
+
+fieldset {
+    padding: 0.25rem;
+    /* margin-bottom: 8px; */
+    /* border: solid black 2px; */
+    margin: 0;
+    border: 0;
+}
+
+.authors-field input[type="text"],
+.authors-field input[type="number"] {
+    width: 5rem;
+}
+.authors-field {
+    align-items: flex-start;
+}

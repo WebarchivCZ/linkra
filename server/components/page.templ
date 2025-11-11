@@ -1,0 +1,89 @@
+package components
+
+const (
+	defaultTitle = "Webarchiv - Linkra"
+	defaultHeading = "Webarchiv"
+)
+
+type PageComponents struct {
+	Title string
+	Header templ.Component
+	Navigation templ.Component
+	Main templ.Component
+	Footer templ.Component
+}
+
+func Assemble(components *PageComponents) templ.Component {
+	if components.Title == "" {
+		components.Title = defaultTitle
+	}
+	if components.Header == nil {
+		components.Header = header(defaultHeading)
+	}
+	if components.Navigation == nil {
+		components.Navigation = nav()
+	}
+	if components.Footer == nil {
+		components.Footer = footer()
+	}
+	return page(components)
+}
+
+templ page(components *PageComponents) {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{ components.Title }</title>
+	<link rel="stylesheet" href={ fullStaticPath("style.css") }>
+</head>
+<body>
+	<header class="flex-content-column">
+		@components.Header
+		<nav>
+			@components.Navigation
+		</nav>
+	</header>
+	<main>
+		@components.Main
+	</main>
+	<footer>
+		@components.Footer
+	</footer>
+</body>
+</html>
+}
+
+templ header(heading string) {
+<div class="header">
+	<h1>{ heading }</h1>
+</div>
+<hr class="no-bottom-margin">
+}
+
+templ nav() {
+<div class="flex-row nav">
+	<a href="/">1. krok - zadejte URL</a>
+	&gt;
+	<a>2. krok - přehled semínek</a>
+	&gt;
+	<a href="/generator/">3. krok - generátor citací</a>
+</div>
+}
+
+templ footer() {
+<hr>
+<div class="flex-row footer">
+	<div>
+		<p>
+			<a href="https://www.webarchiv.cz">Webarchiv</a> je součástí<br>
+			<a href="https://www.nkp.cz">Národní knihovny ČR</a>
+		</p>
+	</div>
+	<!-- NK logo -->
+	<a class="logo-nk" href="https://www.nkp.cz">
+		<img src={ fullStaticPath("logo_NK.svg") } alt="Národní knihovna">
+	</a>
+</div>
+}

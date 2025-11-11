@@ -1,0 +1,30 @@
+package components
+
+import "path"
+
+templ indexHeader() {
+<div class="header">
+	<h1><a href="https://www.webarchiv.cz">Webarchiv</a> archivuje citace</h1>
+	<p>Pomůžeme vám uchovat zdroje k vaší práci</p>
+</div>
+<hr class="no-bottom-margin">
+}
+
+templ indexView() {
+	<div class="flex-content-column">
+		<!-- Vyhledávací / zadávací pole -->
+		<p>Krok 1. zadejte URL adresy</p>
+		<section>
+			<form action={ path.Join(Constants().GetGroupPath(), "/save") + "/" } method="post" enctype="multipart/form-data">
+				<label for="url-list">zadejte jednu nebo více URL adres</label>
+				<textarea name="url-list" id="url-list" placeholder="https://example.com" required wrap="off" ></textarea>
+				<button type="submit">Odeslat</button>
+			</form>
+		</section>
+		<script>
+			// Workaround for multiline placeholder
+			const textarea = document.querySelector("textarea");
+			textarea.setAttribute("placeholder", "https://example.com\nhttps://another.example.com");
+		</script>
+	</div>
+}

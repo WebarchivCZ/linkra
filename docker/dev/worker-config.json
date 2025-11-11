@@ -1,0 +1,6 @@
+{
+  "discardArchiveFiles": true,
+  "outputDir": "/app/captures/",
+  "valkeyUrl": "redis://queue:6379",
+  "captureSettings": {}
+}
