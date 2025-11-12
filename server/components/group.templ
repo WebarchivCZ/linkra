@@ -63,6 +63,7 @@ templ groupView(data *GroupViewData) {
 			</tr>
 		</tfoot>
 	</table>
+	<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">Pokračovat na generátor citací</a>
 </div>
 <script src={ fullStaticPath("group-main.js") }></script>
 }
