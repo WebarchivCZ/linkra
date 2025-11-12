@@ -34,5 +34,5 @@ func (handler *GeneratorHandler) View(w http.ResponseWriter, r *http.Request) er
 }
 
 func (handler *GeneratorHandler) Routes(mux *http.ServeMux) {
-	mux.Handle("GET /generator/", handler)
+	mux.Handle("GET /citace/", handler)
 }

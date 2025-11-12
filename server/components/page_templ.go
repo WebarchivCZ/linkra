@@ -187,7 +187,7 @@ func nav() templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<div class=\"flex-row nav\"><a href=\"/\">1. krok - zadejte URL</a> &gt; <a>2. krok - přehled semínek</a> &gt; <a href=\"/generator/\">3. krok - generátor citací</a></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<div class=\"flex-row nav\"><a href=\"/\">1. krok - zadejte URL</a> &gt; <a>2. krok - přehled semínek</a> &gt; <a href=\"/citace/\">3. krok - generátor citací</a></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
