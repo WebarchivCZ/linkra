@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"linkra/assert"
 	"linkra/entities"
+	"linkra/server/components"
 	"linkra/server/handlers/httperror"
 	"linkra/services"
 	"linkra/utils"
@@ -79,7 +80,7 @@ func (handler *ExportGroupHandler) RespondExcel(w http.ResponseWriter, r *http.R
 	header := w.Header()
 	const XlsxMimetype = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 	header.Set(utils.ContentType, XlsxMimetype)
-	filename := "export-" + group.ShadowID + ".xlsx"
+	filename := components.ExcelFilename(group)
 	header.Set("Content-Disposition", `attachment; filename="`+filename+`"`)
 	w.WriteHeader(http.StatusOK)
 	_, _ = buffer.WriteTo(w)
@@ -98,7 +99,7 @@ func (handler *ExportGroupHandler) RespondCsv(w http.ResponseWriter, r *http.Req
 	header := w.Header()
 	const CsvMimetype = "text/csv"
 	header.Set(utils.ContentType, CsvMimetype)
-	filename := "export-" + group.ShadowID + ".csv"
+	filename := components.CsvFilename(group)
 	header.Set("Content-Disposition", `attachment; filename="`+filename+`"`)
 	w.WriteHeader(http.StatusOK)
 	_, _ = buffer.WriteTo(w)

@@ -141,6 +141,7 @@ h1 a {
 }
 
 button,
+a.btn,
 input,
 textarea,
 select {
@@ -172,12 +173,14 @@ output {
     border: 3px solid var(--clr-webarchiv-blue);
 }
 
-button {
+button,
+a.btn {
     background-color: var(--clr-webarchiv-blue);
     border: 3px solid var(--clr-webarchiv-blue);
     color: var(--clr-white);
 }
-button:hover {
+button:hover,
+a.btn:hover {
     background-color: var(--clr-white);
     color: var(--clr-webarchiv-blue);
 }
@@ -293,7 +296,7 @@ tbody > tr:nth-of-type(odd) {
     margin-left: 8px;
 }
 
-.group-export-buttons > form {
+.group-export-buttons > a.btn {
     margin-left: 1rem;
 }
 

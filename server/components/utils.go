@@ -5,6 +5,14 @@ import (
 	"path"
 )
 
+func CsvFilename(group *entities.SeedsGroup) string {
+	return "export-" + group.ShadowID + ".csv"
+}
+
+func ExcelFilename(group *entities.SeedsGroup) string {
+	return "export-" + group.ShadowID + ".xlsx"
+}
+
 func prettyPrintCaptureState(state entities.CaptureState) string {
 	return entities.PrettyPrintCaptureState(state)
 }

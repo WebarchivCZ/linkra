@@ -34,12 +34,8 @@ templ groupView(data *GroupViewData) {
 	<div class="flex-row">
 		<p>Exportovat do:</p>
 		<div class="flex-row group-export-buttons">
-			<form method="get" action={ path.Join(Constants().GetGroupPath(), "/export/excel/", data.Group.ShadowID) }>
-				<button type="submit">Excel</button>
-			</form>
-			<form method="get" action={ path.Join(Constants().GetGroupPath(), "/export/csv/", data.Group.ShadowID) }>
-				<button type="submit">CSV</button>
-			</form>
+			<a class="btn" download={ ExcelFilename(data.Group) } href={ path.Join(Constants().GetGroupPath(), "/export/excel/", data.Group.ShadowID) }>Excel</a>
+			<a class="btn" download={ CsvFilename(data.Group) } href={ path.Join(Constants().GetGroupPath(), "/export/csv/", data.Group.ShadowID) }>CSV</a>
 		</div>
 	</div>
 	<table id="group-info-table">
