@@ -32,10 +32,10 @@ func ErrorView(data *ErrorViewData) templ.Component {
 	})
 }
 
-func GeneratorView() templ.Component {
+func GeneratorView(data *GeneratorViewData) templ.Component {
 	return Assemble(&PageComponents{
 		Title:  "Generátor citací",
 		Header: header("Generátor citací"),
-		Main:   generatorView(),
+		Main:   generatorView(data),
 	})
 }

@@ -31,7 +31,7 @@ func NewServer(ctx context.Context, log *slog.Logger, addr string, services *ser
 		static.NewStaticHandler(log, staticFiles /* from embed.go */),
 		group.NewGroupHandler(log, services.SeedService, services.ExporterService, services.CaptureService, errorHandler),
 		seed.NewSeedHandler(log, services.SeedService, errorHandler),
-		generator.NewGeneratorHandler(log),
+		generator.NewGeneratorHandler(log, services.SeedService, errorHandler),
 		redirect.NewRedirectHanlder(log, services.SeedService, errorHandler),
 	)
 

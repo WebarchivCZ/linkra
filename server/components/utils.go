@@ -1,6 +1,7 @@
 package components
 
 import (
+	"encoding/json"
 	"linkra/entities"
 	"path"
 )
@@ -15,6 +16,40 @@ func ExcelFilename(group *entities.SeedsGroup) string {
 
 func prettyPrintCaptureState(state entities.CaptureState) string {
 	return entities.PrettyPrintCaptureState(state)
+}
+
+type seedJsonObject struct {
+	Authors      []authorsJsonObject `json:"autoři"`
+	URL          string              `json:"url"`
+	ArchivalURL  string              `json:"archivní-url"`
+	ArchivalDate string              `json:"datum-archivace"`
+}
+
+type authorsJsonObject struct {
+	Name    string `json:"jméno"`
+	Surname string `json:"příjmení"`
+}
+
+func groupToJson(group *entities.SeedsGroup) string {
+	objects := make([]seedJsonObject, 0, len(group.Seeds))
+	for _, seed := range group.Seeds {
+		seedObject := seedJsonObject{
+			Authors:      []authorsJsonObject{{}},
+			URL:          seed.URL,
+			ArchivalURL:  shortWaybackLink(seed),
+			ArchivalDate: seed.HarvestedAt.Format("2006-01-02T15:04:05"),
+		}
+		objects = append(objects, seedObject)
+	}
+	data, err := json.Marshal(objects)
+	if err != nil {
+		return `[{"error":"could not marshal json"}]`
+	}
+	return string(data)
+}
+
+func wrapJsonToScript(data string) string {
+	return `<script type="application/json" id="input-data">` + data + `</script>`
 }
 
 // NOTE

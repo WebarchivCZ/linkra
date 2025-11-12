@@ -1,6 +1,19 @@
 package components
 
-templ generatorView() {
+import "linkra/entities"
+
+type GeneratorViewData struct {
+	Group *entities.SeedsGroup
+}
+
+// group may be nil
+func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
+	return &GeneratorViewData{
+		Group: group,
+	}
+}
+
+templ generatorView(data *GeneratorViewData) {
 	<!-- Output -->
 	<div class="flex-content-column citation">
 		<section>
@@ -124,16 +137,21 @@ templ generatorView() {
 		
 	</div>
 
-	<script type="application/json" id="input-data">
-		[{
-			"autoři": [
-				{
-					"příjmení": "",
-					"jméno": ""
-				}
-			]
-		}]
-	</script>
+	if data.Group == nil {
+		<script type="application/json" id="input-data">
+			[{
+				"autoři": [
+					{
+						"příjmení": "",
+						"jméno": ""
+					}
+				]
+			}]
+		</script>
+	} else {
+		@templ.Raw(wrapJsonToScript(groupToJson(data.Group)))
+	}
+	
 	<script src={ fullStaticPath("handlebars.min-v4.7.8.js") }></script>
 	<script src={ fullStaticPath("luxon.min.js") }></script>
 	<script src={ fullStaticPath("generator.js") }></script>

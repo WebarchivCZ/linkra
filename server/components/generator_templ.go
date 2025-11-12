@@ -8,7 +8,20 @@ package components
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func generatorView() templ.Component {
+import "linkra/entities"
+
+type GeneratorViewData struct {
+	Group *entities.SeedsGroup
+}
+
+// group may be nil
+func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
+	return &GeneratorViewData{
+		Group: group,
+	}
+}
+
+func generatorView(data *GeneratorViewData) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,46 +42,61 @@ func generatorView() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!-- Output --><div class=\"flex-content-column citation\"><section><h2>Citace:</h2><p id=\"citation\"></p></section></div><div class=\"flex-content-column\"><span class=\"inline-step\"><i>A. Doplňte data a zobrazí se vám citace podle předpřipravené šablony</i></span><section><form id=\"generator\"><!-- Controls --><div class=\"flex-row hidden\" id=\"form-controls\" hidden><button type=\"button\" id=\"prev\">Předchozí</button><p><span id=\"cit-data-num\"></span> z <span id=\"cit-data-count\"></span></p><button type=\"button\" id=\"next\">Další</button></div><hr><div class=\"flex-row\"><button type=\"button\" id=\"add-author\">Přidat autora</button> <button type=\"button\" id=\"remove-author\">Odebrat autora</button></div><!-- Data --><div id=\"authors\"><fieldset data-author-id=\"0\"><legend>Autor 1</legend><div class=\"flex-row cit-gen-fields\"><div class=\"flex-column cit-gen-labels\"><label for=\"příjmení\">Příjmení:</label> <label for=\"jméno\">Jméno:</label></div><div class=\"flex-column cit-gen-inputs\"><input type=\"text\" name=\"příjmení\"> <input type=\"text\" name=\"jméno\"></div></div></fieldset></div><div class=\"flex-row cit-gen-fields\"><div class=\"flex-column cit-gen-labels\"><label for=\"název\">Název&nbsp;webu:</label> <label for=\"součást\">Součást:</label> <label for=\"místo-vydání\">Místo&nbsp;vydání:</label> <label for=\"datum-vydání\">Datum&nbsp;vydání:</label> <label for=\"url\">URL&nbsp;webu:</label> <label for=\"archivní-url\">Archivní&nbsp;URL:</label> <label for=\"datum-archivace\">Datum&nbsp;archivace:</label> <label for=\"datum-citace\">Datum&nbsp;citace:</label></div><div class=\"flex-column cit-gen-inputs\"><input type=\"text\" id=\"název\" data-citationfield=\"název\"> <input type=\"text\" id=\"součást\" data-citationfield=\"součást\"> <input type=\"text\" id=\"místo-vydání\" data-citationfield=\"místo-vydání\"> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"Vyberte nebo vyplňte hodnotu\" id=\"datum-vydání\" data-citationfield=\"datum-vydání\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-vydání-datetime\"></span> <input type=\"text\" id=\"url\" data-citationfield=\"url\"> <input type=\"text\" id=\"archivní-url\" data-citationfield=\"archivní-url\"> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"Vyberte nebo vyplňte hodnotu\" id=\"datum-archivace\" data-citationfield=\"datum-archivace\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-archivace-datetime\"></span> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"Vyberte nebo vyplňte hodnotu\" id=\"datum-citace\" data-citationfield=\"datum-citace\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-citace-datetime\"></span><script>\n\t\t\t\t\t\t\tconst input = document.getElementById(\"datum-citace\");\n\t\t\t\t\t\t\tinput.value = (new Date).toLocaleDateString(\"en-CA\");\n\t\t\t\t\t\t\t// Don't question this. This is what gods of javascript wanted. Please give me TemporalAPI soon.\n\t\t\t\t\t\t</script></div></div><!-- Template --><div class=\"flex-row\"><label for=\"template\">Šablona:</label> <input type=\"text\" id=\"template\" value=\"{{autoři}}. {{kurzíva název}} Online {{místo-vydání}} [{{datum-vydání}}]. Dostupné z: {{url}}. [cit. {{datum-citace}}]\"></div></form><hr></section><section><span class=\"inline-step\"><i>B. Upravte si šablonu podle potřeby. Upravte existující pole, nebo přidejte nová. Šablonu použijete tlačítkem níže.</i></span><form id=\"builder-controls\" class=\"flex-row\"><div class=\"flex-row field-chooser\"><select id=\"field-type\"><option value=\"autoři\">Autoři</option><option value=\"název\">Název webu</option> <option value=\"součást\">Součást</option> <option value=\"místo-vydání\">Místo vydání</option> <option value=\"datum-vydání\">Datum vydání</option> <option value=\"url\">URL</option> <option value=\"archivní-url\">Archivní URL</option> <option value=\"datum-archivace\">Datum archivace</option> <option value=\"datum-citace\">Datum citace</option> <option value=\"text\">Text</option></select> <button type=\"button\" id=\"add-field\">Přidat&nbsp;pole</button></div><button type=\"button\" id=\"remove-all-fields\">Odebrat všechna pole</button></form></section><section id=\"builder\"><i id=\"builder-placeholder\">Tady budou vidět přidaná pole</i></section><button type=\"button\" id=\"build-template\" form=\"builder-controls\">Použít&nbsp;šablonu</button></div><script type=\"application/json\" id=\"input-data\">\n\t\t[{\n\t\t\t\"autoři\": [\n\t\t\t\t{\n\t\t\t\t\t\"příjmení\": \"\",\n\t\t\t\t\t\"jméno\": \"\"\n\t\t\t\t}\n\t\t\t]\n\t\t}]\n\t</script><script src=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!-- Output --><div class=\"flex-content-column citation\"><section><h2>Citace:</h2><p id=\"citation\"></p></section></div><div class=\"flex-content-column\"><span class=\"inline-step\"><i>A. Doplňte data a zobrazí se vám citace podle předpřipravené šablony</i></span><section><form id=\"generator\"><!-- Controls --><div class=\"flex-row hidden\" id=\"form-controls\" hidden><button type=\"button\" id=\"prev\">Předchozí</button><p><span id=\"cit-data-num\"></span> z <span id=\"cit-data-count\"></span></p><button type=\"button\" id=\"next\">Další</button></div><hr><div class=\"flex-row\"><button type=\"button\" id=\"add-author\">Přidat autora</button> <button type=\"button\" id=\"remove-author\">Odebrat autora</button></div><!-- Data --><div id=\"authors\"><fieldset data-author-id=\"0\"><legend>Autor 1</legend><div class=\"flex-row cit-gen-fields\"><div class=\"flex-column cit-gen-labels\"><label for=\"příjmení\">Příjmení:</label> <label for=\"jméno\">Jméno:</label></div><div class=\"flex-column cit-gen-inputs\"><input type=\"text\" name=\"příjmení\"> <input type=\"text\" name=\"jméno\"></div></div></fieldset></div><div class=\"flex-row cit-gen-fields\"><div class=\"flex-column cit-gen-labels\"><label for=\"název\">Název&nbsp;webu:</label> <label for=\"součást\">Součást:</label> <label for=\"místo-vydání\">Místo&nbsp;vydání:</label> <label for=\"datum-vydání\">Datum&nbsp;vydání:</label> <label for=\"url\">URL&nbsp;webu:</label> <label for=\"archivní-url\">Archivní&nbsp;URL:</label> <label for=\"datum-archivace\">Datum&nbsp;archivace:</label> <label for=\"datum-citace\">Datum&nbsp;citace:</label></div><div class=\"flex-column cit-gen-inputs\"><input type=\"text\" id=\"název\" data-citationfield=\"název\"> <input type=\"text\" id=\"součást\" data-citationfield=\"součást\"> <input type=\"text\" id=\"místo-vydání\" data-citationfield=\"místo-vydání\"> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"Vyberte nebo vyplňte hodnotu\" id=\"datum-vydání\" data-citationfield=\"datum-vydání\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-vydání-datetime\"></span> <input type=\"text\" id=\"url\" data-citationfield=\"url\"> <input type=\"text\" id=\"archivní-url\" data-citationfield=\"archivní-url\"> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"Vyberte nebo vyplňte hodnotu\" id=\"datum-archivace\" data-citationfield=\"datum-archivace\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-archivace-datetime\"></span> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"Vyberte nebo vyplňte hodnotu\" id=\"datum-citace\" data-citationfield=\"datum-citace\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-citace-datetime\"></span><script>\n\t\t\t\t\t\t\tconst input = document.getElementById(\"datum-citace\");\n\t\t\t\t\t\t\tinput.value = (new Date).toLocaleDateString(\"en-CA\");\n\t\t\t\t\t\t\t// Don't question this. This is what gods of javascript wanted. Please give me TemporalAPI soon.\n\t\t\t\t\t\t</script></div></div><!-- Template --><div class=\"flex-row\"><label for=\"template\">Šablona:</label> <input type=\"text\" id=\"template\" value=\"{{autoři}}. {{kurzíva název}} Online {{místo-vydání}} [{{datum-vydání}}]. Dostupné z: {{url}}. [cit. {{datum-citace}}]\"></div></form><hr></section><section><span class=\"inline-step\"><i>B. Upravte si šablonu podle potřeby. Upravte existující pole, nebo přidejte nová. Šablonu použijete tlačítkem níže.</i></span><form id=\"builder-controls\" class=\"flex-row\"><div class=\"flex-row field-chooser\"><select id=\"field-type\"><option value=\"autoři\">Autoři</option><option value=\"název\">Název webu</option> <option value=\"součást\">Součást</option> <option value=\"místo-vydání\">Místo vydání</option> <option value=\"datum-vydání\">Datum vydání</option> <option value=\"url\">URL</option> <option value=\"archivní-url\">Archivní URL</option> <option value=\"datum-archivace\">Datum archivace</option> <option value=\"datum-citace\">Datum citace</option> <option value=\"text\">Text</option></select> <button type=\"button\" id=\"add-field\">Přidat&nbsp;pole</button></div><button type=\"button\" id=\"remove-all-fields\">Odebrat všechna pole</button></form></section><section id=\"builder\"><i id=\"builder-placeholder\">Tady budou vidět přidaná pole</i></section><button type=\"button\" id=\"build-template\" form=\"builder-controls\">Použít&nbsp;šablonu</button></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if data.Group == nil {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<script type=\"application/json\" id=\"input-data\">\n\t\t\t[{\n\t\t\t\t\"autoři\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"příjmení\": \"\",\n\t\t\t\t\t\t\"jméno\": \"\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}]\n\t\t</script>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			templ_7745c5c3_Err = templ.Raw(wrapJsonToScript(groupToJson(data.Group))).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<script src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("handlebars.min-v4.7.8.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 137, Col: 57}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 155, Col: 57}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"></script><script src=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\"></script><script src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("luxon.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 138, Col: 45}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 156, Col: 45}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"></script><script src=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\"></script><script src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("generator.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 139, Col: 45}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 157, Col: 45}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\"></script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\"></script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
