@@ -54,47 +54,84 @@ templ generatorView(data *GeneratorViewData) {
 						</div>
 					</fieldset>
 				</div>
-				
-				<div class="flex-row cit-gen-fields">
-					<div class="flex-column cit-gen-labels">
-						// <label for="příjmení">Příjmení:</label>
-						// <label for="jméno">Jméno:</label>
-						<label for="název">Název&nbsp;webu:</label>
-						<label for="součást">Součást:</label>
-						<label for="místo-vydání">Místo&nbsp;vydání:</label>
-						<label for="datum-vydání">Datum&nbsp;vydání:</label>
-						<label for="url">URL&nbsp;webu:</label>
-						<label for="archivní-url">Archivní&nbsp;URL:</label>
-						<label for="datum-archivace">Datum&nbsp;archivace:</label>
-						<label for="datum-citace">Datum&nbsp;citace:</label>
-					</div>
-					<div class="flex-column cit-gen-inputs">
-						// <input type="text" id="příjmení" data-citationfield="příjmení">
-						// <input type="text" id="jméno" data-citationfield="jméno">
-						<input type="text" id="název" data-citationfield="název">
-						<input type="text" id="součást" data-citationfield="součást">
-						<input type="text" id="místo-vydání" data-citationfield="místo-vydání">
-						<span class="flex-row max-flex">
-							<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-vydání" data-citationfield="datum-vydání">
-							<input type="datetime-local" step="1" id="datum-vydání-datetime">
-						</span>
-						<input type="text" id="url" data-citationfield="url">
-						<input type="text" id="archivní-url" data-citationfield="archivní-url">
-						<span class="flex-row max-flex">
-							<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-archivace" data-citationfield="datum-archivace">
-							<input type="datetime-local" step="1" id="datum-archivace-datetime">
-						</span>
-						<span class="flex-row max-flex">
-							<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-citace" data-citationfield="datum-citace">
-							<input type="datetime-local" step="1" id="datum-citace-datetime">
-						</span>
-						<script>
-							const input = document.getElementById("datum-citace");
-							input.value = (new Date).toLocaleDateString("en-CA");
-							// Don't question this. This is what gods of javascript wanted. Please give me TemporalAPI soon.
-						</script>
-					</div>
+
+				<div class="flex-column flex-start">
+					<label for="název">Název&nbsp;webu:</label>
+					<input type="text" id="název" data-citationfield="název">
+
+					<label for="součást">Součást:</label>
+					<input type="text" id="součást" data-citationfield="součást">
+
+					<label for="místo-vydání">Místo&nbsp;vydání:</label>
+					<input type="text" id="místo-vydání" data-citationfield="místo-vydání">
+
+					<label for="datum-vydání">Datum&nbsp;vydání:</label>
+					<span class="flex-row max-flex">
+						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-vydání" data-citationfield="datum-vydání">
+						<input type="datetime-local" step="1" id="datum-vydání-datetime">
+					</span>
+
+					<label for="url">URL&nbsp;webu:</label>
+					<input type="text" id="url" data-citationfield="url">
+
+					<label for="datum-archivace">Datum&nbsp;archivace:</label>
+					<span class="flex-row max-flex">
+						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-archivace" data-citationfield="datum-archivace">
+						<input type="datetime-local" step="1" id="datum-archivace-datetime">
+					</span>
+
+					<label for="datum-citace">Datum&nbsp;citace:</label>
+					<span class="flex-row max-flex">
+						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-citace" data-citationfield="datum-citace">
+						<input type="datetime-local" step="1" id="datum-citace-datetime">
+					</span>
+					<script>
+						const input = document.getElementById("datum-citace");
+						input.value = (new Date).toLocaleDateString("en-CA");
+						// Don't question this. This is what gods of javascript wanted. Please give me TemporalAPI soon.
+					</script>
 				</div>
+				
+				// <div class="flex-row cit-gen-fields">
+				// 	<div class="flex-column cit-gen-labels">
+				// 		// <label for="příjmení">Příjmení:</label>
+				// 		// <label for="jméno">Jméno:</label>
+				// 		<label for="název">Název&nbsp;webu:</label>
+				// 		<label for="součást">Součást:</label>
+				// 		<label for="místo-vydání">Místo&nbsp;vydání:</label>
+				// 		<label for="datum-vydání">Datum&nbsp;vydání:</label>
+				// 		<label for="url">URL&nbsp;webu:</label>
+				// 		<label for="archivní-url">Archivní&nbsp;URL:</label>
+				// 		<label for="datum-archivace">Datum&nbsp;archivace:</label>
+				// 		<label for="datum-citace">Datum&nbsp;citace:</label>
+				// 	</div>
+				// 	<div class="flex-column cit-gen-inputs">
+				// 		// <input type="text" id="příjmení" data-citationfield="příjmení">
+				// 		// <input type="text" id="jméno" data-citationfield="jméno">
+				// 		<input type="text" id="název" data-citationfield="název">
+				// 		<input type="text" id="součást" data-citationfield="součást">
+				// 		<input type="text" id="místo-vydání" data-citationfield="místo-vydání">
+				// 		<span class="flex-row max-flex">
+				// 			<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-vydání" data-citationfield="datum-vydání">
+				// 			<input type="datetime-local" step="1" id="datum-vydání-datetime">
+				// 		</span>
+				// 		<input type="text" id="url" data-citationfield="url">
+				// 		<input type="text" id="archivní-url" data-citationfield="archivní-url">
+				// 		<span class="flex-row max-flex">
+				// 			<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-archivace" data-citationfield="datum-archivace">
+				// 			<input type="datetime-local" step="1" id="datum-archivace-datetime">
+				// 		</span>
+				// 		<span class="flex-row max-flex">
+				// 			<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-citace" data-citationfield="datum-citace">
+				// 			<input type="datetime-local" step="1" id="datum-citace-datetime">
+				// 		</span>
+				// 		<script>
+				// 			const input = document.getElementById("datum-citace");
+				// 			input.value = (new Date).toLocaleDateString("en-CA");
+				// 			// Don't question this. This is what gods of javascript wanted. Please give me TemporalAPI soon.
+				// 		</script>
+				// 	</div>
+				// </div>
 
 				<!-- Template -->
 				<div class="flex-row">
