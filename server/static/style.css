@@ -13,7 +13,7 @@
     --font-serif: "Times New Roman", serif;
     --font-sans: "Roboto", sans-serif;
 
-    --font-size: 1.2rem;
+    --font-size: 1rem;
 
     --paragraph-width: 1000px;
 }
@@ -95,7 +95,7 @@ h5 {
     font-weight: 500;
 }
 h1 {
-    font-size: 3.75rem;
+    font-size: 3rem;
     color: var(--clr-text-main);
 }
 h2 {
@@ -103,11 +103,11 @@ h2 {
     font-style: italic;
 }
 h3 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-style: italic;
 }
 h4 {
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 ul {
@@ -118,7 +118,7 @@ li {
 }
 
 hr {
-    height: 3px;
+    height: 2px;
     background-color: var(--clr-black);
     border: 0;
 }
@@ -147,16 +147,16 @@ textarea,
 select {
     font-family: inherit;
     font-size: 100%;
-    padding: 4px 8px;
+    padding: 4px;
 }
 
 input,
 textarea,
 select {
     width: 100%;
-    border: 3px solid var(--clr-webarchiv-blue);
+    border: 1px solid var(--clr-gray);
     background-color: var(--clr-background-secondary);
-    font-size: 1.35rem;
+    font-size: 1rem;
     /* margin: 4px 0; */
     margin-bottom: 16px;
 }
@@ -166,7 +166,7 @@ textarea {
 }
 input:focus,
 textarea:focus {
-    outline: 3px solid var(--clr-webarchiv-blue);
+    outline: 2px solid var(--clr-webarchiv-blue);
 }
 
 output {
@@ -176,7 +176,7 @@ output {
 button,
 a.btn {
     background-color: var(--clr-webarchiv-blue);
-    border: 3px solid var(--clr-webarchiv-blue);
+    border: 2px solid var(--clr-webarchiv-blue);
     color: var(--clr-white);
 }
 button:hover,
@@ -189,7 +189,7 @@ table {
     border-collapse: collapse;
     border: none;
     background-color: var(--clr-background-main);
-    font-size: 1.1rem;
+    /* font-size: 1.1rem; */
     margin-bottom: 16px;
     text-align: center;
     min-width: var(--paragraph-width);
@@ -204,7 +204,7 @@ td {
 th {
     padding: 1rem 0.5rem 0.5rem;
     font-weight: 400;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
 }
 tbody > tr:nth-of-type(odd) {
     background-color: var(--clr-background-secondary);
@@ -399,13 +399,14 @@ tbody > tr:nth-of-type(odd) {
 
 .inline-step {
     margin-bottom: 0.5rem;
-    font-size: 1.35rem;
+    font-size: 1.1rem;
     display: inline-block;
 }
 
 fieldset {
     padding: 0.25rem;
     /* margin-bottom: 8px; */
+    
     /* border: solid black 2px; */
     margin: 0;
     border: 0;
