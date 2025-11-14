@@ -22,7 +22,11 @@ Aplikace Linkra cílí na potřeby akademické obce a umožňuje webovým archiv
 
 ## Uživatelský manuál
 
+[Uživatelský manuál](./docs/Uživatelský_manuál.md)
+
 ## Technická dokumentace
+
+[Technická dokumentace](./docs/Technická_dokumentace.md)
 
 ## Dedikace
 
