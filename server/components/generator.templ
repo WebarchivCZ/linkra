@@ -59,8 +59,8 @@ templ generatorView(data *GeneratorViewData) {
 					<label for="název">Název&nbsp;webu:</label>
 					<input type="text" id="název" data-citationfield="název">
 
-					<label for="součást">Součást:</label>
-					<input type="text" id="součást" data-citationfield="součást">
+					// <label for="součást">Součást:</label>
+					// <input type="text" id="součást" data-citationfield="součást">
 
 					<label for="místo-vydání">Místo&nbsp;vydání:</label>
 					<input type="text" id="místo-vydání" data-citationfield="místo-vydání">
@@ -136,7 +136,7 @@ templ generatorView(data *GeneratorViewData) {
 				<!-- Template -->
 				<div class="flex-row">
 					<label for="template">Šablona:</label>
-					<input type="text" id="template" value="{{autoři}}. {{kurzíva název}} Online {{místo-vydání}} [{{datum-vydání}}]. Dostupné z: {{url}}. [cit. {{datum-citace}}]">
+					<input type="text" id="template" value="Pokud vydíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.">
 				</div>
 			</form>
 			<hr>
@@ -162,7 +162,7 @@ templ generatorView(data *GeneratorViewData) {
 					</select>
 					<button type="button" id="add-field">Přidat&nbsp;pole</button>
 				</div>
-				<button type="button" id="set-template-fields">Použít výchozí šablonu</button>
+				<button type="button" id="set-template">Použít výchozí šablonu</button>
 				<button type="button" id="remove-all-fields">Odebrat všechna pole</button>
 			</form>
 		</section>

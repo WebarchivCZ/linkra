@@ -33,6 +33,8 @@
     if (addFieldBtn === null) {
       throw new Error("Element with id 'add-field' must exist");
     }
+
+    // Used by callbacks that create new fields. Increment it after every use.
     let fieldNumber = 1;
     addFieldBtn.addEventListener("click", () => {
       addField(templateBuilder, fieldTypeSelect.value, fieldNumber);
@@ -61,6 +63,30 @@
       buildTemplate(templateBuilder, templateInputElement);
       templateInputElement.dispatchEvent(new Event("input", { bubbles: true }));
     });
+
+    // Button used to set template to some predefined state.
+    const setTemplateBtn = document.getElementById("set-template");
+    if (setTemplateBtn === null) {
+      throw new Error("Element with id 'set-template' must exist");
+    }
+    setTemplateBtn.addEventListener(
+      "click",
+      () => (fieldNumber += setDefaulTemplate(templateBuilder, fieldNumber))
+    );
+
+    // Set and use the default template
+    fieldNumber += setDefaulTemplate(templateBuilder, fieldNumber);
+    buildTemplate(templateBuilder, templateInputElement);
+    templateInputElement.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  /**
+   * @param {HTMLElement} templateBuilder
+   * @param {number} fieldNumber
+   * @returns {number}
+   */
+  function setDefaulTemplate(templateBuilder, fieldNumber) {
+    return setTemplateIso690(templateBuilder, fieldNumber);
   }
 
   /**
@@ -118,7 +144,7 @@
    * @param {number} fieldNumber
    */
   function addField(target, type, fieldNumber) {
-    const id = "field-" + fieldNumber;
+    const id = createFieldId(fieldNumber);
     let fieldInitFunc = null;
     switch (type) {
       case "text":
@@ -473,17 +499,18 @@
       <div class="flex-column max-flex f-middle">
         <div class="flex-row max-flex">
           <select class="flex-row" name="f-date-format">
-            <option value="iso-date">Datum (RRRR-MM-DD)</option>
-            <option value="rok">Rok</option>
-            <option value="human">Datum dlouhé</option>
-            <option value="iso">Datum a čas (ISO 8601)</option>
-            <option value="rfc">Datum a čas (ISO 8601 s mezerou)</option>
-            <option value="apa">APA (RRRR, měsíc DD)</option>
-            <option value="bez-formatu">Neměnit formát</option>
+            <option name="iso-date" value="iso-date">Datum (RRRR-MM-DD)</option>
+            <option name="rok" value="rok">Rok</option>
+            <option name="human" value="human">Datum dlouhé</option>
+            <option name="iso" value="iso">Datum a čas (ISO 8601)</option>
+            <option name="rfc" value="rfc">Datum a čas (ISO 8601 s mezerou)</option>
+            <option name="apa" value="apa">APA (RRRR, měsíc DD)</option>
+            <option name="bez-formatu" value="bez-formatu">Neměnit formát</option>
           </select>
           <label class="flex-row"><input type="checkbox" name="f-utc">UTC</label>
         </div>
         <div class="flex-row max-flex">
+          ${fieldSeparatorFormControls}
           ${addSpaceFormControls}
         </div>
       </div>
@@ -494,6 +521,7 @@
       let expr = exprName;
       expr = formatTime(field, expr);
       expr = `{{${expr}}}`;
+      expr = addSeparator(expr, field);
       expr = addSpace(expr, field);
       return expr;
     };
@@ -691,6 +719,196 @@
       template += data.getTemplateValue();
     }
     target.value = template;
+  }
+
+  /**
+   * Set the contents of template builder to fields that will generate
+   * citation confoming to ISO690.
+   * @param {HTMLElement} templateBuilder
+   * @param {number} fieldNumber
+   * @returns {number} Number of added fields. This should be used to increment variable used for creating field IDs.
+   */
+  function setTemplateIso690(templateBuilder, fieldNumber) {
+    // Remove everithing from templateBuilder before inserting new fields.
+    templateBuilder.innerHTML = "";
+
+    let localFieldNumber = fieldNumber;
+
+    // Authors
+    {
+      const field = createNewField(
+        "autoři",
+        createFieldId(localFieldNumber),
+        initAuthorsField
+      );
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Source name
+    {
+      const field = createNewField(
+        "název",
+        createFieldId(localFieldNumber),
+        initWebNameField
+      );
+      field.elements.namedItem("f-kurzíva").checked = true;
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Online.
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "Online. ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Place of publication
+    {
+      const field = createNewField(
+        "místo-vydání",
+        createFieldId(localFieldNumber),
+        initPlaceOfPublicationField
+      );
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Date of publication
+    {
+      const field = createNewField(
+        "datum-vydání",
+        createFieldId(localFieldNumber),
+        initDateOfPublicationField
+      );
+      field.elements
+        .namedItem("f-date-format")
+        .namedItem("rok").selected = true;
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Dostupné z:
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "Dostupné z: ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // URL
+    {
+      const field = createNewField(
+        "url",
+        createFieldId(localFieldNumber),
+        initUrlField
+      );
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Archivní kopie dostupná z:
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "Archivní kopie dostupná z: ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Archival URL
+    {
+      const field = createNewField(
+        "archivní-url",
+        createFieldId(localFieldNumber),
+        initArchivalUrlField
+      );
+      field.elements.namedItem("f-oddělovač").value = "";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Arhivováno
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "[archivováno ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Archival date
+    {
+      const field = createNewField(
+        "datum-archivace",
+        createFieldId(localFieldNumber),
+        initDateOfHarvestField
+      );
+      field.elements
+        .namedItem("f-date-format")
+        .namedItem("iso").selected = true;
+      field.elements.namedItem("f-oddělovač").value = "].";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Citováno
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "[cit. ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Citation date
+    {
+      const field = createNewField(
+        "datum-citace",
+        createFieldId(localFieldNumber),
+        initDatefCitationField
+      );
+      field.elements
+        .namedItem("f-date-format")
+        .namedItem("iso-date").selected = true;
+      field.elements.namedItem("f-oddělovač").value = "].";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    return localFieldNumber - fieldNumber;
+  }
+
+  /**
+   * @param {number} fieldNumber
+   * @returns {string}
+   */
+  function createFieldId(fieldNumber) {
+    return "field-" + fieldNumber;
   }
 
   // --- Citation generator ---
