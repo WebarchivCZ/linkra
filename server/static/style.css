@@ -423,3 +423,8 @@ fieldset {
 .flex-start {
     align-items: flex-start;
 }
+
+.data-form > input,
+.data-form > span {
+    margin-bottom: 0.4rem;
+}
