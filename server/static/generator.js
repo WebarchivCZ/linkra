@@ -38,20 +38,15 @@
       addField(templateBuilder, fieldTypeSelect.value, fieldNumber);
       fieldNumber++;
       // Remove placeholder if present
-      const placeholder = document.getElementById("builder-placeholder");
-      if (placeholder) {
-        placeholder.remove();
-      }
+      removePlaceholderText();
     });
 
     const removeAllFieldsBtn = document.getElementById("remove-all-fields");
     if (removeAllFieldsBtn === null) {
       throw new Error("Element with id 'remove-all-fields' must exist");
     }
-    removeAllFieldsBtn.addEventListener(
-      "click",
-      () =>
-        (templateBuilder.innerHTML = `<i id="builder-placeholder">Tady budou vidět přidaná pole</i>`)
+    removeAllFieldsBtn.addEventListener("click", () =>
+      setToPlaceholderText(templateBuilder)
     );
 
     const templateInputElement = document.getElementById("template");
@@ -66,6 +61,28 @@
       buildTemplate(templateBuilder, templateInputElement);
       templateInputElement.dispatchEvent(new Event("input", { bubbles: true }));
     });
+  }
+
+  /**
+   * This function removes all fields in templateBuilder and sets a placeholder text.
+   * Use this instead of just removing the nodes.
+   * @param {HTMLElement} templateBuilder
+   */
+  function setToPlaceholderText(templateBuilder) {
+    templateBuilder.innerHTML = `<i id="builder-placeholder">Tady budou vidět přidaná pole</i>`;
+  }
+
+  /**
+   * This function removes placeholder text in templateBuilder as set with setToPlaceholderText.
+   * It checks if the placeholder text exists so user doesn't have to do it.
+   * It should only be called when adding new fields into templateBuider otherwise
+   * a there will be a wierd blank space.
+   */
+  function removePlaceholderText() {
+    const placeholder = document.getElementById("builder-placeholder");
+    if (placeholder) {
+      placeholder.remove();
+    }
   }
 
   /**
@@ -167,7 +184,14 @@
 
     const removeBtn = document.createElement("button");
     removeBtn.append("Odebrat");
-    removeBtn.addEventListener("click", () => field.remove());
+    removeBtn.addEventListener("click", () => {
+      const templateBuilder = field.parentElement;
+      field.remove();
+      // If there are no fields, then we want to show placeholder text.
+      if (templateBuilder && templateBuilder.children.length === 0) {
+        setToPlaceholderText(templateBuilder);
+      }
+    });
     field.append(removeBtn);
 
     field.draggable = true;
