@@ -385,16 +385,39 @@ tbody > tr:nth-of-type(odd) {
 .citation {
     position: sticky;
     top: 0;
+    background-color: var(--clr-webarchiv-blue);
+    border: hsl(from var(--clr-webarchiv-blue) h s calc(l - 20)) solid 0.4rem;
+    padding: 0.6rem;
 }
-.citation > section {
-    background-color: var(--clr-background-main);
-    border-top: var(--clr-webarchiv-blue) solid 3px;
-    border-bottom: var(--clr-webarchiv-blue) solid 3px;
-    padding-left: 1rem;
-    padding-right: 1rem;
+.citation .expl {
+    color: var(--clr-white);
+    margin-bottom: 4px;
+    display: inline-block;
+    margin-left: 1rem;
 }
-.citation p {
-    font-size: 1.35rem;
+.citation .output-box {
+    background-color: var(--clr-white);
+    padding: 0;
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+.citation .output-box #citation {
+    color: var(--clr-text-main);
+    font-size: 1.1rem;
+    padding: 4px;
+    margin: 0;
+    flex: 1;
+}
+.citation .output-box button {
+    margin: 4px;
+    margin-bottom: clamp(4px, auto, auto);
+}
+.citation h4 {
+    font-size: 1.4rem;
+    color: var(--clr-white);
+    margin-bottom: 4px;
+    font-weight: bold;
+    display: inline-block;
 }
 
 .inline-step {

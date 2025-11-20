@@ -15,12 +15,19 @@ func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
 
 templ generatorView(data *GeneratorViewData) {
 	<!-- Output -->
-	<div class="flex-content-column citation">
-		<section>
-			<h2>Citace:</h2>
-			<p id="citation"></p>
-		</section>
-	</div>
+	<section class="flex-content-column citation">
+		// <section>
+			<span><h4>Citace: </h4><p class="expl">(Pro získání citace vyplňte formulář níže)</p></span>
+			<span class="output-box"><p id="citation"></p><button type="button">Kopírovat</button></span>
+		// </section>
+		// <section>
+			<!-- Template -->
+			// <div class="flex-row">
+			<span><label for="template"><h4>Šablona: </h4></label><p class="expl">(Šablonu lze upravit ve spodní části stránky)</p></span>
+			<input disabled type="text" id="template" value="Pokud vydíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.">
+			// </div>
+		// </section>
+	</section>
 	<div class="flex-content-column">
 		<span class="inline-step"><i>A. Doplňte data a zobrazí se vám citace podle předpřipravené šablony</i></span>
 		<section>
@@ -133,11 +140,7 @@ templ generatorView(data *GeneratorViewData) {
 				// 	</div>
 				// </div>
 
-				<!-- Template -->
-				<div class="flex-row">
-					<label for="template">Šablona:</label>
-					<input type="text" id="template" value="Pokud vydíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.">
-				</div>
+				
 			</form>
 			<hr>
 		</section>
