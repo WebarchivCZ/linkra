@@ -499,13 +499,14 @@
       <div class="flex-column max-flex f-middle">
         <div class="flex-row max-flex">
           <select class="flex-row" name="f-date-format">
-            <option name="iso-date" value="iso-date">Datum (RRRR-MM-DD)</option>
-            <option name="rok" value="rok">Rok</option>
-            <option name="human" value="human">Datum dlouhé</option>
-            <option name="iso" value="iso">Datum a čas (ISO 8601)</option>
-            <option name="rfc" value="rfc">Datum a čas (ISO 8601 s mezerou)</option>
-            <option name="apa" value="apa">APA (RRRR, měsíc DD)</option>
-            <option name="bez-formatu" value="bez-formatu">Neměnit formát</option>
+            <option name="default" value="rok"> -- Prosím zvolte požadovaný formát -- </option>
+            <option name="rok" value="rok">2025 (Jen rok)</option>
+            <option name="iso-date" value="iso-date">2025-01-31 (Rok - Měsíc - Den)</option>
+            <option name="iso" value="iso">2025-01-31T00:00:00+01:00 (ISO 8601)</option>
+            <option name="rfc" value="rfc">2025-01-31 00:00:00+01:00 (ISO 8601 s mezerou)</option>
+            <option name="apa" value="apa">2025, leden 31 (APA styl)</option>
+            <option name="human" value="human">Podle nastavené lokalizace</option>
+            <option name="bez-formatu" value="bez-formatu">Neměnit formát (použije se uživatelem zadaná hodnota)</option>
           </select>
           <label class="flex-row"><input type="checkbox" name="f-utc">UTC</label>
         </div>
@@ -1549,7 +1550,7 @@
 
     switch (format) {
       case "iso":
-        return parsedDate.toISO();
+        return parsedDate.toFormat("yyyy-MM-dd'T'HH:mm:ssZZ");
       case "iso-date":
         return parsedDate.toISODate();
       case "iso-time":
