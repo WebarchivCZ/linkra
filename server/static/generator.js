@@ -1119,13 +1119,19 @@
   }
 
   /**
-   * Extract data from generatorForm and return them
+   * Extract citation data from apropriate inputs and return them as object.
    * @param {HTMLFormElement} generatorForm
    * @return {object}
    */
   function extractCurrentCitationData(generatorForm) {
     const currentData = {};
     currentData.autoři = [];
+
+    const template = document.getElementById("template");
+    if (template && "value" in template) {
+      currentData.template = template.value;
+    }
+
     for (const element of generatorForm.elements) {
       // Handle all fieldsets with author data
       if (
@@ -1150,12 +1156,23 @@
   }
 
   /**
-   *
+   * Load citation data to input elements.
    * @param {HTMLFormElement} generatorForm
    * @param {HTMLElement} authorsDiv // Part of form for author fieldsets
    * @param {any} inputData // Object containing citation field values
    */
   function fillForm(generatorForm, authorsDiv, inputData) {
+    if ("template" in inputData) {
+      const template = document.getElementById("template");
+      if (template && "value" in template) {
+        template.value = inputData.template;
+      } else {
+        console.error(
+          "Element with id template must exist and be HTMLInputElement"
+        );
+      }
+    }
+
     authorsDiv.innerHTML = "";
     for (const field in inputData) {
       if (field === "autoři") {
