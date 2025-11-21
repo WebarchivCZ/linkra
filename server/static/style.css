@@ -388,6 +388,7 @@ tbody > tr:nth-of-type(odd) {
     background-color: var(--clr-webarchiv-blue);
     border: hsl(from var(--clr-webarchiv-blue) h s calc(l - 20)) solid 0.4rem;
     padding: 0.6rem;
+    margin-bottom: 2rem;
 }
 .citation .expl {
     color: var(--clr-white);
@@ -453,4 +454,12 @@ fieldset {
 .data-form > input,
 .data-form > span {
     margin-bottom: 0.4rem;
+}
+
+.form-controls{
+    align-items: baseline;
+}
+.form-controls span {
+    color: blue;
+    font-size: 1.3rem;
 }

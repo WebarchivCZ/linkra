@@ -15,9 +15,9 @@ func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
 
 templ generatorView(data *GeneratorViewData) {
 	<!-- Output -->
-	<section class="flex-content-column citation">
+	<div class="flex-content-column citation">
 		// <section>
-			<span><h4>Citace: </h4><p class="expl">(Pro získání citace vyplňte formulář níže)</p></span>
+			<span><h4>Citace: </h4><p class="expl">(Pro získání citace vyplňte metadata níže)</p></span>
 			<span class="output-box"><p id="citation"></p><button type="button">Kopírovat</button></span>
 		// </section>
 		// <section>
@@ -27,24 +27,23 @@ templ generatorView(data *GeneratorViewData) {
 			<input disabled type="text" id="template" value="Pokud vydíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.">
 			// </div>
 		// </section>
-	</section>
+	</div>
 	<div class="flex-content-column">
-		<span class="inline-step"><i>A. Doplňte data a zobrazí se vám citace podle předpřipravené šablony</i></span>
+		// <span class="inline-step"><i>A. Doplňte data a zobrazí se vám citace podle předpřipravené šablony</i></span>
+		<h2>Metadata citace</h2>
+		<p>Zde vyplňte metadata citace pro vaše webové zdroje.</p>
 		<section>
 			<form id="generator">
 				<!-- Controls -->
-				<div class="flex-row hidden" id="form-controls" hidden>
-					<button type="button" id="prev">Předchozí</button>
-					<p><span id="cit-data-num"></span> z <span id="cit-data-count"></span></p>
-					<button type="button" id="next">Další</button>
+				<div class="flex-row form-controls" id="form-controls">
+					<button type="button" id="prev">Předchozí citace</button>
+					<p><span id="cit-data-num"></span> citace z <span id="cit-data-count"></span></p>
+					<button type="button" id="next">Další citace</button>
 				</div>
-				
-
-				<hr>
-				<div class="flex-row">
+				<span>
 					<button type="button" id="add-author">Přidat autora</button>
 					<button type="button" id="remove-author">Odebrat autora</button>
-				</div>
+				</span>
 				<!-- Data -->
 				<div id="authors">
 					<fieldset data-author-id="0">
@@ -63,11 +62,11 @@ templ generatorView(data *GeneratorViewData) {
 				</div>
 
 				<div class="flex-column flex-start data-form">
-					<label for="název">Název&nbsp;webu:</label>
+					<label for="název">Název&nbsp;webového&nbsp;zdroje:</label>
 					<input type="text" id="název" data-citationfield="název">
 
-					// <label for="součást">Součást:</label>
-					// <input type="text" id="součást" data-citationfield="součást">
+					<label for="součást">Součást:</label>
+					<input type="text" id="součást" data-citationfield="součást">
 
 					<label for="místo-vydání">Místo&nbsp;vydání:</label>
 					<input type="text" id="místo-vydání" data-citationfield="místo-vydání">
@@ -102,14 +101,18 @@ templ generatorView(data *GeneratorViewData) {
 					</script>
 				</div>
 			</form>
-			<hr>
 		</section>
 
 		<section>
-			<span class="inline-step"><i>B. Upravte si šablonu podle potřeby. Upravte existující pole, nebo přidejte nová. Šablonu použijete tlačítkem níže.</i></span>
+			// <span class="inline-step"><i>B. Upravte si šablonu podle potřeby. Upravte existující pole, nebo přidejte nová. Šablonu použijete tlačítkem níže.</i></span>
+			<h2>Šablona</h2>
+			<p>Pro změnu struktury citace můžete použít předpřipravenou šablonu:</p>
+			<p><button id="use-iso690">Použít ISO 690</button></p>
+			<p>Nebo vytvořit vlastní: (neprojevý se dokud nepotvrdíte tlačítkem Použít šablonu)</p>
 			<form id="builder-controls" class="flex-row">
 				<div class="flex-row field-chooser">
 					<select id="field-type">
+						<option> -- Vyberte jakou část šablony přidat do citace -- </option>
 						<option value="autoři">Autoři</option>
 						// <option value="příjmení">Příjmení</option>
 						// <option value="jméno">Jméno</option>
@@ -123,19 +126,17 @@ templ generatorView(data *GeneratorViewData) {
 						<option value="datum-citace">Datum citace</option>
 						<option value="text">Text</option>
 					</select>
-					<button type="button" id="add-field">Přidat&nbsp;pole</button>
+					<button type="button" id="add-field">Přidat</button>
 				</div>
-				<button type="button" id="set-template">Použít výchozí šablonu</button>
-				<button type="button" id="remove-all-fields">Odebrat všechna pole</button>
+				<button type="button" id="set-template">Výchozí</button>
+				<button type="button" id="remove-all-fields">Odebrat vše</button>
 			</form>
 		</section>
 		<section id="builder">
 			<i id="builder-placeholder">Tady budou vidět přidaná pole</i>
 		</section>
 		// <span class="inline-step"><i>C. Vygenerujte šablonu a použijte pro aktuální citaci</i></span>
-		<button type="button" id="build-template" form="builder-controls">Použít&nbsp;šablonu</button>
-		// <hr>
-		
+		<button type="button" id="build-template" form="builder-controls">Použít valstní šablonu</button>
 	</div>
 
 	if data.Group == nil {

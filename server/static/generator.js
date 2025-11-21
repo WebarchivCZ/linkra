@@ -64,7 +64,18 @@
       templateInputElement.dispatchEvent(new Event("input", { bubbles: true }));
     });
 
-    // Button used to set template to some predefined state.
+    // Button(s) used to set and use predefined template
+    const useIso690Btn = document.getElementById("use-iso690");
+    if (useIso690Btn === null) {
+      throw new Error("Element with id 'use-iso690' must exist");
+    }
+    useIso690Btn.addEventListener("click", () => {
+      fieldNumber += setDefaulTemplate(templateBuilder, fieldNumber);
+      buildTemplate(templateBuilder, templateInputElement);
+      templateInputElement.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+
+    // Button used to set template (in template builder) to some predefined state.
     const setTemplateBtn = document.getElementById("set-template");
     if (setTemplateBtn === null) {
       throw new Error("Element with id 'set-template' must exist");
@@ -1255,6 +1266,8 @@
     const citation = template(data);
     citationOutput.innerHTML = citation;
   }
+
+  // function generateCitationString()
 
   // Add helpers to Handlebars for producing formatted output.
   Handlebars.registerHelper("tučně", (text) => formatBold(false, text));
