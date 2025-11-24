@@ -38,9 +38,25 @@ docker compose -f ./docker/zvolené_prostředí/docker-compose.yaml -p linkra up
 - linux
 - git
 - go 1.24.0 nebo novější
-- nodejs 22.20
+- nodejs 22.20 (aktuálně bug v jedné závislosti neumožňuje použít vyšší verzi)
 - npm
 - valkey
+
+### Instalace
+
+1. Nejprve je potřeba nainstalovat požadavky. Konkrétně go, nodejs a valkey (alternativně by mělo být možné použít redis). Použijte oficiální postupy pro jejich instalaci. V případě valkey je možné použít libovolnou variantu (spustit jako příkaz nebo pomocí systemd nebo dockeru).
+2. Naklonujeme repositář s aplikací: `git clone https://github.com/WebarchivCZ/linkra.git`
+3. Pokud ještě nemáme běžící instanci valkey tak je potřeba ji spustit dříve než se pokusíme spustit server.
+4. Pokud nám jde o vývoj a dostačuje nám aplikace běžící na lokálním zařízení, tak v tuto chvíli stačí spustit `go run .` v kořeni repositáře. Tento příkaz stáhne potřebné závislosti, zkompiluje a spustí server. Ve výstupu logu uvidíme adresu na které bude aplikace dostupná.
+5. Nyní, pokud chceme spustit i workera, tak přejdeme do adresáře `workers/scoop-worker`.
+6. Zde nejprve spustíme příkaz `npm install`, který stáhne část závislostí pro workera.
+7. Poté je potřeba ještě spustit `npx playwright install-deps chromium` pro doinstalování některých závislostí playwrightu.
+8. Následně by mělo být možné spustit worker pomocí `node main.js run`. Je možné příkaz opakovat a spustit více instancí workera.
+
+### Poznámky
+
+- Sever a worker mohou pracovat samostatně, veškerá komunikace mezi nimi probíhá skrze valkey.
+- Více workerů může běžet současně. Není k tomu potřeba žádná speciální konfigurace, pouze spuštění více worker procesů.
 
 ## Popis aplikace
 
@@ -64,4 +80,8 @@ Server dále poskytuje rozhraní pro generování citací z archivovaných URL s
 
 Worker čte z fronty požadavky na sklizení URL adres. Aktuálně je implementován jako nodejs script s použitím sklízeče Scoop. Tento trochu netradiční nástroj (oproti např. sklízeči Heritrix který je obvykle webovými archivy používán) umožňuje Scoop rychlé sklizení jedné URL, což umožňuje urychlené generování archivních adres, protože nemusíme čekat na zaindexování všech dat.
 
-Worker je dále zodpovědný za extrakci metadat ze skliznených dat. Script otevře a zpracuje vygenerovaný WACZ soubor a odešle metadata potřebná pro generování archivní adresy zpátky do fronty odkud si je převezme server. Worker poté uloží archivní data do specifikované cesty.
+Worker je dále zodpovědný za extrakci metadat ze sklizených dat. Script otevře a zpracuje vygenerovaný WACZ soubor a odešle metadata potřebná pro generování archivní adresy zpátky do fronty odkud si je převezme server. Worker poté uloží archivní data do specifikované cesty.
+
+### Fronta
+
+Server a worker komunikují pomocí fronty, která je aktuálně implementovaná pomocí Valkey (fork Redisu). Tato implementace umožňuje spustit více workerů, potenciálně i na více strojích a urychlit tak získávání archivních dat.
