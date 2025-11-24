@@ -1,14 +1,35 @@
 # Technická dokumentace
 
-## Požadavky
+## Spuštění pomocí docker compose
+
+### Požadavky
 
 - git
 - docker
 
 ### Instalace
 
-1. Naklonování repozitáře s aplikací: `git clone https://github.com/WebarchivCZ/linkra.git`
-2. 
+1. Nejdříve je potřeba naklonovat repositář s aplikací: `git clone https://github.com/WebarchivCZ/linkra.git`
+2. Poté se přesuneme do adresáře s aplikací `cd linkra`
+3. Zde se v adresáři `docker` nacházejí podadresáře s připravenými compose soubory pro různá prostředí např. `docker/dev/docker-compose.yaml`
+4. Ve vybraném docker-compose souboru bude potřeba nastavit proměnnou `SERVER_HOST`. Nastavíme ji na URL ze které bude aplikace dostupná (je potřeba zadat celou URL i s protokolem a případně portem např. https://linkra.webarchiv.cz nebo http://10.10.10.10:8080 ). Hodnota této proměnné musí odpovídat tomu jak bude aplikace veřejně dostupná, tedy pokud bude dostupná přes reverzní proxy, měla by obsahovat adresu této reverzní proxy.
+5. V sekci `volumes` změníme cestu k souboru s sqlite databází, který bude přimontovaný do kontejneru. Např. `jmeno_databaze.db:/mnt/storage.db:rw` (Uvedený soubor musí existovat a musí mít povolený zápis jinak dojde k chybě)
+6. Dále je potřeba nastavit cestu pro ukládání archivních souborů z workeru. V compose souboru v nastavení služby linkra-worker je potřeba do `volumes` přidat nastavení pro mount adresáře kam se mají soubory ukládat. Např. `/mnt/archiv/captures:/app/captures:rw`
+7. Nakonec je potřeba se ujistit že ve `worker-config.json` je `discardArchiveFiles` nastaveno na false. V případě že si nepřejete ukládat archivní soubory (například při testovacím provozu), tak je možné nastavit na true, poté není třeba zadávat cestu pro archivní soubory.
+8. Teď už by mělo být možné spustit aplikaci pomocí příkazu docker compose up. Např. `docker compose -f ./docker/zvolené_prostředí/docker-compose.yaml -p linkra up -d`
+
+### Poznámky
+
+- Pro produkční provoz se počítá se směřováním dotazů na aplikaci skrze reverzní proxy která umožní použití https a rate limiting. Pro lokální provoz mimo internet není proxy nutná.
+- Aplikaci nasazenou pomocí docker compose je možné snadno aktualizovat pomocí následujícího postupu.
+
+```bash
+# V kořenu repositáře
+# Stáhneme změny z githubu
+git pull
+# Vytvoříme a spustíme nové kontejnery
+docker compose -f ./docker/zvolené_prostředí/docker-compose.yaml -p linkra up -d --build --force-recreate
+```
 
 ## Spuštění jako nativní proces (pro vývoj)
 
@@ -44,4 +65,3 @@ Server dále poskytuje rozhraní pro generování citací z archivovaných URL s
 Worker čte z fronty požadavky na sklizení URL adres. Aktuálně je implementován jako nodejs script s použitím sklízeče Scoop. Tento trochu netradiční nástroj (oproti např. sklízeči Heritrix který je obvykle webovými archivy používán) umožňuje Scoop rychlé sklizení jedné URL, což umožňuje urychlené generování archivních adres, protože nemusíme čekat na zaindexování všech dat.
 
 Worker je dále zodpovědný za extrakci metadat ze skliznených dat. Script otevře a zpracuje vygenerovaný WACZ soubor a odešle metadata potřebná pro generování archivní adresy zpátky do fronty odkud si je převezme server. Worker poté uloží archivní data do specifikované cesty.
-
