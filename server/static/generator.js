@@ -867,6 +867,18 @@
       localFieldNumber++;
     }
 
+    // Součást
+    {
+      const field = createNewField(
+        "součást",
+        createFieldId(localFieldNumber),
+        initPartOfField
+      );
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
     // Place of publication
     {
       const field = createNewField(
