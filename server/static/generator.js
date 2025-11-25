@@ -432,7 +432,7 @@
           ) {
             continue;
           }
-          console.log(input, input.value);
+          // console.log(input, input.value);
           args.push(`${key}="${input.value}"`);
         }
       }
@@ -448,7 +448,12 @@
    * @param {HTMLFormElement} field
    */
   function initNameField(field) {
-    initGenericFormatAndSeparatorField(field, "Jméno&nbsp;autora", "jméno");
+    initGenericFormatAndSeparatorField(
+      field,
+      "Jméno&nbsp;autora",
+      "jméno",
+      false
+    );
   }
 
   /**
@@ -458,7 +463,8 @@
     initGenericFormatAndSeparatorField(
       field,
       "Příjmení&nbsp;autora",
-      "příjmení"
+      "příjmení",
+      false
     );
   }
 
@@ -466,14 +472,14 @@
    * @param {HTMLFormElement} field
    */
   function initWebNameField(field) {
-    initGenericFormatAndSeparatorField(field, "Název&nbsp;webu", "název");
+    initGenericFormatAndSeparatorField(field, "Název&nbsp;webu", "název", true);
   }
 
   /**
    * @param {HTMLFormElement} field
    */
   function initPartOfField(field) {
-    initGenericFormatAndSeparatorField(field, "Součást", "součást");
+    initGenericFormatAndSeparatorField(field, "Součást", "součást", true);
   }
 
   /**
@@ -483,7 +489,8 @@
     initGenericFormatAndSeparatorField(
       field,
       "Místo&nbsp;vydání",
-      "místo-vydání"
+      "místo-vydání",
+      true
     );
   }
 
@@ -526,8 +533,14 @@
    * @param {HTMLFormElement} field
    * @param {string} readableName
    * @param {string} exprName
+   * @param {boolean} skipIfEmpty
    */
-  function initGenericFormatAndSeparatorField(field, readableName, exprName) {
+  function initGenericFormatAndSeparatorField(
+    field,
+    readableName,
+    exprName,
+    skipIfEmpty
+  ) {
     field.innerHTML = `
       <span class="f-start">${readableName}:</span>
       <div class="flex-column max-flex f-middle">
@@ -551,6 +564,7 @@
       expr = `{{${expr}}}`;
       expr = addSeparator(expr, field);
       expr = addSpace(expr, field);
+      expr = skipExprIfEmpty(skipIfEmpty, expr, exprName);
       return expr;
     };
   }
@@ -640,6 +654,20 @@
       expr = addSpace(expr, field);
       return expr;
     };
+  }
+
+  /**
+   * If should skip is true, than add an if expression that will skip everything if the exprName input will be empty
+   * @param {boolean} shouldSkip
+   * @param {string} expr
+   * @param {string} exprName
+   * @returns {string}
+   */
+  function skipExprIfEmpty(shouldSkip, expr, exprName) {
+    if (shouldSkip) {
+      return `{{#if ${exprName}}}` + expr + "{{/if}}";
+    }
+    return expr;
   }
 
   const addSpaceFormControls = `<label class="flex-row"><input type="checkbox" name="f-add-space" checked>Přidat&nbsp;mezeru</label>`;
