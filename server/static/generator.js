@@ -157,15 +157,6 @@
   }
 
   /**
-   * @param {HTMLElement} templateBuilder
-   * @param {number} fieldNumber
-   * @returns {number}
-   */
-  function setDefaulTemplate(templateBuilder, fieldNumber) {
-    return setTemplateIso690(templateBuilder, fieldNumber);
-  }
-
-  /**
    * This function removes all fields in templateBuilder and sets a placeholder text.
    * Use this instead of just removing the nodes.
    * @param {HTMLElement} templateBuilder
