@@ -15,18 +15,17 @@ func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
 
 templ generatorView(data *GeneratorViewData) {
 	<!-- Output -->
-	<div class="flex-content-column citation">
-		// <section>
-			<span><h4>Citace: </h4><p class="expl">(Pro získání citace vyplňte metadata níže)</p></span>
-			<span class="output-box"><p id="citation"></p><button type="button">Kopírovat</button></span>
-		// </section>
-		// <section>
-			<!-- Template -->
-			// <div class="flex-row">
-			<span><label for="template"><h4>Šablona: </h4></label><p class="expl">(Šablonu lze upravit ve spodní části stránky)</p></span>
-			<input disabled type="text" id="template" value="Pokud vydíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.">
-			// </div>
-		// </section>
+	<div id="output-div" class="flex-content-column citation">
+		<span><h4>Citace: </h4><p class="expl"></p></span>
+		<span class="output-box"><p id="citation"></p><button type="button">Kopírovat</button></span>
+		<!-- Template -->
+		<span><label for="template-select"><h4>Šablona: </h4></label><p class="expl"></p></span>
+		// This input is now hidden, but the script still relies on it's existence. Also it may be again used in the future.
+		<input hidden disabled type="text" id="template" value="Pokud vidíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.">
+		<select id="template-select">
+			@templateOptions()
+			<option value="custom">Uživatelská - Upravte existující šablonu nebo vytvořte novou</option>
+		</select>
 	</div>
 	<div class="flex-content-column">
 		// <span class="inline-step"><i>A. Doplňte data a zobrazí se vám citace podle předpřipravené šablony</i></span>
@@ -103,12 +102,17 @@ templ generatorView(data *GeneratorViewData) {
 			</form>
 		</section>
 
-		<section>
+		<section id="builder-section" hidden>
 			// <span class="inline-step"><i>B. Upravte si šablonu podle potřeby. Upravte existující pole, nebo přidejte nová. Šablonu použijete tlačítkem níže.</i></span>
 			<h2>Šablona</h2>
-			<p>Pro změnu struktury citace můžete použít předpřipravenou šablonu:</p>
-			<p><button id="use-iso690">Použít ISO 690</button></p>
-			<p>Nebo vytvořit vlastní: (neprojevý se dokud nepotvrdíte tlačítkem Použít šablonu)</p>
+			// <p>Pro změnu struktury citace můžete použít předpřipravenou šablonu:</p>
+			// <p><button id="use-iso690">Použít ISO 690</button></p>
+			<p>Zde můžete vytvořit vlastní šablonu.</p>
+			<p>
+				Můžete přidávat nové části, mazat existující nebo třeba jen upravovat předpřipravenou šablonu.
+				Pořadí jednotlivých částí se dá měnit přetažením myší.
+				Na konci je potřeba potvrdit použití šablony tlačítkem <b>Použít vlastní šablonu</b>
+			</p>
 			<form id="builder-controls" class="flex-row">
 				<div class="flex-row field-chooser">
 					<select id="field-type">
@@ -128,15 +132,17 @@ templ generatorView(data *GeneratorViewData) {
 					</select>
 					<button type="button" id="add-field">Přidat</button>
 				</div>
-				<button type="button" id="set-template">Výchozí</button>
+				<select id="prepared-templates">
+					<option> -- Předpřipravené šablony -- </option>
+					@templateOptions()
+				</select>
 				<button type="button" id="remove-all-fields">Odebrat vše</button>
 			</form>
+			<div id="builder">
+				<i id="builder-placeholder">Tady budou vidět přidaná pole</i>
+			</div>
+				<button type="button" id="build-template" form="builder-controls">Použít vlastní šablonu</button>
 		</section>
-		<section id="builder">
-			<i id="builder-placeholder">Tady budou vidět přidaná pole</i>
-		</section>
-		// <span class="inline-step"><i>C. Vygenerujte šablonu a použijte pro aktuální citaci</i></span>
-		<button type="button" id="build-template" form="builder-controls">Použít valstní šablonu</button>
 	</div>
 
 	if data.Group == nil {
@@ -157,4 +163,8 @@ templ generatorView(data *GeneratorViewData) {
 	<script src={ fullStaticPath("handlebars.min-v4.7.8.js") }></script>
 	<script src={ fullStaticPath("luxon.min.js") }></script>
 	<script src={ fullStaticPath("generator.js") }></script>
+}
+
+templ templateOptions() {
+	<option value="iso690">ČSN 690 / ISO 690</option>
 }

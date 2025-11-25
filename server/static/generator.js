@@ -64,31 +64,96 @@
       templateInputElement.dispatchEvent(new Event("input", { bubbles: true }));
     });
 
-    // Button(s) used to set and use predefined template
-    const useIso690Btn = document.getElementById("use-iso690");
-    if (useIso690Btn === null) {
-      throw new Error("Element with id 'use-iso690' must exist");
+    // Used to hide or show the entire builder ui
+    const builderSection = document.getElementById("builder-section");
+    if (builderSection === null) {
+      throw new Error("Element with id 'builder-section' must exist");
     }
-    useIso690Btn.addEventListener("click", () => {
-      fieldNumber += setDefaulTemplate(templateBuilder, fieldNumber);
+    const outputDiv = document.getElementById("output-div");
+    if (outputDiv === null) {
+      throw new Error("Element with id 'output-div' must exist");
+    }
+
+    const templateSelect = document.getElementById("template-select");
+    if (templateSelect === null) {
+      throw new Error("Element with id 'template-select' must exist");
+    }
+    if (!(templateSelect instanceof HTMLSelectElement)) {
+      throw new Error("templateSelect must be HTMLSelectElement");
+    }
+    templateSelect.addEventListener("input", () => {
+      const templateName = templateSelect.value;
+      const setTemplateFunc = getSelectedTemplate(templateName);
+      fieldNumber += setTemplateFunc(templateBuilder, fieldNumber);
       buildTemplate(templateBuilder, templateInputElement);
       templateInputElement.dispatchEvent(new Event("input", { bubbles: true }));
+      if (templateName === "custom") {
+        builderSection.hidden = false;
+        const builderYPosition =
+          builderSection.getBoundingClientRect().top + window.pageYOffset;
+        window.scroll({
+          top: builderYPosition - outputDiv.getBoundingClientRect().height,
+          behavior: "smooth",
+        });
+      } else {
+        builderSection.hidden = true;
+      }
     });
 
-    // Button used to set template (in template builder) to some predefined state.
-    const setTemplateBtn = document.getElementById("set-template");
-    if (setTemplateBtn === null) {
-      throw new Error("Element with id 'set-template' must exist");
+    const preparedTemplatesSelect =
+      document.getElementById("prepared-templates");
+    if (preparedTemplatesSelect === null) {
+      throw new Error("Element with id 'prepared-templates' must exist");
     }
-    setTemplateBtn.addEventListener(
-      "click",
-      () => (fieldNumber += setDefaulTemplate(templateBuilder, fieldNumber))
-    );
+    if (!(preparedTemplatesSelect instanceof HTMLSelectElement)) {
+      throw new Error("preparedTemplatesSelect must be HTMLSelectElement");
+    }
+    preparedTemplatesSelect.addEventListener("input", () => {
+      const templateName = preparedTemplatesSelect.value;
+      const setTemplateFunc = getSelectedTemplate(templateName);
+      fieldNumber += setTemplateFunc(templateBuilder, fieldNumber);
+    });
 
-    // Set and use the default template
-    fieldNumber += setDefaulTemplate(templateBuilder, fieldNumber);
+    // Set template to values set in select
+    let templateName = templateSelect.value;
+    if (templateName === "custom") {
+      builderSection.hidden = false;
+      templateName = preparedTemplatesSelect.value;
+    }
+    const setTemplateFunc = getSelectedTemplate(templateName);
+    fieldNumber += setTemplateFunc(templateBuilder, fieldNumber);
     buildTemplate(templateBuilder, templateInputElement);
     templateInputElement.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  /**
+   * Return function that will set the desired template
+   * @param {string} templateName
+   * @returns {function (HTMLElement, number): number}
+   */
+  function getSelectedTemplate(templateName) {
+    switch (templateName) {
+      case "iso690":
+        return setTemplateIso690;
+      case "custom":
+        return setUserDefinedTemplate;
+      default:
+        console.error("Unknown template name: ", templateName);
+        return function (templateBuilder, fieldNumber) {
+          setToPlaceholderText(templateBuilder);
+          return fieldNumber;
+        };
+    }
+  }
+
+  /**
+   * This is basically noop
+   * @param {HTMLElement} templateBuilder
+   * @param {number} fieldNumber
+   * @returns {number}
+   */
+  function setUserDefinedTemplate(templateBuilder, fieldNumber) {
+    return fieldNumber;
   }
 
   /**
@@ -735,13 +800,13 @@
 
   /**
    * Set the contents of template builder to fields that will generate
-   * citation confoming to ISO690.
+   * citation conforming to ISO690.
    * @param {HTMLElement} templateBuilder
    * @param {number} fieldNumber
    * @returns {number} Number of added fields. This should be used to increment variable used for creating field IDs.
    */
   function setTemplateIso690(templateBuilder, fieldNumber) {
-    // Remove everithing from templateBuilder before inserting new fields.
+    // Remove everything from templateBuilder before inserting new fields.
     templateBuilder.innerHTML = "";
 
     let localFieldNumber = fieldNumber;

@@ -463,3 +463,12 @@ fieldset {
     color: blue;
     font-size: 1.3rem;
 }
+
+#build-template {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+#prepared-templates {
+    max-width: 30%;
+}
