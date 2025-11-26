@@ -45,6 +45,7 @@ func main() {
 	client, err := valkey.NewClient(valkey.ClientOption{InitAddress: []string{net.JoinHostPort(valkeyOptions.Addr, valkeyOptions.Port)}})
 	if err != nil {
 		log.Error("failed to create valkey client", "error", err.Error())
+		os.Exit(1)
 	}
 
 	// Get server address
