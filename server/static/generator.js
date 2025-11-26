@@ -1031,15 +1031,17 @@
       );
     }
 
-    // Part of the form contatining authors metadata
+    // Part of the form containing authors metadata
     const authorsDiv = document.getElementById("authors");
     if (authorsDiv === null) {
       throw new Error("Element with id 'authors' must exist");
     }
 
     const templateElement = document.getElementById("template");
-    if (templateElement === null) {
-      throw new Error("Element with id 'template' must exist");
+    if (!(templateElement instanceof HTMLInputElement)) {
+      throw new Error(
+        "Element with id 'template' must exist and be HTMLInputElement"
+      );
     }
 
     const citationOutput = document.getElementById("citation");
@@ -1099,7 +1101,7 @@
    *
    * @param {HTMLFormElement} generatorForm
    * @param {HTMLElement} authorsDiv
-   * @param {HTMLElement} templateElement
+   * @param {HTMLInputElement} templateElement
    * @param {HTMLElement} citationOutput
    * @param {Array<any>} citationData
    */
@@ -1182,13 +1184,39 @@
       removeLastAuthorFieldset(authorsDiv);
       generatorForm.dispatchEvent(new Event("input", { bubbles: true }));
     });
+
+    const exportCitationsTextBtn = document.getElementById(
+      "export-citations-text"
+    );
+    if (exportCitationsTextBtn === null) {
+      throw new Error("Element with id 'export-citations-text' must exist");
+    }
+    exportCitationsTextBtn.addEventListener("click", () => {
+      saveCurrentCitationData(generatorForm, citationData, currentDataIndex);
+      const citations = exportCitationsText(citationData, templateElement);
+      const data = citations.join("\n");
+      downloadData([data], "text/plain;charset=utf-8", "citace.txt");
+    });
+
+    const exportCitationsHTMLBtn = document.getElementById(
+      "export-citations-html"
+    );
+    if (exportCitationsHTMLBtn === null) {
+      throw new Error("Element with id 'export-citations-html' must exist");
+    }
+    exportCitationsHTMLBtn.addEventListener("click", () => {
+      saveCurrentCitationData(generatorForm, citationData, currentDataIndex);
+      const citations = exportCitationsHTML(citationData, templateElement);
+      const data = citations.join("\n");
+      downloadData([data], "text/html", "citace.txt");
+    });
   }
 
   /**
    * Register input callbacks to the datetime input elements so they propagate
    * the value to the adjacent text input elements.
    * This is done so that user has the power to use custom date format but also
-   * has the convinience of datepicker.
+   * has the convenience of datepicker.
    */
   function enableDatepickers() {
     const elementIDs = [
@@ -1366,7 +1394,81 @@
     citationOutput.innerHTML = citation;
   }
 
-  // function generateCitationString()
+  /**
+   * Starts "download" of data.
+   * @param {BlobPart[]} data
+   * @param {string} mimeType
+   * @param {string} fileName
+   */
+  function downloadData(data, mimeType, fileName) {
+    const blob = new Blob(data, { type: mimeType });
+    const blobURL = URL.createObjectURL(blob);
+
+    const tempLink = document.createElement("a");
+    tempLink.style.display = "none";
+    tempLink.href = blobURL;
+    tempLink.download = fileName;
+
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+
+    // Remember to revoke the URL to avoid memory leaks
+    URL.revokeObjectURL(blobURL);
+  }
+
+  /**
+   * Export all citations into single column text file without formatting.
+   * @param {any[]} data Array of citations metadata objects.
+   * @param {HTMLInputElement} templateElement Will be used as backup if none of the data objects have the 'citation' value set.
+   * @returns {string[]}
+   */
+  function exportCitationsText(data, templateElement) {
+    const citations = exportCitationsHTML(data, templateElement).map(
+      (htmlCitation) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlCitation, "text/html");
+        return doc.body.textContent;
+      }
+    );
+    return citations;
+  }
+
+  /**
+   * Export all citations into single column text file while preserving HTML formatting.
+   * @param {any[]} data Array of citations metadata objects.
+   * @param {HTMLInputElement} templateElement Will be used as backup if none of the data objects have the 'citation' value set.
+   * @returns {string[]}
+   */
+  function exportCitationsHTML(data, templateElement) {
+    const citations = [];
+
+    for (let i = 0; i < data.length; i++) {
+      let templateSource = null;
+      if ("template" in data[i]) {
+        templateSource = data[i].template;
+      }
+      // If template source is not set
+      if (templateSource === null) {
+        // Try finding previous citation with template
+        for (let j = i - 1; j >= 0; j--) {
+          if ("template" in data[j]) {
+            templateSource = data[j].template;
+            break;
+          }
+        }
+      }
+      // If templateSource is still not set, then use whatever is in templateElement
+      if (templateSource === null) {
+        templateSource = templateElement.value;
+      }
+
+      const template = Handlebars.compile(templateSource);
+      citations.push(template(data[i]));
+    }
+
+    return citations;
+  }
 
   // Add helpers to Handlebars for producing formatted output.
   Handlebars.registerHelper("tučně", (text) => formatBold(false, text));
