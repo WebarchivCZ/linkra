@@ -1306,14 +1306,14 @@
   function createAuthorHTML(author, id) {
     return `
       <fieldset data-author-id="${id}">
-        <legend>Autor ${id + 1}</legend>
         <div class="flex-row cit-gen-fields">
-          <div class="flex-column cit-gen-labels">
+          <legend>Autor ${id + 1}</legend>
+          <div class="flex-column">
             <label for="příjmení">Příjmení:</label>
-            <label for="jméno">Jméno:</label>
-          </div>
-          <div class="flex-column cit-gen-inputs">
             <input type="text" name="příjmení" value=${author.příjmení}>
+          </div>
+          <div class="flex-column">
+            <label for="jméno">Jméno: (nebo korporace)</label>
             <input type="text" name="jméno" value=${author.jméno}>
           </div>
         </div>

@@ -310,23 +310,12 @@ tbody > tr:nth-of-type(odd) {
 /* citation generator */
 
 .cit-gen-fields {
-    align-items: stretch;
+    align-items: center;
+    gap: 1rem;
 }
-
-.cit-gen-labels {
-    justify-content: space-around;
-    align-items: end;
-}
-.cit-gen-labels > label {
-    margin-bottom: 0.5rem;
-}
-
-.cit-gen-inputs {
+.cit-gen-fields > div {
     flex: 1;
-    justify-content: space-around;
-}
-.cit-gen-inputs > input {
-    margin-bottom: 0.5rem;
+    align-items: start;
 }
 
 .field-chooser > select {
