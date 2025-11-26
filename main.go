@@ -33,7 +33,7 @@ func main() {
 		sqlitePath = defaultDBPath
 	}
 
-	// Prepare db conection.
+	// Prepare db connection.
 	db, err := gorm.Open(sqlite.Open(sqlitePath), &gorm.Config{})
 	if err != nil {
 		log.Error("could not open database connection", slog.String("error", err.Error()))
@@ -48,11 +48,11 @@ func main() {
 	}
 
 	// Get server address
-	const defaultServerAdderss = "localhost:8080"
+	const defaultServerAddress = "localhost:8080"
 	serverAddress, ok := os.LookupEnv("SERVER_ADDRESS")
 	if !ok {
-		log.Warn("the SERVER_ADDRESS is not set, using default " + defaultServerAdderss)
-		serverAddress = defaultServerAdderss
+		log.Warn("the SERVER_ADDRESS is not set, using default " + defaultServerAddress)
+		serverAddress = defaultServerAddress
 	}
 
 	// Prepare constants for templ components.
@@ -60,11 +60,11 @@ func main() {
 	serverHost, ok := os.LookupEnv("SERVER_HOST")
 	if !ok {
 		serverHost = serverAddress
-		log.Warn("the SERVER_HOST is not set, using server adress " + serverHost)
+		log.Warn("the SERVER_HOST is not set, using server address " + serverHost)
 	}
 	if !strings.HasPrefix(serverHost, "http") {
 		serverHost = "http://" + serverHost
-		log.Warn("added http:// prefix to SERVER_HOST becouse it was missing")
+		log.Warn("added http:// prefix to SERVER_HOST because it was missing")
 	}
 	const (
 		staticPathSegment          = "/static/"
@@ -120,7 +120,7 @@ func main() {
 	initiatedServices.CaptureService.ListenForResults(stopSignal)
 	log.Info("CaptureService is listening for CaptureResults")
 
-	// Wait for interupt
+	// Wait for interrupt
 	<-stopSignal.Done()
 	// Wait for shutdown (or timeout and go eat dirt)
 	shutdownTimeout, stop := context.WithTimeout(context.Background(), 120*time.Second)
