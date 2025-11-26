@@ -1343,11 +1343,14 @@
    * @param {HTMLElement} authorsDiv
    */
   function removeLastAuthorFieldset(authorsDiv) {
+    // Keep at least one author
+    if (authorsDiv.children.length <= 1) {
+      return;
+    }
     const lastElement = authorsDiv.lastElementChild;
     if (lastElement) {
       lastElement.remove();
     }
-    // Otherwise do nothing
   }
 
   /**
