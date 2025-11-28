@@ -19,10 +19,10 @@ type RedirectHandler struct {
 	ErrorHandler *httperror.ErrorHandler
 }
 
-func NewRedirectHanlder(log *slog.Logger, seedService *services.SeedService, errorHandler *httperror.ErrorHandler) *RedirectHandler {
-	assert.Must(log != nil, "NewRedirectHanlder: log can't be nil")
-	assert.Must(seedService != nil, "NewRedirectHanlder: seedService can't be nil")
-	assert.Must(errorHandler != nil, "NewRedirectHanlder: errorHandler can't be nil")
+func NewRedirectHandler(log *slog.Logger, seedService *services.SeedService, errorHandler *httperror.ErrorHandler) *RedirectHandler {
+	assert.Must(log != nil, "NewRedirectHandler: log can't be nil")
+	assert.Must(seedService != nil, "NewRedirectHandler: seedService can't be nil")
+	assert.Must(errorHandler != nil, "NewRedirectHandler: errorHandler can't be nil")
 	return &RedirectHandler{
 		Log:          log,
 		SeedService:  seedService,
@@ -54,5 +54,5 @@ func (handler *RedirectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request
 }
 
 func (handler *RedirectHandler) Routes(mux *http.ServeMux) {
-	mux.Handle("GET /archiv/{id}", handler)
+	mux.Handle("GET /wa/{id}", handler)
 }
