@@ -32,7 +32,7 @@ func NewServer(ctx context.Context, log *slog.Logger, addr string, services *ser
 		group.NewGroupHandler(log, services.SeedService, services.ExporterService, services.CaptureService, errorHandler),
 		seed.NewSeedHandler(log, services.SeedService, errorHandler),
 		generator.NewGeneratorHandler(log, services.SeedService, errorHandler),
-		redirect.NewRedirectHanlder(log, services.SeedService, errorHandler),
+		redirect.NewRedirectHandler(log, services.SeedService, errorHandler),
 	)
 
 	server := &http.Server{

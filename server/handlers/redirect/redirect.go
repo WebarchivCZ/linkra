@@ -3,6 +3,7 @@ package redirect
 import (
 	"errors"
 	"linkra/assert"
+	"linkra/server/components"
 	"linkra/server/handlers/httperror"
 	"linkra/services"
 	"linkra/utils"
@@ -46,7 +47,14 @@ func (handler *RedirectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request
 
 	if seed.ArchivalURL == "" {
 		handler.Log.Warn("RedirectHandler.ServeHTTP seed is not harvested or archival URL is missing", "seed", seed.ShadowID, utils.LogRequestInfo(r))
-		handler.ErrorHandler.PageNotFound(w, r) // TODO: Make special page explaining what happened
+
+		data := components.NewRedirectErrorViewData(seed)
+		err = handler.ViewError(w, r, data)
+		if err != nil {
+			handler.Log.Error("RedirectHandler.ServeHTTP failed to render error page", "error", err.Error(), utils.LogRequestInfo(r))
+			return // Keep this return to prevent mistakes in future
+		}
+
 		return
 	}
 
@@ -55,4 +63,8 @@ func (handler *RedirectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request
 
 func (handler *RedirectHandler) Routes(mux *http.ServeMux) {
 	mux.Handle("GET /wa/{id}", handler)
+}
+
+func (handler *RedirectHandler) ViewError(w http.ResponseWriter, r *http.Request, data *components.RedirectErrorViewData) error {
+	return components.RedirectErrorView(data).Render(r.Context(), w)
 }

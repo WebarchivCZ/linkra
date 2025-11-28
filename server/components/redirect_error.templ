@@ -1,0 +1,33 @@
+package components
+
+import "linkra/entities"
+
+type RedirectErrorViewData struct {
+	Seed *entities.Seed
+}
+
+func NewRedirectErrorViewData(seed *entities.Seed) *RedirectErrorViewData {
+	return &RedirectErrorViewData{
+		Seed: seed,
+	}
+}
+
+templ redirectErrorView(data *RedirectErrorViewData) {
+	<div class="flex-content-column">
+	if data.Seed.State  == entities.DoneFailure {
+		<p>Při archivaci webového zdroje <a href={ data.Seed.URL }>{ data.Seed.URL }</a> došlo k chybě proto nelze zobrazit archivní kopii.</p>
+		<p>Je možné že webový zdroj v době archivace neexistoval, měl výpadek nebo byla jeho URL adresa zadána nesprávně.</p>
+	} else {
+		<p>Vámi požadovaný zdroj <a href={ data.Seed.URL }>{ data.Seed.URL }</a> stále čeká na archivaci.
+		Až bude archivace dokončena povede link který vás sem zavedl na archivní kopii webového zdroje ve waybacku <a href="https://webarchiv.cz">Webarchivu</a></p>
+	}
+		<p>Pokud si přejete vidět ostatní archivní verze tohoto zdroje můžete přejít na <a href={ "https://wayback.webarchiv.cz/wayback/*/" + data.Seed.URL }>{ "https://wayback.webarchiv.cz/wayback/*/" + data.Seed.URL }</a></p>
+	</div>
+}
+
+templ redirectErrorHeader() {
+	<div class="header">
+		<h1 class="blue-text">Chyba při přesměrování</h1>
+	</div>
+	<hr class="no-bottom-margin">
+}

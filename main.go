@@ -71,7 +71,7 @@ func main() {
 		staticPathSegment          = "/static/"
 		seedDetailPathSegment      = "/seed/"
 		groupDetailPathSegment     = "/seeds/"
-		waybackRedirectPathSegment = "/archiv/"
+		waybackRedirectPathSegment = "/wa/"
 	)
 	components.SetComponentConstants(components.NewComponentConstants(
 		serverHost,

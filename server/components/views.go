@@ -39,3 +39,11 @@ func GeneratorView(data *GeneratorViewData) templ.Component {
 		Main:   generatorView(data),
 	})
 }
+
+func RedirectErrorView(data *RedirectErrorViewData) templ.Component {
+	return Assemble(&PageComponents{
+		Title:  "Chyba při přesměrování",
+		Header: redirectErrorHeader(),
+		Main:   redirectErrorView(data),
+	})
+}
