@@ -461,3 +461,8 @@ fieldset {
 #prepared-templates {
     max-width: 30%;
 }
+
+.return-to-group-link {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+}
