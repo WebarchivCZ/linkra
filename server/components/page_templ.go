@@ -187,7 +187,7 @@ func nav() templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<div class=\"flex-row nav\"><a href=\"/\">1. krok - zadejte URL</a> &gt; <a>2. krok - přehled semínek</a> &gt; <a href=\"/citace/\">3. krok - generátor citací</a></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<div class=\"flex-row nav\"><a href=\"/\">Hlavní strana</a> <a href=\"/citace/\">Generátor citací</a></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -223,7 +223,7 @@ func footer() templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("logo_NK.svg"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/page.templ`, Line: 86, Col: 42}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/page.templ`, Line: 83, Col: 42}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
