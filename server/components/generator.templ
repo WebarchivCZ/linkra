@@ -89,6 +89,9 @@ templ generatorView(data *GeneratorViewData) {
 					<label for="url">URL&nbsp;webu:</label>
 					<input type="text" id="url" data-citationfield="url">
 
+					<label for="url">Webarchiv:</label>
+					<input type="text" id="webarchiv" data-citationfield="webarchiv">
+
 					<label for="archivní-url">Archivní&nbsp;URL:</label>
 					<input type="text" id="archivní-url" data-citationfield="archivní-url">
 
@@ -130,11 +133,12 @@ templ generatorView(data *GeneratorViewData) {
 						<option value="autoři">Autoři</option>
 						// <option value="příjmení">Příjmení</option>
 						// <option value="jméno">Jméno</option>
-						<option value="název">Název webu</option>
+						<option value="název">Název webového zdroje</option>
 						<option value="součást">Součást</option>
 						<option value="místo-vydání">Místo vydání</option>
 						<option value="datum-vydání">Datum vydání</option>
 						<option value="url">URL</option>
+						<option value="webarchiv">Webarchiv</option>
 						<option value="archivní-url">Archivní URL</option>
 						<option value="datum-archivace">Datum archivace</option>
 						<option value="datum-citace">Datum citace</option>

@@ -241,6 +241,9 @@
       case "url":
         fieldInitFunc = initUrlField;
         break;
+      case "webarchiv":
+        fieldInitFunc = initArchiveField;
+        break;
       case "archivní-url":
         fieldInitFunc = initArchivalUrlField;
         break;
@@ -506,6 +509,13 @@
    */
   function initUrlField(field) {
     initGenericUrlField(field, "URL", "url");
+  }
+
+  /**
+   * @param {HTMLFormElement} field
+   */
+  function initArchiveField(field) {
+    initGenericFormatAndSeparatorField(field, "Webarchiv", "webarchiv", true);
   }
 
   /**
@@ -938,6 +948,18 @@
         initTextField
       );
       field.elements.namedItem("f-value").value = "Archivní kopie dostupná z: ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Webarchiv
+    {
+      const field = createNewField(
+        "archiv",
+        createFieldId(localFieldNumber),
+        initArchiveField
+      );
+      field.elements.namedItem("f-oddělovač").value = ",";
       templateBuilder.append(field);
       localFieldNumber++;
     }

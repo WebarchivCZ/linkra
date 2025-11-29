@@ -21,6 +21,7 @@ func prettyPrintCaptureState(state entities.CaptureState) string {
 type seedJsonObject struct {
 	Authors      []authorsJsonObject `json:"autoři"`
 	URL          string              `json:"url"`
+	Webarchive   string              `json:"webarchiv"`
 	ArchivalURL  string              `json:"archivní-url"`
 	ArchivalDate string              `json:"datum-archivace"`
 }
@@ -36,6 +37,7 @@ func groupToJson(group *entities.SeedsGroup) string {
 		seedObject := seedJsonObject{
 			Authors:      []authorsJsonObject{{}},
 			URL:          seed.URL,
+			Webarchive:   "Webarchiv",
 			ArchivalURL:  shortWaybackLink(seed),
 			ArchivalDate: seed.HarvestedAt.Format("2006-01-02T15:04:05"),
 		}
