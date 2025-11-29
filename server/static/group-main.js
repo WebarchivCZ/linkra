@@ -53,3 +53,23 @@ function showCopied(target) {
   target.textContent = "Zkopírováno";
   setTimeout(() => (target.textContent = tmp), 1000);
 }
+
+// Reload the page after some time to fetch changes from the server
+const timeoutMs = 30 * 1000;
+window.setTimeout(() => reloadWhenVisible(), timeoutMs);
+
+// This should only reload the page if it is already visible or after it becomes visible.
+function reloadWhenVisible() {
+  if (!document.hidden) {
+    location.reload();
+  } else {
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        location.reload();
+      } else {
+        // In some weird case that we are still hidden wait for a few seconds before retrying
+        window.setTimeout(() => reloadWhenVisible(), 5 * 1000);
+      }
+    });
+  }
+}
