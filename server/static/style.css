@@ -264,6 +264,18 @@ tbody > tr:nth-of-type(odd) {
     margin: 0;
 }
 
+.margin-b-05 {
+    margin-bottom: 0.5rem;
+}
+
+.margin-b-1 {
+    margin-bottom: 1rem;
+}
+
+.margin-b-2 {
+    margin-bottom: 2rem;
+}
+
 /* Hide element */
 .hidden {
     display: none;

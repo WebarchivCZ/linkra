@@ -17,7 +17,7 @@ templ generatorView(data *GeneratorViewData) {
 	<!-- Output -->
 	if data.Group != nil {
 		<div class="flex-content-column">
-			<a class="return-to-group-link" href={ groupViewLink(data.Group) }>Vrátit se na stav</a>
+			<a class="return-to-group-link" href={ groupViewLink(data.Group) }>Vrátit se na stav archivace</a>
 		</div>
 	}
 	<div id="output-div" class="flex-content-column citation">
@@ -33,7 +33,7 @@ templ generatorView(data *GeneratorViewData) {
 		</select>
 	</div>
 	<div class="flex-content-column">
-		<div>
+		<div class="margin-b-2">
 			<button type="button" id="export-citations-text">Exportovat všechny citace</button>
 			<button type="button" id="export-citations-html">Exportovat všechny citace (s formátováním)</button>
 		</div>
@@ -74,7 +74,7 @@ templ generatorView(data *GeneratorViewData) {
 					<label for="název">Název&nbsp;webového&nbsp;zdroje:</label>
 					<input type="text" id="název" data-citationfield="název">
 
-					<label for="součást">Součást:</label>
+					<label for="součást">Název zdroje/periodikum:</label>
 					<input type="text" id="součást" data-citationfield="součást">
 
 					<label for="místo-vydání">Místo&nbsp;vydání:</label>
@@ -134,7 +134,7 @@ templ generatorView(data *GeneratorViewData) {
 						// <option value="příjmení">Příjmení</option>
 						// <option value="jméno">Jméno</option>
 						<option value="název">Název webového zdroje</option>
-						<option value="součást">Součást</option>
+						<option value="součást">Název zdroje/periodikum</option>
 						<option value="místo-vydání">Místo vydání</option>
 						<option value="datum-vydání">Datum vydání</option>
 						<option value="url">URL</option>
@@ -180,5 +180,5 @@ templ generatorView(data *GeneratorViewData) {
 }
 
 templ templateOptions() {
-	<option value="iso690">ČSN 690 / ISO 690</option>
+	<option value="iso690">ČSN ISO 690</option>
 }

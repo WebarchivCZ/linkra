@@ -18,17 +18,17 @@ func NewGroupViewData(seedsGroup *entities.SeedsGroup) *GroupViewData {
 
 templ groupHeader() {
 	<div class="header">
-		<h1><span class="blue-text">Přehled</span> semínek</h1>
-		<p>Zde můžete sledovat stav vašich semínek</p>
+		<h1><span class="blue-text">Stav</span> archivace</h1>
+		<p>Zde můžete sledovat průběh archivace</p>
 	</div>
 	<hr class="no-bottom-margin">
 }
 
 templ groupView(data *GroupViewData) {
 <div class="flex-content-column">
-	<h2>Přehled stavu semínek</h2>
+	<h2>Stav archivace</h2>
 	<div class="flex-row">
-		<p>Odkaz na přehled: <a href={ groupViewLink(data.Group) } id="group-link">{ data.Group.ShadowID }</a></p>
+		<p>Odkaz na stav: <a href={ groupViewLink(data.Group) } id="group-link">{ data.Group.ShadowID }</a></p>
 		<button type="button" id="copy-group-link">Kopírovat odkaz</button>
 	</div>
 	<div class="flex-row">

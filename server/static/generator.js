@@ -482,7 +482,12 @@
    * @param {HTMLFormElement} field
    */
   function initPartOfField(field) {
-    initGenericFormatAndSeparatorField(field, "Součást", "součást", true);
+    initGenericFormatAndSeparatorField(
+      field,
+      "Název zdroje/periodikum",
+      "součást",
+      true
+    );
   }
 
   /**
