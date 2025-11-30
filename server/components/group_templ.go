@@ -45,7 +45,7 @@ func groupHeader() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"header\"><h1><span class=\"blue-text\">Stav</span> archivace</h1><p>Zde můžete sledovat průběh archivace</p></div><hr class=\"no-bottom-margin\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"header\"><h1 class=\"blue-text\">Stav archivace</h1><p>Zde můžete sledovat průběh archivace</p></div><hr class=\"no-bottom-margin\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -74,14 +74,14 @@ func groupView(data *GroupViewData) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"flex-content-column\"><h2>Stav archivace</h2><div class=\"flex-row\"><p>Odkaz na stav: <a href=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"flex-content-column\"><div class=\"flex-row\"><p>Odkaz na stav: <a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 templ.SafeURL
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(groupViewLink(data.Group))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 31, Col: 55}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 30, Col: 55}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -94,7 +94,7 @@ func groupView(data *GroupViewData) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(data.Group.ShadowID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 31, Col: 95}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 30, Col: 95}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -107,7 +107,7 @@ func groupView(data *GroupViewData) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(ExcelFilename(data.Group))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 37, Col: 54}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 36, Col: 54}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -120,7 +120,7 @@ func groupView(data *GroupViewData) templ.Component {
 		var templ_7745c5c3_Var6 templ.SafeURL
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinURLErrs(path.Join(Constants().GetGroupPath(), "/export/excel/", data.Group.ShadowID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 37, Col: 140}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 36, Col: 140}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -133,7 +133,7 @@ func groupView(data *GroupViewData) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(CsvFilename(data.Group))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 38, Col: 52}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 37, Col: 52}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -146,7 +146,7 @@ func groupView(data *GroupViewData) templ.Component {
 		var templ_7745c5c3_Var8 templ.SafeURL
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinURLErrs(path.Join(Constants().GetGroupPath(), "/export/csv/", data.Group.ShadowID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 38, Col: 136}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 37, Col: 136}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -164,7 +164,7 @@ func groupView(data *GroupViewData) templ.Component {
 			var templ_7745c5c3_Var9 templ.SafeURL
 			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinURLErrs(seedViewLink(seed))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 52, Col: 36}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 51, Col: 36}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {
@@ -177,7 +177,7 @@ func groupView(data *GroupViewData) templ.Component {
 			var templ_7745c5c3_Var10 string
 			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(seed.URL)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 52, Col: 49}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 51, Col: 49}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {
@@ -190,7 +190,7 @@ func groupView(data *GroupViewData) templ.Component {
 			var templ_7745c5c3_Var11 templ.SafeURL
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinURLErrs(shortWaybackLink(seed))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 53, Col: 40}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 52, Col: 40}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -203,7 +203,7 @@ func groupView(data *GroupViewData) templ.Component {
 			var templ_7745c5c3_Var12 string
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(shortWaybackLink(seed))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 53, Col: 67}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 52, Col: 67}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 			if templ_7745c5c3_Err != nil {
@@ -216,7 +216,7 @@ func groupView(data *GroupViewData) templ.Component {
 			var templ_7745c5c3_Var13 string
 			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(prettyPrintCaptureState(seed.State))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 54, Col: 45}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 53, Col: 45}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 			if templ_7745c5c3_Err != nil {
@@ -239,7 +239,7 @@ func groupView(data *GroupViewData) templ.Component {
 			var templ_7745c5c3_Var14 templ.SafeURL
 			templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinURLErrs(path.Join("/citace/", data.Group.ShadowID))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 67, Col: 54}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 66, Col: 54}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 			if templ_7745c5c3_Err != nil {
@@ -262,7 +262,7 @@ func groupView(data *GroupViewData) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("group-main.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 73, Col: 45}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 72, Col: 45}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 		if templ_7745c5c3_Err != nil {

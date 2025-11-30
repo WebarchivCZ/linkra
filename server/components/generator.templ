@@ -17,7 +17,7 @@ templ generatorView(data *GeneratorViewData) {
 	<!-- Output -->
 	if data.Group != nil {
 		<div class="flex-content-column">
-			<a class="return-to-group-link" href={ groupViewLink(data.Group) }>Vrátit se na stav archivace</a>
+			<a class="return-to-group-link" href={ groupViewLink(data.Group) } target="_blank">Vrátit se na stav archivace</a>
 		</div>
 	}
 	<div id="output-div" class="flex-content-column citation">

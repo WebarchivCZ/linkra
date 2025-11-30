@@ -18,7 +18,7 @@ func NewGroupViewData(seedsGroup *entities.SeedsGroup) *GroupViewData {
 
 templ groupHeader() {
 	<div class="header">
-		<h1><span class="blue-text">Stav</span> archivace</h1>
+		<h1 class="blue-text">Stav archivace</h1>
 		<p>Zde můžete sledovat průběh archivace</p>
 	</div>
 	<hr class="no-bottom-margin">
@@ -26,7 +26,6 @@ templ groupHeader() {
 
 templ groupView(data *GroupViewData) {
 <div class="flex-content-column">
-	<h2>Stav archivace</h2>
 	<div class="flex-row">
 		<p>Odkaz na stav: <a href={ groupViewLink(data.Group) } id="group-link">{ data.Group.ShadowID }</a></p>
 		<button type="button" id="copy-group-link">Kopírovat odkaz</button>
