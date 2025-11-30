@@ -15,7 +15,7 @@ func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
 
 templ generatorView(data *GeneratorViewData) {
 	<!-- Output -->
-	if data != nil {
+	if data.Group != nil {
 		<div class="flex-content-column">
 			<a class="return-to-group-link" href={ groupViewLink(data.Group) }>Vrátit se na stav</a>
 		</div>
