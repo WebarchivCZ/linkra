@@ -34,6 +34,9 @@ type authorsJsonObject struct {
 func groupToJson(group *entities.SeedsGroup) string {
 	objects := make([]seedJsonObject, 0, len(group.Seeds))
 	for _, seed := range group.Seeds {
+		if seed.State != entities.DoneSuccess {
+			continue
+		}
 		seedObject := seedJsonObject{
 			Authors:      []authorsJsonObject{{}},
 			URL:          seed.URL,
@@ -76,4 +79,15 @@ func groupViewLink(group *entities.SeedsGroup) string {
 // Get full path to static file "filename"
 func fullStaticPath(filename string) string {
 	return Constants().GetFullURL(path.Join(Constants().GetStaticPath(), filename))
+}
+
+func isCaptureCompleted(group *entities.SeedsGroup) bool {
+	for _, seed := range group.Seeds {
+		// We could instead test if state is Pending or NotEnqueued which would be more readable
+		// but this will be more future proof and bug proof (we rather don't show correct seeds instead of showing incorrect ones)
+		if seed.State != entities.DoneSuccess && seed.State != entities.DoneFailure {
+			return false
+		}
+	}
+	return true
 }
