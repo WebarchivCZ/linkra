@@ -2,7 +2,7 @@ package entities
 
 // Information necessary for capturing/crawling a page.
 type CaptureRequest struct {
-	// The URL adress we want to capture.
+	// The URL address we want to capture.
 	SeedURL string `json:"seedURL"`
 	// The ShadowID of Seed we want to capture. This will be used in CaptureResult.
 	SeedShadowID string `json:"seedShadowID"`
@@ -43,14 +43,14 @@ type CaptureResult struct {
 	SeedShadowID string `json:"seedShadowID"`
 	// Was the capture completed
 	Done bool `json:"done"`
-	// Recieved errors
+	// Received errors
 	ErrorMessages []string `json:"errorMessages"`
 
 	CaptureMetadata *CaptureMetadata `json:"captureMetadata"`
 }
 
 type CaptureMetadata struct {
-	// CDXJ timestamp of the instatnt the capture was taken as recorded in index/WARC https://specs.webrecorder.net/cdxj/0.1.0/#timestamp
+	// CDXJ timestamp of the instant the capture was taken as recorded in index/WARC https://specs.webrecorder.net/cdxj/0.1.0/#timestamp
 	Timestamp string `json:"timestamp"`
 	// URL from CDXJ JSON block.
 	CapturedUrl string `json:"capturedUrl"`
@@ -61,11 +61,11 @@ func PrettyPrintCaptureState(state CaptureState) string {
 	case NotEnqueued:
 		return "Nezařazeno"
 	case Pending:
-		return "Čeká na sklizení"
+		return "Čeká na archivaci"
 	case DoneSuccess:
-		return "Úspěšně sklizeno"
+		return "Úspěšně archivováno"
 	case DoneFailure:
-		return "Chyba při sklizni"
+		return "Chyba při archivaci"
 	}
 	return "Neznámý stav"
 }
