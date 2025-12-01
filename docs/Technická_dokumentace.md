@@ -11,17 +11,17 @@
 
 1. Nejdříve je potřeba naklonovat repozitář s aplikací: `git clone https://github.com/WebarchivCZ/linkra.git`
 2. Poté se přesuneme do adresáře s aplikací `cd linkra`
-3. Zde se v adresáři `docker` nacházejí podadresáře s připravenými compose soubory pro různá prostředí např. `docker/dev/docker-compose.yaml`
-4. Ve vybraném docker-compose souboru bude potřeba nastavit proměnnou `SERVER_HOST`. Nastavíme ji na URL, ze které bude aplikace dostupná (je potřeba zadat celou URL i s protokolem a případně portem např. https://linkra.webarchiv.cz, nebo http://10.10.10.10:8080 ). Hodnota této proměnné musí odpovídat tomu, jak bude aplikace veřejně dostupná, tedy pokud bude dostupná přes reverzní proxy, měla by obsahovat adresu této reverzní proxy.
-5. V sekci `volumes` změníme cestu k souboru s sqlite databází, která bude přimontovaná do kontejneru. Např. `jmeno_databaze.db:/mnt/storage.db:rw` (Uvedený soubor musí existovat a musí mít povolený zápis jinak dojde k chybě.)
-6. Dále je potřeba nastavit cestu pro ukládání archivních souborů z workeru. V compose souboru v nastavení služby linkra-worker je potřeba do `volumes` přidat nastavení pro mount adresáře, kam se mají soubory ukládat. Např. `/mnt/archiv/captures:/app/captures:rw`
-7. Nakonec je potřeba se ujistit, že ve `worker-config.json` je `discardArchiveFiles` nastaveno na false. V případě, že si nepřejete ukládat archivní soubory (například při testovacím provozu), tak je možné nastavit na true, poté není třeba zadávat cestu pro archivní soubory.
+3. Zde se v adresáři `docker` nacházejí podadresáře s připravenými docker-compose.yaml soubory pro různá prostředí např. `docker/dev/docker-compose.yaml`
+4. Ve vybraném docker-compose.yaml souboru bude potřeba nastavit proměnnou `SERVER_HOST`. Nastavíme ji na URL, ze které bude aplikace dostupná (je potřeba zadat celou URL i s protokolem a případně portem např. https://linkra.webarchiv.cz, nebo http://10.10.10.10:8080 ). Hodnota této proměnné musí odpovídat tomu, jak bude aplikace veřejně dostupná, tedy pokud bude dostupná přes reverzní proxy, měla by obsahovat adresu této reverzní proxy.
+5. V elementu `volumes` změníme cestu k souboru s sqlite databází, která bude přimontovaná do kontejneru. Např. `jmeno_databaze.db:/mnt/storage.db:rw`. Uvedený soubor musí existovat a musí mít povolený zápis jinak dojde k chybě. Soubor může být prázdný.
+6. Dále je potřeba nastavit cestu pro ukládání archivních souborů z workeru. V compose souboru v elementu služby linkra-worker je potřeba do elementu `volumes` přidat nastavení pro mount adresáře, kam se mají soubory ukládat. Např. `/mnt/archiv/captures:/app/captures:rw`
+7. Nakonec je potřeba se ujistit, že ve `worker-config.json` je `discardArchiveFiles` nastaveno na `false`. V případě, že si nepřejete ukládat archivní soubory (například při testovacím provozu), tak je možné nastavit na `true`, poté není třeba zadávat cestu pro archivní soubory, protože jí bude worker ignorovat.
 8. Teď už by mělo být možné spustit aplikaci pomocí příkazu docker compose up. Např. `docker compose -f ./docker/zvolené_prostředí/docker-compose.yaml -p linkra up -d`
 
 ### Poznámky
 
 - Pro produkční provoz se počítá se směřováním dotazů na aplikaci skrze reverzní proxy, která umožní použití https a rate limiting. Pro lokální provoz mimo internet není proxy nutná.
-- Aplikaci nasazenou pomocí docker compose je možné snadno aktualizovat pomocí následujícího postupu.
+- Aplikaci nasazenou pomocí docker compose je možné snadno aktualizovat pomocí následujícího postupu:
 
 ```bash
 # V kořenu repositáře
@@ -44,8 +44,8 @@ docker compose -f ./docker/zvolené_prostředí/docker-compose.yaml -p linkra up
 
 ### Instalace
 
-1. Nejprve je potřeba nainstalovat požadavky. Konkrétně go, nodejs a valkey (alternativně by mělo být možné použít redis). Použijte oficiální postupy pro jejich instalaci. V případě valkey je možné použít libovolnou variantu (spustit jako příkaz nebo pomocí systemd nebo dockeru).
-2. Naklonujeme repositář s aplikací: `git clone https://github.com/WebarchivCZ/linkra.git`
+1. Nejprve je potřeba nainstalovat požadavky. Konkrétně **go**, **nodejs** a **valkey** (alternativně by mělo být možné použít redis). Použijte oficiální postupy pro jejich instalaci. V případě aplikace valkey je možné použít libovolnou variantu (spustit jako příkaz nebo pomocí systemd nebo dockeru).
+2. Naklonujeme repozitář s aplikací: `git clone https://github.com/WebarchivCZ/linkra.git`
 3. Pokud ještě nemáme běžící instanci valkey tak je potřeba ji spustit dříve, než se pokusíme spustit server.
 4. Pokud nám jde o vývoj a dostačuje nám aplikace běžící na lokálním zařízení, tak v tuto chvíli stačí spustit `go run .` v kořeni repositáře. Tento příkaz stáhne potřebné závislosti, zkompiluje a spustí server. Ve výstupu logu uvidíme adresu, na které bude aplikace dostupná.
 5. Nyní, pokud chceme spustit i worker, tak přejdeme do adresáře `workers/scoop-worker`.
@@ -56,7 +56,29 @@ docker compose -f ./docker/zvolené_prostředí/docker-compose.yaml -p linkra up
 ### Poznámky
 
 - Sever a worker mohou pracovat samostatně, veškerá komunikace mezi nimi probíhá skrze valkey.
+- Server se dá pomocí příkazu `go build` (v kořeni repozitáře) zkompilovat do spustitelného souboru.
 - Více workerů může běžet současně. Není k tomu potřeba žádná speciální konfigurace, pouze spuštění více worker procesů.
+
+### Nastavení serveru
+
+Nastavení serveru se mění pomocí proměnných prostředí. Pokud některá hodnota není explicitně nastavená bude použita výchozí hodnota uvedená v závorce.
+
+- `DB_PATH` - Cesta k souboru SQLite databáze kam se ukládají perzistentní data aplikace. (výchozí: `storage.db`)
+- `VALKEY_ADDR` - Adresa na které běží valkey databáze. (výchozí: `localhost`)
+- `VALKEY_PORT` - Port na kterém běží valkey databáze. (výchozí: `6379`)
+- `SERVER_ADDRESS` - Adresa a port na kterém má běžet webové rozhraní serveru. (výchozí: `localhost:8080`)
+- `SERVER_HOST` - Protokol, adresa a host na kterém je webové rozhraní dostupné z internetu. Může být stejné jako `SERVER_ADDRESS` pokud je vyžadován jen lokální přístup. (výchozí: `http://localhost:8080`)
+
+### Nastavení workerů
+
+Nastavení workerů se provádí pomocí JSON souboru. Vzorový soubor se nachází v `workers/scoop-worker/config.json`.
+
+Musí to být JSON objekt který obsahuje následující klíče:
+
+- `discardArchiveFiles` - Boolean. Pokud je nastaven na `true`, tak worker přeskočí ukládání archivních souborů. Vhodné při testování pokud nás zajímají vrácená metadata sklizně, ale nechceme vytvářet zbytečné soubory.
+- `outputDir` - String. Cesta k adresáři, kam má worker ukládat archivní soubory.
+- `valkeyUrl` - String. Adresa a port valkey databáze.
+- `captureSettings` - Objekt, který může obsahovat konfiguraci pro Scoop. Pokud bude prázdný, tak budou použité rozumné výchozí hodnoty.
 
 ## Popis aplikace
 
