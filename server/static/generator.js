@@ -1234,8 +1234,8 @@
     exportCitationsHTMLBtn.addEventListener("click", () => {
       saveCurrentCitationData(generatorForm, citationData, currentDataIndex);
       const citations = exportCitationsHTML(citationData, templateElement);
-      const data = citations.join("\n");
-      downloadData([data], "text/html", "citace.txt");
+      const data = citations.map((citation) => citation + "<br>").join("\n");
+      downloadData([data], "text/html", "citace.html");
     });
   }
 
