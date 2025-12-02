@@ -1237,6 +1237,14 @@
       const data = citations.map((citation) => citation + "<br>").join("\n");
       downloadData([data], "text/html", "citace.html");
     });
+
+    const copyCitationBtn = document.getElementById("copy-citation");
+    if (copyCitationBtn === null) {
+      throw new Error("Element with id 'copy-citation' must exist");
+    }
+    copyCitationBtn.addEventListener("click", () =>
+      copyHtmlAndTextToClipboard(citationOutput.innerHTML, copyCitationBtn)
+    );
   }
 
   /**
@@ -1452,11 +1460,7 @@
    */
   function exportCitationsText(data, templateElement) {
     const citations = exportCitationsHTML(data, templateElement).map(
-      (htmlCitation) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlCitation, "text/html");
-        return doc.body.textContent;
-      }
+      (htmlCitation) => htmlToText(htmlCitation)
     );
     return citations;
   }
@@ -1495,6 +1499,43 @@
     }
 
     return citations;
+  }
+
+  /**
+   * @param {string} htmlString
+   * @param {HTMLElement} btn
+   */
+  function copyHtmlAndTextToClipboard(htmlString, btn) {
+    const textString = htmlToText(htmlString);
+    console.log(htmlString);
+    const clipItem = new ClipboardItem({
+      "text/html": htmlString,
+      "text/plain": textString,
+    });
+    navigator.clipboard.write([clipItem]).then(
+      () => showCopied(btn),
+      (reason) => console.error("Could not copy citation to clipboard:", reason)
+    );
+  }
+
+  /**
+   * @param {HTMLElement} target
+   */
+  function showCopied(target) {
+    const tmp = target.textContent;
+    target.textContent = "Zkopírováno";
+    setTimeout(() => (target.textContent = tmp), 1000);
+  }
+
+  /**
+   * Get text content from html string
+   * @param {string} htmlString
+   * @returns {string}
+   */
+  function htmlToText(htmlString) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, "text/html");
+    return doc.body.textContent;
   }
 
   // Add helpers to Handlebars for producing formatted output.

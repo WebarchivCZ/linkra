@@ -65,7 +65,7 @@ func generatorView(data *GeneratorViewData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div id=\"output-div\" class=\"flex-content-column citation\"><span><h4>Citace: </h4><p class=\"expl\"></p></span> <span class=\"output-box\"><p id=\"citation\"></p><button type=\"button\">Kopírovat</button></span><!-- Template --><span><label for=\"template-select\"><h4>Šablona: </h4></label><p class=\"expl\"></p></span><input hidden disabled type=\"text\" id=\"template\" value=\"Pokud vidíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.\"> <select id=\"template-select\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div id=\"output-div\" class=\"flex-content-column citation\"><span><h4>Citace: </h4><p class=\"expl\"></p></span> <span class=\"output-box\"><p id=\"citation\"></p><button type=\"button\" id=\"copy-citation\">Kopírovat</button></span><!-- Template --><span><label for=\"template-select\"><h4>Šablona: </h4></label><p class=\"expl\"></p></span><input hidden disabled type=\"text\" id=\"template\" value=\"Pokud vidíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.\"> <select id=\"template-select\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
