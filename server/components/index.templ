@@ -13,8 +13,8 @@ templ indexHeader() {
 templ indexView() {
 	<div class="flex-content-column">
 		<!-- Vyhledávací / zadávací pole -->
-		<p>Krok 1. zadejte URL adresy</p>
 		<section>
+			<h2>Archivace webových zdrojů</h2>
 			<form action={ path.Join(Constants().GetGroupPath(), "/save") + "/" } method="post" enctype="multipart/form-data">
 				<div class="margin-b-05"> // don't remove this div. css is garbage and just ignores margin and padding if you don't know the correct incantation
 					<label for="url-list">zadejte jednu nebo více URL adres</label>
@@ -22,6 +22,20 @@ templ indexView() {
 				<textarea name="url-list" id="url-list" placeholder="https://example.com" required wrap="off" class="margin-b-05"></textarea>
 				<button type="submit">Odeslat</button>
 			</form>
+		</section>
+		<section>
+			<h2>O Aplikaci</h2>
+			<p>
+				Aplikace Linkra umožňuje ukládání webových zdrojů do webového archivu a vytvoření jejich citačního záznamu, který zahrnuje archivní URL adresu.
+				Je vhodná k archivaci jedné stránky/dokumentu, jako je například odborný článek nebo informace na jedné webové stránce (page).
+				Nesklízí celý web.
+				Pokud uživatel chce citovat celý web, může buď citovat jeho již existující archivní verzi nebo navrhnout web k archivaci prostřednictvím formuláře do českého <a href="https://www.webarchiv.cz/cs/pridat-web">Webarchivu</a>.
+				Vzhledem k tomu, že archivace má své technické limity, doporučujeme kvalitu archivních verzí vámi vložených webových zdrojů po indexaci dat ověřit ve webovém archivu.
+				Více o problematice se můžete dozvědět zde:
+				<a href="https://itlib.cvtisr.sk/clanky/o-mrtvych-webovych-zdrojich-jak-identifikovat-a-sledovat-zanikly-webovy-obsah/">O mrtvých webových zdrojích</a>
+				a
+				<a href="https://casopiskniznica.snk.sk/fileadmin/user_upload/Rocnik_2024/04/03_Marie_Haskovcova_.pdf">Archivace webových zdrojů v citacích vědeckých a odborných textů</a>. 
+			</p>
 		</section>
 		<script>
 			// Workaround for multiline placeholder

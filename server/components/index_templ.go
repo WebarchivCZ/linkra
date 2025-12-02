@@ -60,7 +60,7 @@ func indexView() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"flex-content-column\"><!-- Vyhledávací / zadávací pole --><p>Krok 1. zadejte URL adresy</p><section><form action=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"flex-content-column\"><!-- Vyhledávací / zadávací pole --><section><h2>Archivace webových zdrojů</h2><form action=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -73,7 +73,7 @@ func indexView() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" method=\"post\" enctype=\"multipart/form-data\"><div class=\"margin-b-05\"><label for=\"url-list\">zadejte jednu nebo více URL adres</label></div><textarea name=\"url-list\" id=\"url-list\" placeholder=\"https://example.com\" required wrap=\"off\" class=\"margin-b-05\"></textarea> <button type=\"submit\">Odeslat</button></form></section><script>\n\t\t\t// Workaround for multiline placeholder\n\t\t\tconst textarea = document.querySelector(\"textarea\");\n\t\t\ttextarea.setAttribute(\"placeholder\", \"https://webarchiv.cz\\nhttps://example.com\");\n\t\t</script></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" method=\"post\" enctype=\"multipart/form-data\"><div class=\"margin-b-05\"><label for=\"url-list\">zadejte jednu nebo více URL adres</label></div><textarea name=\"url-list\" id=\"url-list\" placeholder=\"https://example.com\" required wrap=\"off\" class=\"margin-b-05\"></textarea> <button type=\"submit\">Odeslat</button></form></section><section><h2>O Aplikaci</h2><p>Aplikace Linkra umožňuje ukládání webových zdrojů do webového archivu a vytvoření jejich citačního záznamu, který zahrnuje archivní URL adresu. Je vhodná k archivaci jedné stránky/dokumentu, jako je například odborný článek nebo informace na jedné webové stránce (page). Nesklízí celý web. Pokud uživatel chce citovat celý web, může buď citovat jeho již existující archivní verzi nebo navrhnout web k archivaci prostřednictvím formuláře do českého <a href=\"https://www.webarchiv.cz/cs/pridat-web\">Webarchivu</a>. Vzhledem k tomu, že archivace má své technické limity, doporučujeme kvalitu archivních verzí vámi vložených webových zdrojů po indexaci dat ověřit ve webovém archivu. Více o problematice se můžete dozvědět zde: <a href=\"https://itlib.cvtisr.sk/clanky/o-mrtvych-webovych-zdrojich-jak-identifikovat-a-sledovat-zanikly-webovy-obsah/\">O mrtvých webových zdrojích</a> a <a href=\"https://casopiskniznica.snk.sk/fileadmin/user_upload/Rocnik_2024/04/03_Marie_Haskovcova_.pdf\">Archivace webových zdrojů v citacích vědeckých a odborných textů</a>. </p></section><script>\n\t\t\t// Workaround for multiline placeholder\n\t\t\tconst textarea = document.querySelector(\"textarea\");\n\t\t\ttextarea.setAttribute(\"placeholder\", \"https://webarchiv.cz\\nhttps://example.com\");\n\t\t</script></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
