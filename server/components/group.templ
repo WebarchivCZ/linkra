@@ -64,6 +64,8 @@ templ groupView(data *GroupViewData) {
 	</table>
 	if isCaptureCompleted(data.Group) {
 		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">Pokračovat na generátor citací</a>
+		<!-- If this script exists then we won't try to reload the page to fetch new data. Otherwise the page should automatically reload after a while. -->
+		<script type="application/json" id="capture-completed"></script>
 	} else {
 		<button disabled type="button">Pokračovat na generátor citací</button>
 		<p>Odkaz na generátor citací se zpřístupní až budou všechny zdroje archivované.</p>

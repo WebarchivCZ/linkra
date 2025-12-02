@@ -55,8 +55,19 @@ function showCopied(target) {
 }
 
 // Reload the page after some time to fetch changes from the server
-const timeoutMs = 30 * 1000;
-window.setTimeout(() => reloadWhenVisible(), timeoutMs);
+const captureCompleted = document.getElementById("capture-completed");
+if (captureCompleted) {
+  // If the capture is done, do nothing.
+  console.log("Capture is already done. Autoreload is disabled.");
+} else {
+  const timeoutMs = 30 * 1000;
+  window.setTimeout(() => reloadWhenVisible(), timeoutMs);
+  console.log(
+    "Page will reload after",
+    timeoutMs / 1000,
+    "seconds to fetch new data."
+  );
+}
 
 // This should only reload the page if it is already visible or after it becomes visible.
 function reloadWhenVisible() {
