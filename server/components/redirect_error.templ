@@ -1,6 +1,9 @@
 package components
 
-import "linkra/entities"
+import (
+	"linkra/entities"
+	"strings"
+)
 
 type RedirectErrorViewData struct {
 	Seed *entities.Seed
@@ -21,8 +24,15 @@ templ redirectErrorView(data *RedirectErrorViewData) {
 		<p>Vámi požadovaný zdroj <a href={ data.Seed.URL }>{ data.Seed.URL }</a> stále čeká na archivaci.
 		Až bude archivace dokončena povede link který vás sem zavedl na archivní kopii webového zdroje ve waybacku <a href="https://webarchiv.cz">Webarchivu</a></p>
 	}
-		<p>Pokud si přejete vidět ostatní archivní verze tohoto zdroje můžete přejít na <a href={ "https://wayback.webarchiv.cz/wayback/*/" + data.Seed.URL }>{ "https://wayback.webarchiv.cz/wayback/*/" + data.Seed.URL }</a></p>
+		<p>Pokud si přejete vidět ostatní archivní verze tohoto zdroje můžete přejít na <a href={ "https://wayback.webarchiv.cz/wayback/*/" + removeProtocol(data.Seed.URL) }>{ "https://wayback.webarchiv.cz/wayback/*/" + data.Seed.URL }</a></p>
 	</div>
+}
+
+// Remove protocol from URL, needed because Openwayback sometimes misbehaves when protocol is included. 
+func removeProtocol(url string) string {
+	url = strings.TrimPrefix(url, "https://")
+	url = strings.TrimPrefix(url, "http://")
+	return url
 }
 
 templ redirectErrorHeader() {
