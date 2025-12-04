@@ -1284,6 +1284,7 @@
 
       dateTimeInput.addEventListener("change", () => {
         textInput.value = dateTimeInput.value;
+        textInput.dispatchEvent(new Event("input", { bubbles: true }));
       });
     });
   }
