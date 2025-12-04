@@ -9,7 +9,7 @@
   // --- Template builder ---
   // Builds template from user defined fields
 
-  // WeakMap holding custom properties and methods for field elements to avoid storing them in the HTMLElements themselfs
+  // WeakMap holding custom properties and methods for field elements to avoid storing them in the HTMLElements themselves
   const fieldCustomData = new WeakMap();
 
   function prepareTemplateBuilder() {
@@ -21,7 +21,7 @@
       e.preventDefault();
     });
     templateBuilder.addEventListener("drop", (e) =>
-      dropHanlder(e, templateBuilder)
+      dropHandler(e, templateBuilder)
     );
 
     const fieldTypeSelect = document.getElementById("field-type");
@@ -182,7 +182,7 @@
    * @param {DragEvent} e
    * @param {HTMLElement} templateBuilder
    */
-  function dropHanlder(e, templateBuilder) {
+  function dropHandler(e, templateBuilder) {
     e.preventDefault();
     const fieldCount = templateBuilder.childElementCount;
     if (fieldCount <= 1) {
@@ -251,7 +251,7 @@
         fieldInitFunc = initDateOfHarvestField;
         break;
       case "datum-citace":
-        fieldInitFunc = initDatefCitationField;
+        fieldInitFunc = initDateCitationField;
         break;
       default:
         throw new Error(`unknown field type: ${type}`);
@@ -475,7 +475,12 @@
    * @param {HTMLFormElement} field
    */
   function initWebNameField(field) {
-    initGenericFormatAndSeparatorField(field, "Název&nbsp;webu", "název", true);
+    initGenericFormatAndSeparatorField(
+      field,
+      "Název webového zdroje",
+      "název",
+      true
+    );
   }
 
   /**
@@ -484,7 +489,7 @@
   function initPartOfField(field) {
     initGenericFormatAndSeparatorField(
       field,
-      "Název zdroje/periodikum",
+      "Název zdroje / periodikum",
       "součást",
       true
     );
@@ -520,14 +525,19 @@
    * @param {HTMLFormElement} field
    */
   function initArchiveField(field) {
-    initGenericFormatAndSeparatorField(field, "Webarchiv", "webarchiv", true);
+    initGenericFormatAndSeparatorField(
+      field,
+      "Webový archiv",
+      "webarchiv",
+      true
+    );
   }
 
   /**
    * @param {HTMLFormElement} field
    */
   function initArchivalUrlField(field) {
-    initGenericUrlField(field, "Archivní&nbsp;URL", "archivní-url");
+    initGenericUrlField(field, "URL archivní kopie", "archivní-url");
   }
 
   /**
@@ -540,7 +550,7 @@
   /**
    * @param {HTMLFormElement} field
    */
-  function initDatefCitationField(field) {
+  function initDateCitationField(field) {
     initGenericTimeField(field, "Datum citace", "datum-citace");
   }
 
@@ -737,11 +747,11 @@
   const fieldFormatFormControls = `
   <span class="flex-row format-controls">
     <label class="flex-row"><input type="checkbox" name="f-tučně">Tučně</label>
-    <label class="flex-row"><input type="checkbox" name="f-kurzíva">Kurzívou</label>
+    <label class="flex-row"><input type="checkbox" name="f-kurziva">Kurzivou</label>
   </span>
   `;
   /**
-   * Add formating to handlebars expression.
+   * Add formatting to handlebars expression.
    * @param {string} expr
    * @param {HTMLFormElement} field
    * @return {string}
@@ -754,17 +764,17 @@
         expr = `tučně ${expr}`;
       }
     }
-    if (field.elements.namedItem("f-kurzíva")?.checked) {
+    if (field.elements.namedItem("f-kurziva")?.checked) {
       if (expr.split(" ").length > 1) {
-        expr = `kurzíva (${expr})`;
+        expr = `kurziva (${expr})`;
       } else {
-        expr = `kurzíva ${expr}`;
+        expr = `kurziva ${expr}`;
       }
     }
     return expr;
   }
   /**
-   * Add formating to plain text.
+   * Add formatting to plain text.
    * @param {string} text
    * @param {HTMLFormElement} field
    * @return {string}
@@ -773,8 +783,8 @@
     if (field.elements.namedItem("f-tučně")?.checked) {
       text = "{{tučně}}" + text + "{{-tučně}}";
     }
-    if (field.elements.namedItem("f-kurzíva")?.checked) {
-      text = "{{kurzíva}}" + text + "{{-kurzíva}}";
+    if (field.elements.namedItem("f-kurziva")?.checked) {
+      text = "{{kurziva}}" + text + "{{-kurziva}}";
     }
     return text;
   }
@@ -864,7 +874,7 @@
         createFieldId(localFieldNumber),
         initWebNameField
       );
-      field.elements.namedItem("f-kurzíva").checked = true;
+      field.elements.namedItem("f-kurziva").checked = true;
       field.elements.namedItem("f-oddělovač").value = ".";
       templateBuilder.append(field);
       localFieldNumber++;
@@ -1025,7 +1035,7 @@
       const field = createNewField(
         "datum-citace",
         createFieldId(localFieldNumber),
-        initDatefCitationField
+        initDateCitationField
       );
       field.elements
         .namedItem("f-date-format")
@@ -1543,9 +1553,9 @@
   Handlebars.registerHelper("b", (text) => formatBold(false, text));
   Handlebars.registerHelper("-tučně", (text) => formatBold(true, text));
   Handlebars.registerHelper("-b", (text) => formatBold(true, text));
-  Handlebars.registerHelper("kurzíva", (text) => formatItalic(false, text));
+  Handlebars.registerHelper("kurziva", (text) => formatItalic(false, text));
   Handlebars.registerHelper("i", (text) => formatItalic(false, text));
-  Handlebars.registerHelper("-kurzíva", (text) => formatItalic(true, text));
+  Handlebars.registerHelper("-kurziva", (text) => formatItalic(true, text));
   Handlebars.registerHelper("-i", (text) => formatItalic(true, text));
   Handlebars.registerHelper("velké", upperCase);
   Handlebars.registerHelper("první-velké", capitalize);

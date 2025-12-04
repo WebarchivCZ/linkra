@@ -71,37 +71,37 @@ templ generatorView(data *GeneratorViewData) {
 				</div>
 
 				<div class="flex-column flex-start data-form">
-					<label for="název">Název&nbsp;webového&nbsp;zdroje:</label>
+					<label for="název">Název webového zdroje:</label>
 					<input type="text" id="název" data-citationfield="název">
 
-					<label for="součást">Název zdroje/periodikum:</label>
+					<label for="součást">Název zdroje / periodikum:</label>
 					<input type="text" id="součást" data-citationfield="součást">
 
-					<label for="místo-vydání">Místo&nbsp;vydání:</label>
+					<label for="místo-vydání">Místo vydání:</label>
 					<input type="text" id="místo-vydání" data-citationfield="místo-vydání">
 
-					<label for="datum-vydání">Datum&nbsp;vydání:</label>
+					<label for="datum-vydání">Datum vydání:</label>
 					<span class="flex-row max-flex">
 						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-vydání" data-citationfield="datum-vydání">
 						<input type="datetime-local" step="1" id="datum-vydání-datetime">
 					</span>
 
-					<label for="url">URL&nbsp;webu:</label>
+					<label for="url">URL webového zdroje:</label>
 					<input type="text" id="url" data-citationfield="url">
 
-					<label for="url">Webarchiv:</label>
+					<label for="url">Webový archiv:</label>
 					<input type="text" id="webarchiv" data-citationfield="webarchiv">
 
-					<label for="archivní-url">Archivní&nbsp;URL:</label>
+					<label for="archivní-url">URL archivní kopie:</label>
 					<input type="text" id="archivní-url" data-citationfield="archivní-url">
 
-					<label for="datum-archivace">Datum&nbsp;archivace:</label>
+					<label for="datum-archivace">Datum archivace:</label>
 					<span class="flex-row max-flex">
 						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-archivace" data-citationfield="datum-archivace">
 						<input type="datetime-local" step="1" id="datum-archivace-datetime">
 					</span>
 
-					<label for="datum-citace">Datum&nbsp;citace:</label>
+					<label for="datum-citace">Datum citace:</label>
 					<span class="flex-row max-flex">
 						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-citace" data-citationfield="datum-citace">
 						<input type="datetime-local" step="1" id="datum-citace-datetime">
@@ -129,17 +129,17 @@ templ generatorView(data *GeneratorViewData) {
 			<form id="builder-controls" class="flex-row">
 				<div class="flex-row field-chooser">
 					<select id="field-type">
-						<option> -- Vyberte jakou část šablony přidat do citace -- </option>
+						<option> -- Vyberte, jakou část šablony přidat do citace -- </option>
 						<option value="autoři">Autoři</option>
 						// <option value="příjmení">Příjmení</option>
 						// <option value="jméno">Jméno</option>
 						<option value="název">Název webového zdroje</option>
-						<option value="součást">Název zdroje/periodikum</option>
+						<option value="součást">Název zdroje / periodikum</option>
 						<option value="místo-vydání">Místo vydání</option>
 						<option value="datum-vydání">Datum vydání</option>
-						<option value="url">URL</option>
-						<option value="webarchiv">Webarchiv</option>
-						<option value="archivní-url">Archivní URL</option>
+						<option value="url">URL webového zdroje</option>
+						<option value="webarchiv">Webový archiv</option>
+						<option value="archivní-url">URL archivní kopie</option>
 						<option value="datum-archivace">Datum archivace</option>
 						<option value="datum-citace">Datum citace</option>
 						<option value="text">Text</option>
