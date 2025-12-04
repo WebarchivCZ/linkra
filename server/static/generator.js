@@ -135,6 +135,8 @@
     switch (templateName) {
       case "iso690":
         return setTemplateIso690;
+      case "apa":
+        return setTemplateToApa;
       case "custom":
         return setUserDefinedTemplate;
       default:
@@ -1041,6 +1043,156 @@
         .namedItem("f-date-format")
         .namedItem("iso-date").selected = true;
       field.elements.namedItem("f-oddělovač").value = "].";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    return localFieldNumber - fieldNumber;
+  }
+
+  /**
+   * Set the contents of template builder to fields that will generate
+   * citation conforming to APA style.
+   * @param {HTMLElement} templateBuilder
+   * @param {number} fieldNumber
+   * @returns {number} Number of added fields. This should be used to increment variable used for creating field IDs.
+   */
+  function setTemplateToApa(templateBuilder, fieldNumber) {
+    // Remove everything from templateBuilder before inserting new fields.
+    templateBuilder.innerHTML = "";
+
+    let localFieldNumber = fieldNumber;
+
+    // Authors
+    {
+      const field = createNewField(
+        "autoři",
+        createFieldId(localFieldNumber),
+        initAuthorsField
+      );
+      field.elements.namedItem("a-formatjmeno-prvni").value = "prvnivelke";
+      field.elements.namedItem("a-formatprijmeni-prvni").value = "prvnivelke";
+      field.elements.namedItem("a-formatjmeno").value = "prvnivelke";
+      field.elements.namedItem("a-formatprijmeni").value = "prvnivelke";
+      field.elements.namedItem("a-intjmeno-prvni").value = ",";
+      field.elements.namedItem("a-intjmeno").value = ",";
+      field.elements.namedItem("a-a").value = "&";
+      field.elements.namedItem("f-oddělovač").value = "";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // (
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "(";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Date of publication
+    {
+      const field = createNewField(
+        "datum-vydání",
+        createFieldId(localFieldNumber),
+        initDateOfPublicationField
+      );
+      field.elements
+        .namedItem("f-date-format")
+        .namedItem("apa").selected = true;
+      field.elements.namedItem("f-oddělovač").value = "";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // )
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "). ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Source name
+    {
+      const field = createNewField(
+        "název",
+        createFieldId(localFieldNumber),
+        initWebNameField
+      );
+      field.elements.namedItem("f-kurziva").checked = true;
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Součást
+    {
+      const field = createNewField(
+        "součást",
+        createFieldId(localFieldNumber),
+        initPartOfField
+      );
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // URL
+    {
+      const field = createNewField(
+        "url",
+        createFieldId(localFieldNumber),
+        initUrlField
+      );
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Archivováno
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "Archivováno ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Archival date
+    {
+      const field = createNewField(
+        "datum-archivace",
+        createFieldId(localFieldNumber),
+        initDateOfHarvestField
+      );
+      field.elements
+        .namedItem("f-date-format")
+        .namedItem("apa").selected = true;
+      field.elements.namedItem("f-oddělovač").value = ".";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Archival URL
+    {
+      const field = createNewField(
+        "archivní-url",
+        createFieldId(localFieldNumber),
+        initArchivalUrlField
+      );
+      field.elements.namedItem("f-oddělovač").value = "";
       templateBuilder.append(field);
       localFieldNumber++;
     }
