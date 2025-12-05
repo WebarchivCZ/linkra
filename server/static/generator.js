@@ -347,7 +347,7 @@
           <label class="flex-row"><input type="radio" name="a-poradi-prvni" value="prijmeni" checked>Příjmení</label>
           <label class="flex-row"><input type="radio" name="a-poradi-prvni" value="jmeno">Jméno</label>
         </span>
-        <label class="flex-row"><b>Interpunkce&nbsp;mezi&nbsp;jmény (první autor):</b><input class="max-flex" type="text" value="," name="a-intjmeno-prvni"></label>
+        <label class="flex-row"><b>Interpunkce mezi jménem a příjmením (první autor):</b><input class="max-flex" type="text" value="," name="a-intjmeno-prvni"></label>
         <hr class="max-flex">
         <span class="flex-row case-controls">
           <b>Písmo jména:</b>
@@ -368,7 +368,7 @@
           <label class="flex-row"><input type="radio" name="a-poradi" value="prijmeni" checked>Příjmení</label>
           <label class="flex-row"><input type="radio" name="a-poradi" value="jmeno">Jméno</label>
         </span>
-        <label class="flex-row"><b>Interpunkce&nbsp;mezi&nbsp;jmény (ostatní):</b><input class="max-flex" type="text" value="," name="a-intjmeno"></label>
+        <label class="flex-row"><b>Interpunkce mezi jménem a příjmením (ostatní):</b><input class="max-flex" type="text" value="," name="a-intjmeno"></label>
         <hr class="max-flex">
         <label class="flex-row"><b>Interpunkce&nbsp;mezi&nbsp;autory:</b><input class="max-flex" type="text" value=";" name="a-intautor"></label>
         <span class="flex-row case-controls">
@@ -378,11 +378,11 @@
           <label class="flex-row"><input type="radio" name="a-a" value="and">and</label>
         </span>
         <span class="flex-row case-controls">
-          <b>Použít spojku vždy když je více než jeden autor:</b>
+          <b>Použít spojku vždy, když je více než jeden autor:</b>
           <label class="flex-row"><input type="radio" name="a-vzdya" value="" checked>Ne</label>
           <label class="flex-row"><input type="radio" name="a-vzdya" value="1">Ano</label>
         </span>
-        <label class="flex-row"><b>Maximalní&nbsp;počet&nbsp;autorů:</b><input class="max-flex" type="number" min="1" step="1" value="5" name="a-max"></label>
+        <label class="flex-row"><b>Maximální&nbsp;počet&nbsp;autorů:</b><input class="max-flex" type="number" min="1" step="1" value="5" name="a-max"></label>
         <label class="flex-row"><b>Přípona (a další):</b><input class="max-flex" type="text" value="et al." name="a-etal"></label>
         <hr class="max-flex">
         <div class="flex-row max-flex">
@@ -1000,7 +1000,7 @@
         createFieldId(localFieldNumber),
         initTextField
       );
-      field.elements.namedItem("f-value").value = "[archivováno ";
+      field.elements.namedItem("f-value").value = "[arch. ";
       templateBuilder.append(field);
       localFieldNumber++;
     }
@@ -1535,11 +1535,11 @@
         <div class="flex-row cit-gen-fields">
           <legend>Autor ${id + 1}</legend>
           <div class="flex-column">
-            <label for="příjmení">Příjmení:</label>
+            <label for="příjmení">Příjmení (nebo korporace):</label>
             <input type="text" name="příjmení" value=${author.příjmení}>
           </div>
           <div class="flex-column">
-            <label for="jméno">Jméno: (nebo korporace)</label>
+            <label for="jméno">Jméno:</label>
             <input type="text" name="jméno" value=${author.jméno}>
           </div>
         </div>

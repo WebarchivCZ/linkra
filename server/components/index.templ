@@ -5,7 +5,7 @@ import "path"
 templ indexHeader() {
 <div class="header">
 	<h1><a href="https://www.webarchiv.cz">Webarchiv</a> Linkra</h1>
-	<p>Pomůžeme vám uchovat zdroje k vaší práci</p>
+	<p>Pomůžeme vám uchovat webové zdroje k vaší práci</p>
 </div>
 <hr class="no-bottom-margin">
 }
@@ -22,6 +22,11 @@ templ indexView() {
 				<textarea name="url-list" id="url-list" placeholder="https://example.com" required wrap="off" class="margin-b-05"></textarea>
 				<button type="submit">Odeslat</button>
 			</form>
+			<script>
+				// Workaround for multiline placeholder
+				const textarea = document.querySelector("textarea");
+				textarea.setAttribute("placeholder", "https://webarchiv.cz\nhttps://example.com");
+			</script>
 		</section>
 		<section>
 			<h2>O Aplikaci</h2>
@@ -32,15 +37,16 @@ templ indexView() {
 				Pokud uživatel chce citovat celý web, může buď citovat jeho již existující archivní verzi nebo navrhnout web k archivaci prostřednictvím formuláře do českého <a href="https://www.webarchiv.cz/cs/pridat-web">Webarchivu</a>.
 			</p>
 			<p>
-				Vzhledem k tomu, že archivace má své technické limity, doporučujeme kvalitu archivních verzí vámi vložených webových zdrojů po indexaci dat ověřit ve webovém archivu.
-				Více o problematice se můžete dozvědět zde:
+				Více o specifikách a limitech archivace webu se dočtete <a href="https://www.webarchiv.cz/cs/faq">zde</a>.
 				Další informace, technická dokumentace a uživatelský manuál je k dispozici v repozitáři na <a href="https://github.com/WebarchivCZ/linkra">GitHubu</a>.
 			</p>
 		</section>
-		<script>
-			// Workaround for multiline placeholder
-			const textarea = document.querySelector("textarea");
-			textarea.setAttribute("placeholder", "https://webarchiv.cz\nhttps://example.com");
-		</script>
+		<section>
+			<h2>Dedikace</h2>
+			<p>Národní knihovna ČR</p>
+			<p><i>
+				Realizováno v rámci institucionálního výzkumu Národní knihovny České republiky financovaného Ministerstvem kultury ČR v rámci Dlouhodobého koncepčního rozvoje výzkumné organizace.
+			</i></p>
+		</section>
 	</div>
 }

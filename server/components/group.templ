@@ -27,15 +27,15 @@ templ groupHeader() {
 templ groupView(data *GroupViewData) {
 <div class="flex-content-column">
 	<div class="flex-row">
-		<p>Odkaz na stav: <a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a></p>
+		<p>Odkaz na stav archivace: <a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a></p>
 		<button type="button" id="copy-group-link">Kopírovat odkaz</button>
 	</div>
-	<div class="flex-row">
-		<p>Exportovat do:</p>
-		<div class="flex-row group-export-buttons">
-			<a class="btn" download={ ExcelFilename(data.Group) } href={ path.Join(Constants().GetGroupPath(), "/export/excel/", data.Group.ShadowID) }>Excel</a>
-			<a class="btn" download={ CsvFilename(data.Group) } href={ path.Join(Constants().GetGroupPath(), "/export/csv/", data.Group.ShadowID) }>CSV</a>
-		</div>
+	<div>
+		<p>
+			Exportovat do:
+			<a download={ ExcelFilename(data.Group) } href={ path.Join(Constants().GetGroupPath(), "/export/excel/", data.Group.ShadowID) }>Excel</a>
+			<a download={ CsvFilename(data.Group) } href={ path.Join(Constants().GetGroupPath(), "/export/csv/", data.Group.ShadowID) }>CSV</a>
+		</p>
 	</div>
 	<table id="group-info-table">
 		<thead>
@@ -52,7 +52,7 @@ templ groupView(data *GroupViewData) {
 				<td><a href={ seed.URL } target="_blank">{ seed.URL }</a></td>
 				<td><a href={ shortWaybackLink(seed) }>{ shortWaybackLink(seed) }</a></td>
 				<td>{ prettyPrintCaptureState(seed.State) }</td>
-				<td><a class="btn" href={ seedViewLink(seed) }>Detail</a></td>
+				<td><a href={ seedViewLink(seed) }>Detail</a></td>
 			</tr>
 		}
 		</tbody>
@@ -65,10 +65,7 @@ templ groupView(data *GroupViewData) {
 			</tr>
 		</tfoot>
 	</table>
-	<p><i>
-		*Kvůli technologickým limitacím se nemusí archivace stránky povést.
-		Doporučujeme si archivní kopii prohlédnout a zkontrolovat její kvalitu i v případě, že má zdroj stav "Úspěšně sklizeno".
-	</i></p>
+	<p>*<i>Pokud vidíte Úspěšně archivováno, znamená to že link již můžete použít, ale v archivu se objeví až po indexaci.</i></p>
 	if isCaptureCompleted(data.Group) {
 		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">Pokračovat na generátor citací</a>
 		<!-- If this script exists then we won't try to reload the page to fetch new data. Otherwise the page should automatically reload after a while. -->
@@ -76,7 +73,7 @@ templ groupView(data *GroupViewData) {
 	} else {
 		<button disabled type="button">Pokračovat na generátor citací</button>
 		<p>
-			Odkaz na generátor citací se zpřístupní až budou všechny zdroje archivované.
+			Odkaz na generátor citací se zpřístupní, až budou všechny zdroje archivované.
 			<br>
 			Na tuto stránku se vrátíte tímto odkazem: <a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a>.
 		</p>
