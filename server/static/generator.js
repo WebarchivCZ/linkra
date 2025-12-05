@@ -1770,17 +1770,24 @@
    * @returns {string}
    */
   function capitalize(text) {
-    if (text.length === 0) {
-      return text;
+    let outputStr = "";
+    // This indicate if the next character is first in word
+    let firstCharacter = true;
+    // Iterates over the unicode code points of the string
+    for (const char of text) {
+      if (char.trim() === "") {
+        outputStr += char;
+        firstCharacter = true;
+        continue;
+      }
+      if (firstCharacter) {
+        outputStr += char.toUpperCase();
+        firstCharacter = false;
+        continue;
+      }
+      outputStr += char;
     }
-    if (text.length === 1) {
-      return text.toUpperCase();
-    }
-    return text
-      .toLowerCase()
-      .split(" ")
-      .map((word) => word[0].toUpperCase() + word.slice(1))
-      .join(" ");
+    return outputStr;
   }
 
   /**
