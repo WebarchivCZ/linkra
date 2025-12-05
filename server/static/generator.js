@@ -1105,6 +1105,7 @@
         .namedItem("f-date-format")
         .namedItem("apa").selected = true;
       field.elements.namedItem("f-oddělovač").value = "";
+      field.elements.namedItem("f-add-space").checked = false;
       templateBuilder.append(field);
       localFieldNumber++;
     }
@@ -2029,6 +2030,10 @@
       case "rok":
         return parsedDate.toFormat("yyyy");
       case "apa":
+        // If the iso formated date only contains year, don't show rest of the date
+        if (date.length === 4) {
+          return parsedDate.toFormat("yyyy");
+        }
         return parsedDate.toFormat("yyyy, MMMM d");
       case "human":
         return parsedDate.toLocaleString(luxon.DateTime.DATE_FULL);
