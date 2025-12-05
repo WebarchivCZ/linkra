@@ -334,6 +334,7 @@
           <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="male">Malé</label>
           <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="velke">Velké</label>
           <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="prvnivelke" checked>První&nbsp;velké</label>
+          <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="iniciala">Iniciála</label>
         </span>
         <span class="flex-row case-controls">
           <b>Písmo příjmení (první autor):</b>
@@ -341,6 +342,7 @@
           <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="male">Malé</label>
           <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="velke" checked>Velké</label>
           <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="prvnivelke">První&nbsp;velké</label>
+          <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="iniciala">Iniciála</label>
         </span>
         <span class="flex-row case-controls">
           <b>Na prvním místě (první autor):</b>
@@ -355,6 +357,7 @@
           <label class="flex-row"><input type="radio" name="a-formatjmeno" value="male">Malé</label>
           <label class="flex-row"><input type="radio" name="a-formatjmeno" value="velke">Velké</label>
           <label class="flex-row"><input type="radio" name="a-formatjmeno" value="prvnivelke" checked>První&nbsp;velké</label>
+          <label class="flex-row"><input type="radio" name="a-formatjmeno" value="iniciala">Iniciála</label>
         </span>
         <span class="flex-row case-controls">
           <b>Písmo příjmení:</b>
@@ -362,6 +365,7 @@
           <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="male">Malé</label>
           <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="velke" checked>Velké</label>
           <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="prvnivelke">První&nbsp;velké</label>
+          <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="iniciala">Iniciála</label>
         </span>
         <span class="flex-row case-controls">
           <b>Na prvním místě (ostatní):</b>
@@ -1070,9 +1074,9 @@
         createFieldId(localFieldNumber),
         initAuthorsField
       );
-      field.elements.namedItem("a-formatjmeno-prvni").value = "prvnivelke";
+      field.elements.namedItem("a-formatjmeno-prvni").value = "iniciala";
       field.elements.namedItem("a-formatprijmeni-prvni").value = "prvnivelke";
-      field.elements.namedItem("a-formatjmeno").value = "prvnivelke";
+      field.elements.namedItem("a-formatjmeno").value = "iniciala";
       field.elements.namedItem("a-formatprijmeni").value = "prvnivelke";
       field.elements.namedItem("a-intjmeno-prvni").value = ",";
       field.elements.namedItem("a-intjmeno").value = ",";
@@ -1800,7 +1804,29 @@
   }
 
   /**
-   * This helper will fill the template with authors formated per ISO and user arguments.
+   * @param {string} text
+   * @returns {string}
+   */
+  function initial(text) {
+    const trimmed = text.trim();
+    if (trimmed.length === 0) {
+      return text;
+    }
+    let outputStr = "";
+    // This loop only runs once. There is another way to do this without the loop, but it is actually much more complex because some of the web APIs are garbage.
+    for (const char of trimmed) {
+      if (char === "" || char === ".") {
+        return text;
+      }
+      outputStr += char.toUpperCase();
+      outputStr += ".";
+      break;
+    }
+    return outputStr;
+  }
+
+  /**
+   * This helper will fill the template with authors formatted per ISO and user arguments.
    * @param  {any} hashOptions hashOptions.hash contains object with options
    */
   function formatAuthors(hashOptions) {
@@ -1993,6 +2019,8 @@
       return capitalize;
     } else if (options.has("male")) {
       return lowerCase;
+    } else if (options.has("iniciala")) {
+      return initial;
     } else {
       return function (text) {
         return text;
