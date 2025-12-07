@@ -2075,10 +2075,15 @@
         return parsedDate.toFormat("yyyy");
       case "apa":
         // If the iso formated date only contains year, don't show rest of the date
+        const year = parsedDate.toFormat("yyyy");
         if (date.length === 4) {
-          return parsedDate.toFormat("yyyy");
+          return year;
         }
-        return parsedDate.toFormat("yyyy, MMMM d");
+        return (
+          year +
+          ", " +
+          parsedDate.toLocaleString({ month: "long", day: "numeric" })
+        );
       case "human":
         return parsedDate.toLocaleString(luxon.DateTime.DATE_FULL);
       default:
