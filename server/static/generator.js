@@ -399,6 +399,11 @@
           <label><input type="radio" name="a-vzdya" value="1">Ano</label>
         </div>
         <div class="flex-row case-controls">
+          Použít interpunkci i mezi posledním a předposledním autorem:
+          <label><input type="radio" name="a-vzdyintautor" value="" checked>Ne</label>
+          <label><input type="radio" name="a-vzdyintautor" value="1">Ano</label>
+        </div>
+        <div class="flex-row case-controls">
           <label>Maximální&nbsp;počet&nbsp;autorů:<input class="max-flex" type="number" min="1" step="1" value="5" name="a-max"></label>
         </div>
         <div class="flex-row case-controls">
@@ -1098,6 +1103,8 @@
       field.elements.namedItem("a-intjmeno").value = ",";
       field.elements.namedItem("a-a").value = "&";
       field.elements.namedItem("f-oddělovač").value = "";
+      field.elements.namedItem("a-vzdyintautor").value = "1";
+      field.elements.namedItem("a-intautor").value = ",";
       templateBuilder.append(field);
       localFieldNumber++;
     }
@@ -1944,6 +1951,9 @@
     /** @type {boolean} Should we print andSeparator even if we have max authors. */
     const alwaysPrintAndSeparator =
       options.vzdya !== undefined ? Boolean(options.vzdya) : false;
+    /** @type {boolean} Print author separator even before the "andSeparator". */
+    const alwaysPutAuthorSeparatorBetweenAuthors =
+      options.vzdyintautor !== undefined ? options.vzdyintautor : false;
     /** @type {string} Order of firsname and lastname (first author) */
     const nameOrderFirtsAuthor =
       options["poradi-prvni"] !== undefined
@@ -2036,7 +2046,11 @@
         i === authorLimit - 2 &&
         (authors.length <= authorLimit || alwaysPrintAndSeparator)
       ) {
-        authorStr += " " + andSeparator + " ";
+        if (alwaysPutAuthorSeparatorBetweenAuthors) {
+          authorStr += authorSeparator + " " + andSeparator + " ";
+        } else {
+          authorStr += " " + andSeparator + " ";
+        }
       } else {
         // Otherwise try to print author separator
 
