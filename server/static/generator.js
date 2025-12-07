@@ -1186,7 +1186,43 @@
         createFieldId(localFieldNumber),
         initTextField
       );
-      field.elements.namedItem("f-value").value = "Archivováno ";
+      field.elements.namedItem("f-value").value = "Archivováno: ";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Webarchiv
+    {
+      const field = createNewField(
+        "archiv",
+        createFieldId(localFieldNumber),
+        initArchiveField
+      );
+      field.elements.namedItem("f-oddělovač").value = ",";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // Archival URL
+    {
+      const field = createNewField(
+        "archivní-url",
+        createFieldId(localFieldNumber),
+        initArchivalUrlField
+      );
+      field.elements.namedItem("f-oddělovač").value = "";
+      templateBuilder.append(field);
+      localFieldNumber++;
+    }
+
+    // (
+    {
+      const field = createNewField(
+        "text",
+        createFieldId(localFieldNumber),
+        initTextField
+      );
+      field.elements.namedItem("f-value").value = "(";
       templateBuilder.append(field);
       localFieldNumber++;
     }
@@ -1201,19 +1237,20 @@
       field.elements
         .namedItem("f-date-format")
         .namedItem("apa").selected = true;
-      field.elements.namedItem("f-oddělovač").value = ".";
+      field.elements.namedItem("f-oddělovač").value = "";
+      field.elements.namedItem("f-add-space").checked = false;
       templateBuilder.append(field);
       localFieldNumber++;
     }
 
-    // Archival URL
+    // )
     {
       const field = createNewField(
-        "archivní-url",
+        "text",
         createFieldId(localFieldNumber),
-        initArchivalUrlField
+        initTextField
       );
-      field.elements.namedItem("f-oddělovač").value = "";
+      field.elements.namedItem("f-value").value = "). ";
       templateBuilder.append(field);
       localFieldNumber++;
     }
