@@ -327,67 +327,83 @@
     // Create the HTML representing the element
     field.innerHTML = `
       <span class="f-start">Autoři:</span>
-      <div class="flex-column max-flex f-middle authors-field">
-        <span class="flex-row case-controls">
-          <b>Písmo jména (první autor):</b>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="vychozi">Výchozí</label>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="male">Malé</label>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="velke">Velké</label>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="prvnivelke" checked>První&nbsp;velké</label>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno-prvni" value="iniciala">Iniciála</label>
-        </span>
-        <span class="flex-row case-controls">
-          <b>Písmo příjmení (první autor):</b>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="vychozi">Výchozí</label>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="male">Malé</label>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="velke" checked>Velké</label>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="prvnivelke">První&nbsp;velké</label>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni-prvni" value="iniciala">Iniciála</label>
-        </span>
-        <span class="flex-row case-controls">
-          <b>Na prvním místě (první autor):</b>
-          <label class="flex-row"><input type="radio" name="a-poradi-prvni" value="prijmeni" checked>Příjmení</label>
-          <label class="flex-row"><input type="radio" name="a-poradi-prvni" value="jmeno">Jméno</label>
-        </span>
-        <label class="flex-row"><b>Interpunkce mezi jménem a příjmením (první autor):</b><input class="max-flex" type="text" value="," name="a-intjmeno-prvni"></label>
+      <div class="flex-column f-middle authors-field">
+        <div class="flex-row case-controls">
+          <b>První autor</b>
+        </div>
+        <div class="case-controls">
+          Velikost písma - Jméno:
+          <label><input type="radio" name="a-formatjmeno-prvni" value="vychozi">Výchozí</label>
+          <label><input type="radio" name="a-formatjmeno-prvni" value="male">Malé</label>
+          <label><input type="radio" name="a-formatjmeno-prvni" value="velke">Velké</label>
+          <label><input type="radio" name="a-formatjmeno-prvni" value="prvnivelke" checked>První&nbsp;velké</label>
+          <label><input type="radio" name="a-formatjmeno-prvni" value="iniciala">Iniciála</label>
+        </div>
+        <div class="flex-row case-controls">
+          Velikost písma - Příjmení:
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="vychozi">Výchozí</label>
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="male">Malé</label>
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="velke" checked>Velké</label>
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="prvnivelke">První&nbsp;velké</label>
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="iniciala">Iniciála</label>
+        </div>
+        <div class="flex-row case-controls">
+          Pořadí jména a příjmení:
+          <label><input type="radio" name="a-poradi-prvni" value="jmeno">První jméno</label>
+          <label><input type="radio" name="a-poradi-prvni" value="prijmeni" checked>První příjmení</label>
+        </div>
+        <div class="flex-row case-controls">
+          <label>Interpunkce mezi jménem a příjmením:<input class="max-flex" type="text" value="," name="a-intjmeno-prvni"></label>
+        </div>
         <hr class="max-flex">
-        <span class="flex-row case-controls">
-          <b>Písmo jména:</b>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno" value="vychozi">Výchozí</label>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno" value="male">Malé</label>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno" value="velke">Velké</label>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno" value="prvnivelke" checked>První&nbsp;velké</label>
-          <label class="flex-row"><input type="radio" name="a-formatjmeno" value="iniciala">Iniciála</label>
-        </span>
-        <span class="flex-row case-controls">
-          <b>Písmo příjmení:</b>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="vychozi">Výchozí</label>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="male">Malé</label>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="velke" checked>Velké</label>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="prvnivelke">První&nbsp;velké</label>
-          <label class="flex-row"><input type="radio" name="a-formatprijmeni" value="iniciala">Iniciála</label>
-        </span>
-        <span class="flex-row case-controls">
-          <b>Na prvním místě (ostatní):</b>
-          <label class="flex-row"><input type="radio" name="a-poradi" value="prijmeni" checked>Příjmení</label>
-          <label class="flex-row"><input type="radio" name="a-poradi" value="jmeno">Jméno</label>
-        </span>
-        <label class="flex-row"><b>Interpunkce mezi jménem a příjmením (ostatní):</b><input class="max-flex" type="text" value="," name="a-intjmeno"></label>
+        <div class="flex-row case-controls">
+          <b>Další autoři</b>
+        </div>
+        <div class="flex-row case-controls">
+          Velikost písma - Jméno:
+          <label><input type="radio" name="a-formatjmeno" value="vychozi">Výchozí</label>
+          <label><input type="radio" name="a-formatjmeno" value="male">Malé</label>
+          <label><input type="radio" name="a-formatjmeno" value="velke">Velké</label>
+          <label><input type="radio" name="a-formatjmeno" value="prvnivelke" checked>První&nbsp;velké</label>
+          <label><input type="radio" name="a-formatjmeno" value="iniciala">Iniciála</label>
+        </div>
+        <div class="flex-row case-controls">
+          Velikost písma - Příjmení:
+          <label><input type="radio" name="a-formatprijmeni" value="vychozi">Výchozí</label>
+          <label><input type="radio" name="a-formatprijmeni" value="male">Malé</label>
+          <label><input type="radio" name="a-formatprijmeni" value="velke" checked>Velké</label>
+          <label><input type="radio" name="a-formatprijmeni" value="prvnivelke">První&nbsp;velké</label>
+          <label><input type="radio" name="a-formatprijmeni" value="iniciala">Iniciála</label>
+        </div>
+        <div class="flex-row case-controls">
+          Pořadí jména a příjmení:
+          <label><input type="radio" name="a-poradi" value="jmeno">První jméno</label>
+          <label><input type="radio" name="a-poradi" value="prijmeni" checked>První příjmení</label>
+        </div>
+        <div class="flex-row case-controls">
+          <label>Interpunkce mezi jménem a příjmením:<input class="max-flex" type="text" value="," name="a-intjmeno"></label>
+        </div>
         <hr class="max-flex">
-        <label class="flex-row"><b>Interpunkce&nbsp;mezi&nbsp;autory:</b><input class="max-flex" type="text" value=";" name="a-intautor"></label>
-        <span class="flex-row case-controls">
-          <b>Spojka před posledním autorem:</b>
-          <label class="flex-row"><input type="radio" name="a-a" value="a" checked>a</label>
-          <label class="flex-row"><input type="radio" name="a-a" value="&amp;">&amp;</label>
-          <label class="flex-row"><input type="radio" name="a-a" value="and">and</label>
-        </span>
-        <span class="flex-row case-controls">
-          <b>Použít spojku vždy, když je více než jeden autor:</b>
-          <label class="flex-row"><input type="radio" name="a-vzdya" value="" checked>Ne</label>
-          <label class="flex-row"><input type="radio" name="a-vzdya" value="1">Ano</label>
-        </span>
-        <label class="flex-row"><b>Maximální&nbsp;počet&nbsp;autorů:</b><input class="max-flex" type="number" min="1" step="1" value="5" name="a-max"></label>
-        <label class="flex-row"><b>Přípona (a další):</b><input class="max-flex" type="text" value="et al." name="a-etal"></label>
+        <div class="flex-row case-controls">
+          <label>Interpunkce mezi autory:<input class="max-flex" type="text" value=";" name="a-intautor"></label>
+        </div>
+        <div class="flex-row case-controls">
+          Spojka před posledním autorem:
+          <label><input type="radio" name="a-a" value="a" checked>a</label>
+          <label><input type="radio" name="a-a" value="&amp;">&amp;</label>
+          <label><input type="radio" name="a-a" value="and">and</label>
+        </div>
+        <div class="flex-row case-controls">
+          Použít spojku vždy, když je více než jeden autor:
+          <label><input type="radio" name="a-vzdya" value="" checked>Ne</label>
+          <label><input type="radio" name="a-vzdya" value="1">Ano</label>
+        </div>
+        <div class="flex-row case-controls">
+          <label>Maximální&nbsp;počet&nbsp;autorů:<input class="max-flex" type="number" min="1" step="1" value="5" name="a-max"></label>
+        </div>
+        <div class="flex-row case-controls">
+          <label>Přípona (a další):<input class="max-flex" type="text" value="et al." name="a-etal"></label>
+        </div>
         <hr class="max-flex">
         <div class="flex-row max-flex">
           ${fieldSeparatorFormControls}

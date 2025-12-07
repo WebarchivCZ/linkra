@@ -153,12 +153,17 @@ select {
 input,
 textarea,
 select {
-    width: 100%;
     border: 1px solid var(--clr-gray);
     background-color: var(--clr-background-secondary);
     font-size: 1rem;
     /* margin: 4px 0; */
     /* margin-bottom: 16px; */
+}
+input[type="text"],
+textarea,
+select,
+input[type="datetime-local"] {
+    width: 100%;
 }
 textarea {
     min-height: 5rem;
@@ -342,12 +347,8 @@ tbody > tr:nth-of-type(odd) {
 
 .field {
     background-color: var(--clr-background-secondary);
-    border: var(--clr-webarchiv-blue) solid 3px;
+    border: var(--clr-gray) solid 1px;
     align-items: center;
-}
-.field span:first-of-type {
-    margin-left: 4px;
-    margin-right: 4px;
 }
 .field .flex-row {
     margin-bottom: 0;
@@ -360,27 +361,37 @@ tbody > tr:nth-of-type(odd) {
 }
 .field input,
 .field select {
-    margin: 4px;
+    margin-left: 4px;
     background-color: var(--clr-background-main);
     border-color: var(--clr-black);
     font-size: var(--font-size);
-    padding: 4px;
+    padding: 2px 4px;
 }
+.field input[type="radio"],
+.field input[type="checkbox"] {
+    margin: 0 4px;
+}
+
 .field .format-controls,
 .field .case-controls {
     margin: 4px 0;
 }
 .field hr {
     border: 0;
-    border-top: var(--clr-black) solid 2px;
+    border-top: var(--clr-gray) solid 1px;
     margin: 0;
     margin-right: 1rem;
 }
 .f-start {
     flex: 1;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 .f-middle {
     flex: 5;
+    gap: 4px;
+    padding: 4px 0;
+    align-items: flex-start;
 }
 
 .citation {
