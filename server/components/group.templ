@@ -65,7 +65,7 @@ templ groupView(data *GroupViewData) {
 			</tr>
 		</tfoot>
 	</table>
-	<p>*<i>Pokud vidíte Úspěšně archivováno, znamená to že link již můžete použít, ale v archivu se objeví až po indexaci.</i></p>
+	<p>*<i>Pokud vidíte Úspěšně archivováno, znamená to, že link již můžete použít, ale v archivu se objeví až po indexaci.</i></p>
 	if isCaptureCompleted(data.Group) {
 		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">Pokračovat na generátor citací</a>
 		<!-- If this script exists then we won't try to reload the page to fetch new data. Otherwise the page should automatically reload after a while. -->
