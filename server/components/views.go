@@ -11,6 +11,7 @@ func IndexView() templ.Component {
 
 func GroupView(data *GroupViewData) templ.Component {
 	return Assemble(&PageComponents{
+		Title:  "Linkra - Stav archivace",
 		Header: groupHeader(),
 		Main:   groupView(data),
 	})
@@ -34,15 +35,15 @@ func ErrorView(data *ErrorViewData) templ.Component {
 
 func GeneratorView(data *GeneratorViewData) templ.Component {
 	return Assemble(&PageComponents{
-		Title:  "Generátor citací",
-		Header: header("Generátor citací"),
+		Title:  "Linkra - Generátor citací",
+		Header: generatorHeader(),
 		Main:   generatorView(data),
 	})
 }
 
 func RedirectErrorView(data *RedirectErrorViewData) templ.Component {
 	return Assemble(&PageComponents{
-		Title:  "Chyba při přesměrování",
+		Title:  "Linkra - Chyba při přesměrování",
 		Header: redirectErrorHeader(),
 		Main:   redirectErrorView(data),
 	})

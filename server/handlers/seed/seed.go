@@ -43,7 +43,7 @@ func (handler *SeedHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		handler.ErrorHandler.InternalServerError(w, r)
 		return
 	}
-	data := components.NewSeedViewData(seed, "Zdroj - "+seed.URL)
+	data := components.NewSeedViewData(seed, "Linkra - Detail "+seed.URL)
 	err = handler.View(w, r, data)
 	if err != nil {
 		handler.Log.Error("SeedHandler.ServeHTTP failed to render view", "error", err.Error(), utils.LogRequestInfo(r))
