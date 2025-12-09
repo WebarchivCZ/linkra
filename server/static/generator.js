@@ -2033,9 +2033,6 @@
       const firstname = chooseCaseFunc(firstnameFormat)(author.jméno);
       const lastname = chooseCaseFunc(lastnameFormat)(author.příjmení);
 
-      // This is used to check if the name part was empty
-      let lastAddedNamePart = "";
-
       // Get the correct value to determine the order of firstname and lastname
       let nameOrderThisIter = nameOrder;
       if (i === 0) {
@@ -2045,10 +2042,8 @@
       // If order is set to "prijmeni", then lastname will go first
       if (nameOrderThisIter === "prijmeni") {
         authorStr += lastname;
-        lastAddedNamePart = lastname;
       } else {
         authorStr += firstname;
-        lastAddedNamePart = firstname;
       }
 
       // Set correct name separator
@@ -2057,20 +2052,16 @@
         nameSeparatorThisIter = nameSeparatorFirstAuthor;
       }
 
-      // Add name separator and space (this space should be added always)
-      if (lastAddedNamePart !== "") {
+      // Add name separator and space (if we have both names)
+      if (firstname !== "" && lastname !== "") {
         authorStr += nameSeparatorThisIter + " ";
-      } else {
-        authorStr += " "; // No name part, add only space
       }
 
       // Add rest of the name
       if (nameOrderThisIter === "prijmeni") {
         authorStr += firstname;
-        lastAddedNamePart = firstname;
       } else {
         authorStr += lastname;
-        lastAddedNamePart = lastname;
       }
 
       // If andSeparator is set
@@ -2096,7 +2087,7 @@
         // (and from before we know that the conditions for andSeparator are not met)
         // then print authorSeparator
         if (i < authorLimit - 1) {
-          if (lastAddedNamePart !== "") {
+          if (firstname !== "" || lastname != "") {
             authorStr += authorSeparator + " ";
           } else {
             authorStr += " ";
