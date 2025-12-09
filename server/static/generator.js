@@ -1426,16 +1426,7 @@
       throw new Error("Element with id 'add-author' must exist");
     }
     addAuthorButton.addEventListener("click", () => {
-      addAuthorFieldset(authorsDiv);
-      generatorForm.dispatchEvent(new Event("input", { bubbles: true }));
-    });
-
-    const removeAuthorButton = document.getElementById("remove-author");
-    if (removeAuthorButton === null) {
-      throw new Error("Element with id 'remove-author' must exist");
-    }
-    removeAuthorButton.addEventListener("click", () => {
-      removeLastAuthorFieldset(authorsDiv);
+      appendAuthorElement(authorsDiv, {});
       generatorForm.dispatchEvent(new Event("input", { bubbles: true }));
     });
 
@@ -1575,8 +1566,7 @@
     for (const field in inputData) {
       if (field === "autoři") {
         inputData[field].forEach((author, id) => {
-          const authorHTML = createAuthorHTML(author, id);
-          authorsDiv.insertAdjacentHTML("beforeend", authorHTML);
+          appendAuthorElement(authorsDiv, { id: id, author: author });
         });
       } else {
         const element = generatorForm.elements.namedItem(field);
@@ -1590,58 +1580,106 @@
   }
 
   /**
+   * Append input fields for single author
+   * If 'id' is specified in options, then it will be used. Otherwise id will be one bigger than the last already appended id.
+   * If 'author' object with name strings is specified in options, then it will be used to fill the input elements.
+   * @param {HTMLElement} appendTarget Where to append the element
+   * @param {object} options
+   */
+  function appendAuthorElement(appendTarget, options) {
+    // First try to use id in options
+    // or use last authors id + 1
+    // or 0
+    let id = 0;
+    if ("id" in options && typeof options.id === "number") {
+      id = options.id;
+    } else if (
+      appendTarget.lastElementChild &&
+      appendTarget.lastElementChild instanceof HTMLElement
+    ) {
+      let lastId = appendTarget.lastElementChild.dataset.authorId;
+      if (lastId) {
+        id = Number(lastId) + 1;
+      } // Else id remains 0
+    }
+
+    // If either firstname or lastname is specified in options then use it
+    const authorNames = { jméno: "", příjmení: "" };
+    if (
+      "author" in options &&
+      typeof options.author === "object" &&
+      options.author
+    ) {
+      if (
+        "jméno" in options.author &&
+        typeof options.author.jméno === "string"
+      ) {
+        authorNames.jméno = options.author.jméno;
+      }
+      if (
+        "příjmení" in options.author &&
+        typeof options.author.příjmení === "string"
+      ) {
+        authorNames.příjmení = options.author.příjmení;
+      }
+    }
+
+    // Create the element and fill with html
+    const authorElement = document.createElement("fieldset");
+    authorElement.dataset.authorId = id.toString();
+    authorElement.innerHTML = createAuthorHTML(authorNames, id);
+
+    // Add callback to remove the author element
+    const removeBtn = authorElement.elements.namedItem("remove");
+    if (!removeBtn) {
+      throw new Error(
+        "The innerHTML of author element is missing it's remove button!"
+      );
+    }
+    removeBtn.addEventListener("click", () => {
+      let authorSibling = authorElement.nextElementSibling;
+      while (authorSibling && authorSibling instanceof HTMLFieldSetElement) {
+        const siblingId = authorSibling.dataset.authorId;
+        if (!siblingId) {
+          continue;
+        }
+        authorSibling.dataset.authorId = (Number(siblingId) - 1).toString();
+        const authorLegend = authorSibling.getElementsByTagName("legend");
+        if (authorLegend.length <= 0) {
+          continue;
+        }
+        authorLegend[0].textContent = `Autor ${siblingId}`;
+        authorSibling = authorSibling.nextElementSibling;
+      }
+      authorElement.remove();
+      // This should regenerate citation
+      appendTarget.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+
+    // Insert the author element into the DOM
+    appendTarget.insertAdjacentElement("beforeend", authorElement);
+  }
+
+  /**
    * @param {{jméno: string, příjmení: string}} author
    * @param {number} id
    * @returns {string} String containing HTML representing the author form element
    */
   function createAuthorHTML(author, id) {
     return `
-      <fieldset data-author-id="${id}">
-        <div class="flex-row cit-gen-fields">
-          <legend>Autor ${id + 1}</legend>
-          <div class="flex-column">
-            <label for="příjmení">Příjmení (nebo korporace):</label>
-            <input type="text" name="příjmení" value=${author.příjmení}>
-          </div>
-          <div class="flex-column">
-            <label for="jméno">Jméno:</label>
-            <input type="text" name="jméno" value=${author.jméno}>
-          </div>
+      <div class="flex-row cit-gen-fields">
+        <legend>Autor ${id + 1}</legend>
+        <div class="flex-column">
+          <label for="příjmení">Příjmení (nebo korporace):</label>
+          <input type="text" name="příjmení" value=${author.příjmení}>
         </div>
-      </fieldset>
+        <div class="flex-column">
+          <label for="jméno">Jméno:</label>
+          <input type="text" name="jméno" value=${author.jméno}>
+        </div>
+        <button type="button" name="remove">Odebrat</button>
+      </div>
     `;
-  }
-
-  /**
-   * Add empty author fieldset to the form
-   * @param {HTMLElement} authorsDiv
-   */
-  function addAuthorFieldset(authorsDiv) {
-    let id = authorsDiv.lastElementChild?.dataset.authorId;
-    if (id) {
-      id = Number(id) + 1;
-    } else {
-      id = 0;
-    }
-    authorsDiv.insertAdjacentHTML(
-      "beforeend",
-      createAuthorHTML({ jméno: "", příjmení: "" }, id)
-    );
-  }
-
-  /**
-   * Remove last author fieldset from the form
-   * @param {HTMLElement} authorsDiv
-   */
-  function removeLastAuthorFieldset(authorsDiv) {
-    // Keep at least one author
-    if (authorsDiv.children.length <= 1) {
-      return;
-    }
-    const lastElement = authorsDiv.lastElementChild;
-    if (lastElement) {
-      lastElement.remove();
-    }
   }
 
   /**
