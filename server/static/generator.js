@@ -341,7 +341,7 @@
           <b>První autor</b>
         </div>
         <div class="case-controls">
-          Velikost písma - Jméno:
+          Velikost písma – Jméno:
           <label><input type="radio" name="a-formatjmeno-prvni" value="vychozi">Výchozí</label>
           <label><input type="radio" name="a-formatjmeno-prvni" value="male">Malé</label>
           <label><input type="radio" name="a-formatjmeno-prvni" value="velke">Velké</label>
@@ -349,7 +349,7 @@
           <label><input type="radio" name="a-formatjmeno-prvni" value="iniciala">Iniciála</label>
         </div>
         <div class="flex-row case-controls">
-          Velikost písma - Příjmení:
+          Velikost písma – Příjmení:
           <label><input type="radio" name="a-formatprijmeni-prvni" value="vychozi">Výchozí</label>
           <label><input type="radio" name="a-formatprijmeni-prvni" value="male">Malé</label>
           <label><input type="radio" name="a-formatprijmeni-prvni" value="velke" checked>Velké</label>
@@ -369,7 +369,7 @@
           <b>Další autoři</b>
         </div>
         <div class="flex-row case-controls">
-          Velikost písma - Jméno:
+          Velikost písma – Jméno:
           <label><input type="radio" name="a-formatjmeno" value="vychozi">Výchozí</label>
           <label><input type="radio" name="a-formatjmeno" value="male">Malé</label>
           <label><input type="radio" name="a-formatjmeno" value="velke">Velké</label>
@@ -377,7 +377,7 @@
           <label><input type="radio" name="a-formatjmeno" value="iniciala">Iniciála</label>
         </div>
         <div class="flex-row case-controls">
-          Velikost písma - Příjmení:
+          Velikost písma – Příjmení:
           <label><input type="radio" name="a-formatprijmeni" value="vychozi">Výchozí</label>
           <label><input type="radio" name="a-formatprijmeni" value="male">Malé</label>
           <label><input type="radio" name="a-formatprijmeni" value="velke" checked>Velké</label>
