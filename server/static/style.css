@@ -489,3 +489,10 @@ fieldset {
     font-size: 1.2rem;
     margin-bottom: 0.75rem;
 }
+
+.spaced-header {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    align-content: space-between;
+}
