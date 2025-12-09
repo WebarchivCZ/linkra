@@ -97,6 +97,15 @@
         });
       } else {
         builderSection.hidden = true;
+        const builderTemplateSelect =
+          document.getElementById("prepared-templates");
+        if (
+          builderTemplateSelect &&
+          builderTemplateSelect instanceof HTMLSelectElement
+        ) {
+          builderTemplateSelect.value = templateSelect.value;
+          // Don't fire input/change event on builderTemplateSelect. It would be redundant.
+        }
       }
     });
 
