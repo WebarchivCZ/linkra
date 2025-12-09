@@ -42,7 +42,7 @@ func groupToJson(group *entities.SeedsGroup) string {
 			URL:          seed.URL,
 			Webarchive:   "Webarchiv",
 			ArchivalURL:  shortWaybackLink(seed),
-			ArchivalDate: seed.HarvestedAt.Format("2006-01-02T15:04:05"),
+			ArchivalDate: seed.HarvestedAt.Format("2006-01-02T15:04:05Z07:00"),
 		}
 		objects = append(objects, seedObject)
 	}
