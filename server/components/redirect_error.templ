@@ -22,7 +22,7 @@ templ redirectErrorView(data *RedirectErrorViewData) {
 		<p>Je možné že webový zdroj v době archivace neexistoval, měl výpadek nebo byla jeho URL adresa zadána nesprávně.</p>
 	} else {
 		<p>Vámi požadovaný zdroj <a href={ data.Seed.URL }>{ data.Seed.URL }</a> stále čeká na archivaci.
-		Až bude archivace dokončena, povede link, na archivní kopii webového zdroje ve waybacku <a href="https://webarchiv.cz">Webarchivu</a></p>
+		Až bude archivace dokončena, povede link na archivní kopii webového zdroje ve <a href="https://webarchiv.cz">Webarchivu</a></p>
 	}
 		<p>Pokud si přejete vidět ostatní archivní verze tohoto zdroje, můžete přejít na <a href={ "https://wayback.webarchiv.cz/wayback/*/" + removeProtocol(data.Seed.URL) }>{ "https://wayback.webarchiv.cz/wayback/*/" + data.Seed.URL }</a></p>
 	</div>

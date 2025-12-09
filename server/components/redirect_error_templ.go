@@ -106,7 +106,7 @@ func redirectErrorView(data *RedirectErrorViewData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</a> stále čeká na archivaci. Až bude archivace dokončena, povede link, na archivní kopii webového zdroje ve waybacku <a href=\"https://webarchiv.cz\">Webarchivu</a></p>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</a> stále čeká na archivaci. Až bude archivace dokončena, povede link na archivní kopii webového zdroje ve <a href=\"https://webarchiv.cz\">Webarchivu</a></p>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
