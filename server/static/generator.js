@@ -2144,13 +2144,15 @@
 
     switch (format) {
       case "iso":
-        return parsedDate.toFormat("yyyy-MM-dd'T'HH:mm:ssZZ");
+        return parsedDate.toISO({ suppressMilliseconds: true });
       case "iso-date":
         return parsedDate.toISODate();
       case "iso-time":
         return parsedDate.toISOTime();
       case "rfc":
-        return parsedDate.toFormat("yyyy-MM-dd HH:mm:ssZZ");
+        return parsedDate
+          .toISO({ suppressMilliseconds: true })
+          .replace("T", " ");
       case "rok":
         return parsedDate.toFormat("yyyy");
       case "apa":
