@@ -1266,7 +1266,7 @@
         createFieldId(localFieldNumber),
         initTextField
       );
-      field.elements.namedItem("f-value").value = "). ";
+      field.elements.namedItem("f-value").value = ") ";
       templateBuilder.append(field);
       localFieldNumber++;
     }
