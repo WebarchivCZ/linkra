@@ -13,14 +13,6 @@ func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
 	}
 }
 
-templ generatorHeader() {
-	<div class="header">
-		<h1><a href="https://www.webarchiv.cz">Webarchiv</a> Linkra</h1>
-		<p>Pomůžeme vám vytvořit citace k vašim webovým zdrojům</p>
-	</div>
-	<hr class="no-bottom-margin">
-}
-
 templ generatorView(data *GeneratorViewData) {
 	<div class="flex-content-column">
 		<h2>Generátor citací</h2>

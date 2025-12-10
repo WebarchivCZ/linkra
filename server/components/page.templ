@@ -55,9 +55,12 @@ templ page(components *PageComponents) {
 </html>
 }
 
-templ header(heading string) {
+templ header(subHeading string) {
 <div class="header">
-	<h1 class="blue-text">{ heading }</h1>
+	<h1 class="spaced-header"><a href="https://www.webarchiv.cz">Webarchiv</a> <span class="blue-text">4😀4</span> <span>Linkra</span></h1>
+	if subHeading != "" {
+		<p>{ subHeading }</p>
+	}
 </div>
 <hr class="no-bottom-margin">
 }

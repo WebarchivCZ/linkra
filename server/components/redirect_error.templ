@@ -17,6 +17,7 @@ func NewRedirectErrorViewData(seed *entities.Seed) *RedirectErrorViewData {
 
 templ redirectErrorView(data *RedirectErrorViewData) {
 	<div class="flex-content-column">
+	<h2>Chyba při přesměrování</h2>
 	if data.Seed.State  == entities.DoneFailure {
 		<p>Při archivaci webového zdroje <a href={ data.Seed.URL }>{ data.Seed.URL }</a> došlo k chybě proto nelze zobrazit archivní kopii.</p>
 		<p>Je možné že webový zdroj v době archivace neexistoval, měl výpadek nebo byla jeho URL adresa zadána nesprávně.</p>
@@ -33,11 +34,4 @@ func removeProtocol(url string) string {
 	url = strings.TrimPrefix(url, "https://")
 	url = strings.TrimPrefix(url, "http://")
 	return url
-}
-
-templ redirectErrorHeader() {
-	<div class="header">
-		<h1 class="blue-text">Chyba při přesměrování</h1>
-	</div>
-	<hr class="no-bottom-margin">
 }

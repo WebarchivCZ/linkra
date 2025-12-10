@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func IndexView() templ.Component {
 	return Assemble(&PageComponents{
-		Header: indexHeader(),
+		Header: header("Pomůžeme vám uchovat webové zdroje k vaší práci"),
 		Main:   indexView(),
 	})
 }
@@ -12,7 +12,7 @@ func IndexView() templ.Component {
 func GroupView(data *GroupViewData) templ.Component {
 	return Assemble(&PageComponents{
 		Title:  "Linkra - Stav archivace",
-		Header: groupHeader(),
+		Header: header("Zde můžete sledovat průběh archivace"),
 		Main:   groupView(data),
 	})
 }
@@ -20,7 +20,7 @@ func GroupView(data *GroupViewData) templ.Component {
 func SeedView(data *SeedViewData) templ.Component {
 	return Assemble(&PageComponents{
 		Title:  data.Title,
-		Header: seedHeader(data.Seed.URL),
+		Header: header("Přehled informací o zdroji"),
 		Main:   seedView(data),
 	})
 }
@@ -28,7 +28,7 @@ func SeedView(data *SeedViewData) templ.Component {
 func ErrorView(data *ErrorViewData) templ.Component {
 	return Assemble(&PageComponents{
 		Title:  data.Title,
-		Header: errorHeader(data),
+		Header: header(""),
 		Main:   errorView(data),
 	})
 }
@@ -36,7 +36,7 @@ func ErrorView(data *ErrorViewData) templ.Component {
 func GeneratorView(data *GeneratorViewData) templ.Component {
 	return Assemble(&PageComponents{
 		Title:  "Linkra - Generátor citací",
-		Header: generatorHeader(),
+		Header: header("Pomůžeme vám vytvořit citace k vašim webovým zdrojům"),
 		Main:   generatorView(data),
 	})
 }
@@ -44,7 +44,7 @@ func GeneratorView(data *GeneratorViewData) templ.Component {
 func RedirectErrorView(data *RedirectErrorViewData) templ.Component {
 	return Assemble(&PageComponents{
 		Title:  "Linkra - Chyba při přesměrování",
-		Header: redirectErrorHeader(),
+		Header: header(""),
 		Main:   redirectErrorView(data),
 	})
 }

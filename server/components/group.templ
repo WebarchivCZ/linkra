@@ -16,14 +16,6 @@ func NewGroupViewData(seedsGroup *entities.SeedsGroup) *GroupViewData {
 	}
 }
 
-templ groupHeader() {
-	<div class="header">
-		<h1><a href="https://www.webarchiv.cz">Webarchiv</a> Linkra</h1>
-		<p>Zde můžete sledovat průběh archivace</p>
-	</div>
-	<hr class="no-bottom-margin">
-}
-
 templ groupView(data *GroupViewData) {
 <div class="flex-content-column">
 	<h2>Stav archivace</h2>
