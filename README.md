@@ -20,6 +20,8 @@ Kromě uchovávání citovaných zdrojů je součástí výzkumného záměru po
 která doporučuje archivní verze v citačních záznamech zmiňovat.
 Aplikace Linkra cílí na potřeby akademické obce a umožňuje webovým archivům a paměťovým institucím rozšíření akvizičních strategií a obohacení fondu webových zdrojů.
 
+**Autoři výsledku:** Marie Haškovcová, Václav Dragoun, Luboš Svoboda, Markéta Hrdličková
+
 ## Uživatelský manuál
 
 [Uživatelský manuál](./docs/Uživatelský_manuál.md)
@@ -33,3 +35,4 @@ Aplikace Linkra cílí na potřeby akademické obce a umožňuje webovým archiv
 Národní knihovna ČR
 
 *Realizováno v rámci institucionálního výzkumu Národní knihovny České republiky financovaného Ministerstvem kultury ČR v rámci Dlouhodobého koncepčního rozvoje výzkumné organizace.*
+
