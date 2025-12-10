@@ -20,6 +20,7 @@ Uživatel vloží do formuláře jednu (nebo více) URL adres a stiskne tlačít
 
 Když se uživatel dostane do druhého kroku, může si uložit **Odkaz na stav archivace**, prostřednictvím kterého je možné se do Stavu archivace vrátit. Link lze případně nalézt i v historii prohlížeče. 
 
+<img width="1428" height="732" alt="Screenshot 2025-12-10 at 14 41 24" src="https://github.com/user-attachments/assets/82637c6b-1e51-420c-a469-f1dc905fc4f3" />
 
 
 
@@ -60,6 +61,7 @@ Tabulka zahrnuje pole: URL, Zkrácený odkaz do Webarchivu, Odkaz na detail, Sta
 - **Detail**
 Prostřednictvím pole Detail se uživatel dostane na Detail archivovaného zdroje. Zahrnuje URL adresu vloženou k archivaci, stav archivace, zkrácenou archivní URL adresu, plnou archivní URL adresu a přesné datum archivace.
 
+<img width="1427" height="725" alt="Screenshot 2025-12-10 at 14 41 40" src="https://github.com/user-attachments/assets/e9e9e335-c5fd-4ac2-97cb-1c6e3065b209" />
 
 
 Stisknutím pole **Pokračovat na generátor citací** se uživatel přesune ze stránky Stav archivace do třetího kroku, kde si může vytvořit citační záznam webového zdroje.
