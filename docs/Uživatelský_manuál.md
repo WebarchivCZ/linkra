@@ -106,7 +106,8 @@ Pokud uživateli nabízená struktura citace nevyhovuje, může v horním modré
 **Uživatelská šablona**
 Uživatelská šablona je určena pro úpravu navržené struktury (stávající pole lze editovat, doplňovat, odstraňovat apod.) nebo pro tvorbu šablony vlastní. Prostřednictvím pole **Odebrat vše** a potvrzením prostřednictvím tlačítka **Použít vlastní šablonu** lze všechny pole smazat. 
 
-<img width="519" height="584" alt="Screenshot 2025-12-10 at 14 12 57" src="https://github.com/user-attachments/assets/826a5743-e4a9-4d86-b36e-c978314c0337" />
+<img width="343" height="558" alt="11_Linkra" src="https://github.com/user-attachments/assets/a6c2e632-859f-4b1d-91ac-fd43848e7aca" />
+
 
 Pro tvorbu vlastní šablony lze využít pole **Vyberte, jakou část šablony přidat do citace**. Uživatel si pomocí nabízených polí může vytvořit strukturu podle svých vlastních požadavků. 
 
