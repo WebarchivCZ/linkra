@@ -48,11 +48,9 @@ Stav označuje, v jakém stavu se archivace nachází. Může se jednat o tyto s
 
 Tabulku s přehledem archivovaných zdrojů si lze stáhnout ve formátu Excel nebo CSV. 
 
-Excel
-<img width="679" height="93" alt="Screenshot 2025-12-10 at 14 10 12" src="https://github.com/user-attachments/assets/717fa88a-7e5f-4866-b53e-680cd5247524" />
+Excel, CSV
 
-CSV
-<img width="680" height="117" alt="Screenshot 2025-12-10 at 14 10 19" src="https://github.com/user-attachments/assets/3885e510-372a-4ab4-b1a8-98ea95875172" />
+<img width="1181" height="132" alt="Screenshot 2025-12-10 at 16 58 04" src="https://github.com/user-attachments/assets/c82bc404-c329-44e7-b147-dce555930b57" />
 
 
 Tabulka zahrnuje pole: URL, Zkrácený odkaz do Webarchivu, Odkaz na detail, Stav, Odkaz do Webarchivu
