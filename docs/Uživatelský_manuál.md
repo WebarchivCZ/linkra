@@ -33,10 +33,10 @@ Sloupec obsahuje zdroje vložené k archivaci.
 Zde uživatel vidí zkrácené verze archivních URL adres, tzn. adres archivních verzí zdrojů. Zkrácenou archivní URL uživatel získá obratem. Přesměrovává na plnou archivní URL, která je však dostupná teprve až po úspěšné archivaci. Vložením zdrojů do aplikace je spuštěn proces archivace, archivní verze je však možné zobrazit až po jejich zaindexování, tedy s určitým časovým zpožděním. Archivovaný webový zdroj lze v archivu dohledat podle zkrácené i plné verze.
 
 příklad zkrácené archivní URL:
-> https://linkra.webarchiv/wa/KXLJIV
+https://linkra.webarchiv/wa/KXLJIV
 <br>
 příklad plné archivní URL:
->
+
 https://wayback.webarchiv.cz/wayback/20251125152215/https://doi.org/10.5817/ProIn2013-2-14
 
 Pokud není archivace zdroje ještě ukončena, zkrácená archivní URL vede na hlášku **Chyba při přesměrování**. Po úspěšné archivaci vede na archivní verzi.
