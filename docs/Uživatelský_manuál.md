@@ -12,7 +12,8 @@ Práce spočívá ve třech základních krocích.
 
 Uživatel vloží do formuláře jednu (nebo více) URL adres a stiskne tlačítko odeslat, což vede ke spuštění archivace. Limit počtu jednorázově vložených URL adres je 20. Po stisknutí tlačítka odeslat se dostane do druhého kroku, kde nalezne přehled archivovaných URL.
 
-<img width="773" height="664" alt="1_L" src="https://github.com/user-attachments/assets/7d98f501-d0f2-4846-b032-043f27d40632" />
+<img width="1030" height="590" alt="1_LIN" src="https://github.com/user-attachments/assets/07336e8e-99e8-4044-977d-eaef8f7857c7" />
+
 
 
 
@@ -21,7 +22,8 @@ Uživatel vloží do formuláře jednu (nebo více) URL adres a stiskne tlačít
 
 Když se uživatel dostane do druhého kroku, může si uložit **Odkaz na stav archivace**, prostřednictvím kterého je možné se do Stavu archivace vrátit. Link lze případně nalézt i v historii prohlížeče. 
 
-<img width="785" height="410" alt="2_L" src="https://github.com/user-attachments/assets/dab23a6a-a94c-4b79-be95-b642efdb3594" />
+<img width="1005" height="471" alt="2_LIN" src="https://github.com/user-attachments/assets/f85a98bf-712e-4d58-bfc0-7dc3794d8d01" />
+
 
 
 
@@ -59,7 +61,8 @@ Tabulka zahrnuje pole: URL, Zkrácený odkaz do Webarchivu, Odkaz na detail, Sta
 - **Detail**
 Prostřednictvím pole Detail se uživatel dostane na Detail archivovaného zdroje. Zahrnuje URL adresu vloženou k archivaci, stav archivace, zkrácenou archivní URL adresu, plnou archivní URL adresu a přesné datum archivace.
 
-<img width="795" height="279" alt="3_L" src="https://github.com/user-attachments/assets/ad9b27d9-f7a3-49cc-aa7f-596b146b5663" />
+<img width="758" height="226" alt="3_LIN" src="https://github.com/user-attachments/assets/58753cc3-0a6c-4126-b506-913992b3b285" />
+
 
 
 
