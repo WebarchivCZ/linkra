@@ -33,10 +33,10 @@ Sloupec obsahuje zdroje vložené k archivaci.
 Zde uživatel vidí zkrácené verze archivních URL adres, tzn. adres archivních verzí zdrojů. Zkrácenou archivní URL uživatel získá obratem. Přesměrovává na plnou archivní URL, která je však dostupná teprve až po úspěšné archivaci. Vložením zdrojů do aplikace je spuštěn proces archivace, archivní verze je však možné zobrazit až po jejich zaindexování, tedy s určitým časovým zpožděním. Archivovaný webový zdroj lze v archivu dohledat podle zkrácené i plné verze.
 
 příklad zkrácené archivní URL:
-https://linkra.webarchiv/wa/KXLJIV
+https://linkra.webarchiv.cz/wa/FGE3UD
 <br>
 příklad plné archivní URL:
-https://wayback.webarchiv.cz/wayback/20251125152215/https://doi.org/10.5817/ProIn2013-2-14
+https://wayback.webarchiv.cz/wayback/20251211111029/https://journals.phil.muni.cz/proinflow/article/view/2013-2-14
 
 Pokud není archivace zdroje ještě ukončena, zkrácená archivní URL vede na hlášku **Chyba při přesměrování**. Po úspěšné archivaci vede na archivní verzi.
 
@@ -145,9 +145,10 @@ Pro vykopírování jednotlivé citace můžete použít tlačítko Kopírovat. 
 
 
 příklad ČSN ISO 690 <br>
->BOWERS, John; STANTON, Clare a ZITTRAIN, Jonathan. What the ephemerality of the Web means for your hyperlinks. Online. In: Columbia Journalism Review. New York. 2021. Dostupné z: https://www.cjr.org/analysis/linkrot-contentdrift-new-york-times.php. Archivní kopie dostupná z: Webarchiv, http://10.3.0.122:8321/archiv/2TIIRT [arch. 2025-11-27T10:44:20+01:00]. [cit. 2025-11-27].
+>BOWERS, John; STANTON, Clare a ZITTRAIN, Jonathan. What the ephemerality of the Web means for your hyperlinks. Online. Columbia Journalism Review. New York. 2021. Dostupné z: https://www.cjr.org/analysis/linkrot-content-drift-new-york-times.php. Archivní kopie dostupná z: Webarchiv, https://linkra.webarchiv.cz/wa/EF5MNZ [arch. 2025-12-11T11:44:59+01:00]. [cit. 2025-12-11].
 
-<img width="519" height="584" alt="Screenshot 2025-12-10 at 14 12 57" src="https://github.com/user-attachments/assets/8460ddec-36c7-49a2-be17-4d0325f077b1" />
+<img width="510" height="641" alt="příklad ISO" src="https://github.com/user-attachments/assets/5256f180-c750-4a3d-84af-011d2340ffe6" />
+
 
 
 
@@ -162,7 +163,8 @@ příklad ČSN ISO 690 <br>
 
 
 příklad APA <br>
->BOWERS, J., STANTON, C., & ZITTRAIN, J. (2021). What the ephemerality of the Web means for your hyperlinks. Columbia Journalism Review. https://www.cjr.org/analysis/linkrot-contentdrift-new-york-times.php. Archivováno: Webarchiv, http://10.3.0.122:8321/wa/2TIIRT (2025, 27. listopadu)
+>BOWERS, J., STANTON, C., & ZITTRAIN, J. (2021). What the ephemerality of the Web means for your hyperlinks. Columbia Journalism Review. https://www.cjr.org/analysis/linkrot-content-drift-new-york-times.php. Archivováno: Webarchiv, https://linkra.webarchiv.cz/wa/EF5MNZ (2025, 11. prosince)
 
-<img width="501" height="588" alt="Screenshot 2025-12-10 at 14 13 12" src="https://github.com/user-attachments/assets/2e9426bd-9fc6-4d9f-a945-def2d53eacd9" />
+<img width="507" height="628" alt="příklad_APA" src="https://github.com/user-attachments/assets/cec37c8d-37b1-4424-aa1c-06d91be91589" />
+
 
