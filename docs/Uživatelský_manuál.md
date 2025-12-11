@@ -4,7 +4,7 @@ Aplikace Linkra umožňuje ukládání webových zdrojů do webového archivu a 
 
 ## Postup práce s aplikací:
 
-Aplikace se nalézá na URL adrese: http://linkra.webarchiv.cz/. Pokud chce uživatel zdroj archivovat ve webovém archivu, postupuje podle jednotlivých kroků z **Hlavní strany**. Pokud chce vytvořit citační záznam již existující archivní verze, může přejít přímo do **Generátoru citací**.
+Aplikace se nalézá na URL adrese: https://linkra.webarchiv.cz/. Pokud chce uživatel zdroj archivovat ve webovém archivu, postupuje podle jednotlivých kroků z **Hlavní strany**. Pokud chce vytvořit citační záznam již existující archivní verze, může přejít přímo do **Generátoru citací**.
 
 Práce spočívá ve třech základních krocích.
 
@@ -12,7 +12,8 @@ Práce spočívá ve třech základních krocích.
 
 Uživatel vloží do formuláře jednu (nebo více) URL adres a stiskne tlačítko odeslat, což vede ke spuštění archivace. Limit počtu jednorázově vložených URL adres je 20. Po stisknutí tlačítka odeslat se dostane do druhého kroku, kde nalezne přehled archivovaných URL.
 
-<img width="1440" height="900" alt="Screenshot 2025-12-10 at 14 08 36" src="https://github.com/user-attachments/assets/1a77dd75-66b5-48ec-8a44-c73d2fd4f31f" />
+<img width="773" height="664" alt="1_L" src="https://github.com/user-attachments/assets/7d98f501-d0f2-4846-b032-043f27d40632" />
+
 
 
 
@@ -20,7 +21,8 @@ Uživatel vloží do formuláře jednu (nebo více) URL adres a stiskne tlačít
 
 Když se uživatel dostane do druhého kroku, může si uložit **Odkaz na stav archivace**, prostřednictvím kterého je možné se do Stavu archivace vrátit. Link lze případně nalézt i v historii prohlížeče. 
 
-<img width="1428" height="732" alt="Screenshot 2025-12-10 at 14 41 24" src="https://github.com/user-attachments/assets/82637c6b-1e51-420c-a469-f1dc905fc4f3" />
+<img width="785" height="410" alt="2_L" src="https://github.com/user-attachments/assets/dab23a6a-a94c-4b79-be95-b642efdb3594" />
+
 
 
 
@@ -57,7 +59,8 @@ Tabulka zahrnuje pole: URL, Zkrácený odkaz do Webarchivu, Odkaz na detail, Sta
 - **Detail**
 Prostřednictvím pole Detail se uživatel dostane na Detail archivovaného zdroje. Zahrnuje URL adresu vloženou k archivaci, stav archivace, zkrácenou archivní URL adresu, plnou archivní URL adresu a přesné datum archivace.
 
-<img width="1427" height="725" alt="Screenshot 2025-12-10 at 14 41 40" src="https://github.com/user-attachments/assets/e9e9e335-c5fd-4ac2-97cb-1c6e3065b209" />
+<img width="795" height="279" alt="3_L" src="https://github.com/user-attachments/assets/ad9b27d9-f7a3-49cc-aa7f-596b146b5663" />
+
 
 
 Stisknutím pole **Pokračovat na generátor citací** se uživatel přesune ze stránky Stav archivace do třetího kroku, kde si může vytvořit citační záznam webového zdroje.
@@ -73,7 +76,7 @@ Do pole **Citace** se postupně propisují doplňované bibliografické údaje (
 
 V případě, že uživatel vloží do aplikace k archivaci více než jeden zdroj, ve třetím kroku může listovat mezi jednotlivými záznamy.
 
-
+<img width="678" height="33" alt="8_Linkra" src="https://github.com/user-attachments/assets/75e48f11-0961-4427-965c-adff8f80de54" />
 
 **Šablona ČSN ISO 690 a APA**<br>
 Pokud uživatel zvolí první nebo druhou variantu šablony, tzn. **ČSN ISO 690** nebo **APA**, může do tabulky **Metadata citace** doplnit bibliografické údaje a šablona mu je automaticky převádí do struktury v souladu s normou ČSN ISO 690 nebo podle citačního stylu APA. 
@@ -83,7 +86,7 @@ Pokud uživatel zvolí první nebo druhou variantu šablony, tzn. **ČSN ISO 690
 
 Zahrnuje základní údaje: 
 
-- **Autor** – uživatel má k dispozici pole Příjmení a Jméno. Pro více autorů lze využít tlačítka Přidat autora / Odebrat. Pokud je autorem korporace, lze využít pole Příjmení
+- **Autor** – uživatel má k dispozici pole Příjmení a Jméno. Pro více autorů lze využít tlačítka Přidat autora, odstranit je lze prostřednictvím pole Odebrat. Pokud je autorem korporace, lze využít pole Příjmení
 - **Název webového zdroje** – například název citovaného článku
 - **Název zdroje / periodikum** – textové pole určené například pro údaj o periodiku, ve kterém je článek publikován
 - **Místo vydání**
@@ -143,7 +146,7 @@ Pro vykopírování jednotlivé citace můžete použít tlačítko Kopírovat. 
 
 
 
-příklad ČSN ISO 690 <br>
+**příklad ČSN ISO 690** <br>
 >BOWERS, John; STANTON, Clare a ZITTRAIN, Jonathan. What the ephemerality of the Web means for your hyperlinks. Online. Columbia Journalism Review. New York. 2021. Dostupné z: https://www.cjr.org/analysis/linkrot-content-drift-new-york-times.php. Archivní kopie dostupná z: Webarchiv, https://linkra.webarchiv.cz/wa/EF5MNZ [arch. 2025-12-11T11:44:59+01:00]. [cit. 2025-12-11].
 
 <img width="510" height="641" alt="příklad ISO" src="https://github.com/user-attachments/assets/5256f180-c750-4a3d-84af-011d2340ffe6" />
@@ -161,7 +164,7 @@ příklad ČSN ISO 690 <br>
 
 
 
-příklad APA <br>
+**příklad APA** <br>
 >BOWERS, J., STANTON, C., & ZITTRAIN, J. (2021). What the ephemerality of the Web means for your hyperlinks. Columbia Journalism Review. https://www.cjr.org/analysis/linkrot-content-drift-new-york-times.php. Archivováno: Webarchiv, https://linkra.webarchiv.cz/wa/EF5MNZ (2025, 11. prosince)
 
 <img width="507" height="628" alt="příklad_APA" src="https://github.com/user-attachments/assets/cec37c8d-37b1-4424-aa1c-06d91be91589" />
