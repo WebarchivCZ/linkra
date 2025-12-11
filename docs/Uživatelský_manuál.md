@@ -1,6 +1,6 @@
 # Uživatelský manuál
 
-Aplikace Linkra umožňuje ukládání webových zdrojů do webového archivu a vytvoření jejich citačního záznamu, který zahrnuje archivní URL adresu. Je navržena k archivaci stránek/dokumentů, jako je například odborný článek (1 page/1 URL). Pro hlubší archivaci celého média (více URL na 1 zdroj) je možné navrhnout web k archivaci prostřednictvím formuláře do českého [Webarchivu](https://www.webarchiv.cz/cs/pridat-web).
+Aplikace Linkra umožňuje ukládání webových zdrojů do webového archivu a vytvoření jejich citačního záznamu, který zahrnuje archivní URL adresu. Je navržena k archivaci stránek/dokumentů, jako je například odborný článek (1 page/1 URL). Pro hlubší archivaci celého média (více URL na 1 zdroj) je možné navrhnout web k archivaci prostřednictvím formuláře do českého [Webarchivu](https://www.webarchiv.cz/cs/pridat-web), anebo URL vložit zvlášť.
 
 ## Postup práce s aplikací:
 
@@ -26,10 +26,10 @@ Když se uživatel dostane do druhého kroku, může si uložit **Odkaz na stav 
 
 Přehled zahrnuje tři sloupce:
 
-- **URL**
+- **URL**<br>
 Sloupec obsahuje zdroje vložené k archivaci.
 
-- **Zkrácená archivní URL**
+- **Zkrácená archivní URL**<br>
 Zde uživatel vidí zkrácené verze archivních URL adres, tzn. adres archivních verzí zdrojů. Zkrácenou archivní URL uživatel získá obratem. Přesměrovává na plnou archivní URL, která je však dostupná teprve až po úspěšné archivaci. Vložením zdrojů do aplikace je spuštěn proces archivace, archivní verze je však možné zobrazit až po jejich zaindexování, tedy s určitým časovým zpožděním. Archivovaný webový zdroj lze v archivu dohledat podle zkrácené i plné verze.
 
 příklad zkrácené archivní URL:
@@ -48,7 +48,6 @@ Stav označuje, v jakém stavu se archivace nachází. Může se jednat o tyto s
 
 Tabulku s přehledem archivovaných zdrojů si lze stáhnout ve formátu Excel nebo CSV. 
 
-Excel, CSV
 
 <img width="1181" height="132" alt="Screenshot 2025-12-10 at 16 58 04" src="https://github.com/user-attachments/assets/c82bc404-c329-44e7-b147-dce555930b57" />
 
@@ -76,7 +75,7 @@ V případě, že uživatel vloží do aplikace k archivaci více než jeden zdr
 
 
 
-Šablona ČSN ISO 690 a APA
+**Šablona ČSN ISO 690 a APA**<br>
 Pokud uživatel zvolí první nebo druhou variantu šablony, tzn. **ČSN ISO 690** nebo **APA**, může do tabulky **Metadata citace** doplnit bibliografické údaje a šablona mu je automaticky převádí do struktury v souladu s normou ČSN ISO 690 nebo podle citačního stylu APA. 
 
 <img width="736" height="509" alt="Screenshot 2025-12-10 at 14 10 43" src="https://github.com/user-attachments/assets/13418c98-7ffd-46a6-b2b3-9e321e78f12f" />
@@ -101,7 +100,7 @@ Zahrnuje základní údaje:
 
 Pokud uživateli nabízená struktura citace nevyhovuje, může v horním modrém poli zvolit třetí možnost **(Uživatelská – Upravte existující šablonu nebo vytvořte novou)**, která mu umožní sestavit si citaci podle svých potřeb. Zobrazí se mu **Šablona**, kterou lze libovolně editovat, případně může pomocí pole **Odebrat vše** všechna navrhovaná pole zrušit a začít je znovu skládat zcela podle svých individuálních požadavků. Pořadí jednotlivých částí je možné změnit přetažením myší. Po každé úpravě šablony je potřeba stisknout tlačítko dole Použít vlastní šablonu. Teprve pak se změna promítne v citaci v modrém poli nahoře.
 
-**Uživatelská šablona**
+**Uživatelská šablona**<br>
 Uživatelská šablona je určena pro úpravu navržené struktury (stávající pole lze editovat, doplňovat, odstraňovat apod.) nebo pro tvorbu šablony vlastní. Prostřednictvím pole **Odebrat vše** a potvrzením prostřednictvím tlačítka **Použít vlastní šablonu** lze všechny pole smazat. 
 
 <img width="343" height="558" alt="11_Linkra" src="https://github.com/user-attachments/assets/a6c2e632-859f-4b1d-91ac-fd43848e7aca" />
