@@ -23,7 +23,7 @@ Aplikace Linkra cílí na potřeby akademické obce a umožňuje webovým archiv
 
 ## Linkra
 
-**Aplikace Linkra je dostupná [zde](https://linkra.webarchiv.cz/)**
+Aplikace Linkra je dostupná [zde](https://linkra.webarchiv.cz/)
 
 ## Uživatelský manuál
 
@@ -38,6 +38,7 @@ Aplikace Linkra cílí na potřeby akademické obce a umožňuje webovým archiv
 Národní knihovna ČR
 
 *Realizováno v rámci institucionálního výzkumu Národní knihovny České republiky financovaného Ministerstvem kultury ČR v rámci Dlouhodobého koncepčního rozvoje výzkumné organizace.*
+
 
 
 
