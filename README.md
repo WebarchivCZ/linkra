@@ -21,6 +21,10 @@ Aplikace Linkra cílí na potřeby akademické obce a umožňuje webovým archiv
 
 **Autoři výsledku:** Marie Haškovcová, Václav Dragoun, Luboš Svoboda, Markéta Hrdličková
 
+## Linkra
+
+**Aplikace Linkra je dostupná [zde](https://linkra.webarchiv.cz/)**
+
 ## Uživatelský manuál
 
 [Uživatelský manuál](./docs/Uživatelský_manuál.md)
@@ -34,6 +38,7 @@ Aplikace Linkra cílí na potřeby akademické obce a umožňuje webovým archiv
 Národní knihovna ČR
 
 *Realizováno v rámci institucionálního výzkumu Národní knihovny České republiky financovaného Ministerstvem kultury ČR v rámci Dlouhodobého koncepčního rozvoje výzkumné organizace.*
+
 
 
 
