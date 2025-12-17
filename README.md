@@ -29,19 +29,16 @@ Aplikace Linkra je dostupná [zde](https://linkra.webarchiv.cz/)
 
 [Uživatelský manuál](./docs/Uživatelský_manuál.md)
 
+[Uživatelský manuál PDF](./docs/Uživatelský_manuál.pdf)
+
 ## Technická dokumentace
 
 [Technická dokumentace](./docs/Technická_dokumentace.md)
+
+[Technická dokumentace PDF](./docs/Technická_dokumentace.pdf)
 
 ### Dedikace
 
 Národní knihovna ČR
 
 *Realizováno v rámci institucionálního výzkumu Národní knihovny České republiky financovaného Ministerstvem kultury ČR v rámci Dlouhodobého koncepčního rozvoje výzkumné organizace.*
-
-
-
-
-
-
-
