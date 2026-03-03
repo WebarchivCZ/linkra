@@ -114,6 +114,7 @@ func main() {
 	)
 
 	// Start the server in new goroutine
+	// TODO: See if it makes sense to cath this error.
 	go server.ListenAndServe()
 	log.Info("Server is listening at http://" + serverAddress)
 
