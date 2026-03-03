@@ -85,7 +85,7 @@ func main() {
 	// TODO: There are more signals that need catching
 	signals := []os.Signal{os.Interrupt}
 	if runtime.GOOS == "linux" {
-		signals = append(signals, syscall.SIGHUP)
+		signals = append(signals, syscall.SIGHUP, syscall.SIGTERM)
 	}
 	stopSignal, stop := signal.NotifyContext(context.Background(), signals...)
 	defer stop()
