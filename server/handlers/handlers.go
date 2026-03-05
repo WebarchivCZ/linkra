@@ -25,7 +25,7 @@ func NewHandlers(log *slog.Logger, services *services.Services, staticFs fs.FS) 
 	redirectHandler := NewRedirectHandler(services.SeedService, errorHandler)
 	generatorHandler := NewGeneratorHandler(services.SeedService, errorHandler)
 	staticHandler := NewStaticHandler(staticFs)
-	groupHandler := NewGroupHandler(log, services.SeedService, errorHandler)
+	groupHandler := NewGroupHandler(services.SeedService, errorHandler)
 	exporterGroupHandler := NewExportGroupHandler(log, services.SeedService, services.ExporterService, errorHandler)
 	saveGroupHandler := NewSaveGroupHandler(log, services.SeedService, services.CaptureService, errorHandler)
 	return &Handlers{
