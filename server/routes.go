@@ -15,7 +15,7 @@ func RegisterRoutes(router *echo.Echo, handlers *handlers.Handlers) {
 	router.GET("/seeds/:id", partialWrapHandler(handlers.GroupHandler))
 	router.GET("/wa/:id", partialWrapHandler(handlers.RedirectHandler))
 	router.POST("/seeds/save", echo.WrapHandler(handlers.SaveGroupHandler))
-	router.GET("/seed/:id", partialWrapHandler(handlers.SeedHandler))
+	router.GET("/seed/:id", IntoFunc(handlers.SeedHandler))
 	router.GET("/static/*", echo.WrapHandler(handlers.StaticHandler))
 }
 
