@@ -2,25 +2,23 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 	"linkra/assert"
 	"linkra/services"
-	"linkra/utils"
-	"log/slog"
 	"net/http"
+
+	"github.com/labstack/echo/v5"
 )
 
 func NewSaveGroupHandler(
-	log *slog.Logger,
 	seedService *services.SeedService,
 	captureService *services.CaptureService,
 	errorHandler *ErrorHandler,
 ) *SaveGroupHandler {
-	assert.Must(log != nil, "NewSaveGroupHandler: log can't be nil")
 	assert.Must(seedService != nil, "NewSaveGroupHandler: seedService can't be nil")
 	assert.Must(captureService != nil, "NewSaveGroupHandler: captureService can't be nil")
 	assert.Must(errorHandler != nil, "NewSaveGroupHandler: errorHandler can't be nil")
 	return &SaveGroupHandler{
-		Log:            log,
 		SeedService:    seedService,
 		CaptureService: captureService,
 		ErrorHandler:   errorHandler,
@@ -28,36 +26,32 @@ func NewSaveGroupHandler(
 }
 
 type SaveGroupHandler struct {
-	Log            *slog.Logger
 	SeedService    *services.SeedService
 	CaptureService *services.CaptureService
 	ErrorHandler   *ErrorHandler
 }
 
-func (handler *SaveGroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (handler *SaveGroupHandler) ServeHTTP(c *echo.Context) error {
+	r := c.Request()
+	w := c.Response()
+
 	const urlKey = "url-list"
 	// TODO: Check that server has correct setting for request size.
 	seedURL := r.FormValue(urlKey)
 	group, err := handler.SeedService.Save(seedURL, true)
-	// TODO: Return different error pages/messages when different errors are recived. This should help user understant what they did wrong.
+	// TODO: Return different error pages/messages when different errors are received. This should help user understand what they did wrong.
 	if errors.Is(err, services.ErrEmptyList) {
-		handler.Log.Warn("SaveGroupHandler.ServeHTTP recieved empty seed list", utils.LogRequestInfo(r))
-		handler.ErrorHandler.ServeError(w, r, "Prázdný požadavek", 400, "Prázdný požadavek", "Požadavek který jsme obdrželi obsahoval jen prázdné řádky. Prosím vraťe se na hlavní stránku a zadejte platnou URL adresu.")
-		return
+		handler.ErrorHandler.ServeError(w, r, "Prázdný požadavek", 400, "Prázdný požadavek", "Požadavek který jsme obdrželi obsahoval jen prázdné řádky. Prosím vraťte se na hlavní stránku a zadejte platnou URL adresu.")
+		return errors.New("SaveGroupHandler.ServeHTTP received empty seed list")
 	}
 	if err != nil {
-		handler.Log.Error("SaveGroupHandler.ServeHTTP SeedService returned error when trying to save group", slog.String("error", err.Error()), utils.LogRequestInfo(r))
 		handler.ErrorHandler.InternalServerError(w, r)
-		return
+		return fmt.Errorf("SaveGroupHandler.ServeHTTP SeedService returned error when trying to save group; %w", err)
 	}
 
-	// Enqueue seeds for capture (this does not change the success of the http request)
+	// Enqueue seeds for capture (and let the request succeed, it can be reenqueue later)
 	err = handler.CaptureService.CaptureGroup(r.Context(), group)
-	if err != nil {
-		handler.Log.Error("SaveGroupHandler.ServeHTTP CaptureService returned error when trying to enqueue group", "error", err.Error(), utils.LogRequestInfo(r))
-		// Do not return!
-	}
-
 	http.Redirect(w, r, "/seeds/"+group.ShadowID, http.StatusSeeOther)
-	handler.Log.Info("SaveGroupHandler.ServeHTTP sucessfully responded", utils.LogRequestInfo(r))
+	// The request completed, this will only log the potential error
+	return fmt.Errorf("SaveGroupHandler.ServeHTTP CaptureService returned error when trying to enqueue group; %w", err)
 }

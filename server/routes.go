@@ -2,7 +2,6 @@ package server
 
 import (
 	"linkra/server/handlers"
-	"net/http"
 
 	"github.com/labstack/echo/v5"
 )
@@ -14,22 +13,9 @@ func RegisterRoutes(router *echo.Echo, handlers *handlers.Handlers) {
 	router.GET("/citace/:id", IntoFunc(handlers.GeneratorHandler))
 	router.GET("/seeds/:id", IntoFunc(handlers.GroupHandler))
 	router.GET("/wa/:id", IntoFunc(handlers.RedirectHandler))
-	router.POST("/seeds/save", echo.WrapHandler(handlers.SaveGroupHandler))
+	router.POST("/seeds/save", IntoFunc(handlers.SaveGroupHandler))
 	router.GET("/seed/:id", IntoFunc(handlers.SeedHandler))
 	router.GET("/static/*", IntoFunc(handlers.StaticHandler))
-}
-
-// Mixed handler to speed up migration to echo
-// TODO: Migrate all handlers to echo handlers
-type mixedHandler interface {
-	ServeHTTP(w http.ResponseWriter, r *http.Request, c *echo.Context)
-}
-
-func partialWrapHandler(h mixedHandler) echo.HandlerFunc {
-	return func(c *echo.Context) error {
-		h.ServeHTTP(c.Response(), c.Request(), c)
-		return nil
-	}
 }
 
 type EchoHandler interface {
