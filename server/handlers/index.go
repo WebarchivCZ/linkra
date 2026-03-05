@@ -25,23 +25,6 @@ func NewIndexHandler(log *slog.Logger, errorHandler *ErrorHandler) *IndexHandler
 }
 
 func (handler *IndexHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// Thanks to the http.ServeMux implementation, all NotFound pages
-	// are gonna be served by this handler. Also we need to do our own http method check
-
-	// TODO: This can probably be removed. Echo router handles this in different way than http.ServeMux.
-	// If we aren't looking for index page, return 404 error
-	// path := r.URL.Path
-	// if path != "/" && path != "/index.html" {
-	// 	handler.ErrorHandler.PageNotFound(w, r)
-	// 	return
-	// }
-	// If this isn't GET request, return 405 error
-	// if r.Method != http.MethodGet {
-	// 	handler.ErrorHandler.MethodNotAllowed(w, r)
-	// 	return
-	// }
-
-	// All should be well. We can serve the index page.
 	err := handler.View(w, r)
 	if err != nil {
 		handler.Log.Error("IndexHandler.ServeHTTP failed to render view", "error", err.Error(), utils.LogRequestInfo(r))
