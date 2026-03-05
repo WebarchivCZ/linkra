@@ -2,12 +2,12 @@ package handlers
 
 import (
 	"bytes"
+	"fmt"
 	"linkra/assert"
 	"linkra/entities"
 	"linkra/server/components"
 	"linkra/services"
 	"linkra/utils"
-	"log/slog"
 	"net/http"
 
 	"github.com/labstack/echo/v5"
@@ -15,66 +15,65 @@ import (
 )
 
 type ExportGroupHandler struct {
-	Log             *slog.Logger
 	SeedService     *services.SeedService
 	ExporterService *services.ExporterService
 	ErrorHandler    *ErrorHandler
 }
 
 func NewExportGroupHandler(
-	log *slog.Logger,
 	seedService *services.SeedService,
 	exporterService *services.ExporterService,
 	errorHandler *ErrorHandler,
 ) *ExportGroupHandler {
-	assert.Must(log != nil, "NewExportGroupHandler: log can't be nil")
 	assert.Must(seedService != nil, "NewExportGroupHandler: seedService can't be nil")
 	assert.Must(exporterService != nil, "NewExportGroupHandler: exporterService can't be nil")
 	assert.Must(errorHandler != nil, "NewExportGroupHandler: errorHandler can't be nil")
 	return &ExportGroupHandler{
-		Log:             log,
 		SeedService:     seedService,
 		ExporterService: exporterService,
 		ErrorHandler:    errorHandler,
 	}
 }
 
-func (handler *ExportGroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Request, c *echo.Context) {
+func (handler *ExportGroupHandler) ServeHTTP(c *echo.Context) error {
+	r := c.Request()
+	w := c.Response()
+
 	groupId := c.Param("id")
 
 	group, err := handler.SeedService.GetGroup(groupId)
-	// TODO: Create common error for services to comunicate that record does not exist so we don't have to break the layer model all the time
+	// TODO: Create common error for services to communicate that record does not exist so we don't have to break the layer model all the time
 	if err == gorm.ErrRecordNotFound {
-		handler.Log.Warn("ExportGroupHandler.ServeHTTP group not found", "error", err.Error(), utils.LogRequestInfo(r))
 		handler.ErrorHandler.PageNotFound(w, r)
-		return
+		return fmt.Errorf("ExportGroupHandler.ServeHTTP group not found; %w", err)
 	}
 	if err != nil {
-		handler.Log.Error("ExportGroupHandler.ServeHTTP failed to fetch SeedsGroup data", "error", err.Error(), utils.LogRequestInfo(r))
 		handler.ErrorHandler.InternalServerError(w, r)
-		return
+		return fmt.Errorf("ExportGroupHandler.ServeHTTP failed to fetch SeedsGroup data; %w", err)
 	}
 
 	format := c.Param("format")
 	switch format {
 	case "excel":
-		handler.RespondExcel(w, r, group)
+		handler.RespondExcel(c, group)
 	case "csv":
-		handler.RespondCsv(w, r, group)
+		handler.RespondCsv(c, group)
 	default:
-		handler.Log.Warn("ExportGroupHandler.ServeHTTP user requested unknown format", utils.LogRequestInfo(r))
+		// TODO: This should maybe return pure 400. Investigate.
 		handler.ErrorHandler.PageNotFound(w, r)
-		return
+		return fmt.Errorf("ExportGroupHandler.ServeHTTP user requested unknown format")
 	}
+	return nil
 }
 
-func (handler *ExportGroupHandler) RespondExcel(w http.ResponseWriter, r *http.Request, group *entities.SeedsGroup) {
+func (handler *ExportGroupHandler) RespondExcel(c *echo.Context, group *entities.SeedsGroup) error {
+	r := c.Request()
+	w := c.Response()
 	buffer := new(bytes.Buffer)
 	err := handler.ExporterService.GroupToExcel(group, buffer)
 	if err != nil {
-		handler.Log.Error("ExportGroupHandler.ServeHTTP got error from exporter service", "error", err.Error(), utils.LogRequestInfo(r))
 		handler.ErrorHandler.InternalServerError(w, r)
-		return
+		return fmt.Errorf("ExportGroupHandler.ServeHTTP got error from exporter service; %w", err)
 	}
 
 	header := w.Header()
@@ -84,16 +83,17 @@ func (handler *ExportGroupHandler) RespondExcel(w http.ResponseWriter, r *http.R
 	header.Set("Content-Disposition", `attachment; filename="`+filename+`"`)
 	w.WriteHeader(http.StatusOK)
 	_, _ = buffer.WriteTo(w)
-	handler.Log.Info("ExportGroupHandler.ServeHTTP sucessfully responded", utils.LogRequestInfo(r))
+	return nil
 }
 
-func (handler *ExportGroupHandler) RespondCsv(w http.ResponseWriter, r *http.Request, group *entities.SeedsGroup) {
+func (handler *ExportGroupHandler) RespondCsv(c *echo.Context, group *entities.SeedsGroup) error {
+	r := c.Request()
+	w := c.Response()
 	buffer := new(bytes.Buffer)
 	err := handler.ExporterService.GroupToCsv(group, buffer)
 	if err != nil {
-		handler.Log.Error("ExportGroupHandler.ServeHTTP got error from exporter service", "error", err.Error(), utils.LogRequestInfo(r))
 		handler.ErrorHandler.InternalServerError(w, r)
-		return
+		return fmt.Errorf("ExportGroupHandler.ServeHTTP got error from exporter service; %w", err)
 	}
 
 	header := w.Header()
@@ -103,5 +103,5 @@ func (handler *ExportGroupHandler) RespondCsv(w http.ResponseWriter, r *http.Req
 	header.Set("Content-Disposition", `attachment; filename="`+filename+`"`)
 	w.WriteHeader(http.StatusOK)
 	_, _ = buffer.WriteTo(w)
-	handler.Log.Info("ExportGroupHandler.ServeHTTP sucessfully responded", utils.LogRequestInfo(r))
+	return nil
 }

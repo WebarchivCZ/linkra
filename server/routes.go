@@ -9,7 +9,7 @@ import (
 
 func RegisterRoutes(router *echo.Echo, handlers *handlers.Handlers) {
 	router.GET("/", IntoFunc(handlers.IndexHandler))
-	router.GET("/seeds/export/:format/:id", partialWrapHandler(handlers.ExportGroupHandler))
+	router.GET("/seeds/export/:format/:id", IntoFunc(handlers.ExportGroupHandler))
 	router.GET("/citace", IntoFunc(handlers.GeneratorHandler))
 	router.GET("/citace/:id", IntoFunc(handlers.GeneratorHandler))
 	router.GET("/seeds/:id", IntoFunc(handlers.GroupHandler))
