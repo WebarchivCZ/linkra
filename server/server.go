@@ -15,7 +15,14 @@ import (
 
 func NewServer(ctx context.Context, log *slog.Logger, addr string, services *services.Services, e *echo.Echo) *http.Server {
 	handlers := handlers.NewHandlers(log, services, staticFiles /* from embed.go */)
+
+	// Pre router middleware
 	e.Pre(middleware.RemoveTrailingSlash())
+
+	// Root level middleware
+	e.Use(middleware.RequestLogger())
+	e.Use(middleware.Recover())
+
 	RegisterRoutes(e, handlers)
 
 	server := &http.Server{
