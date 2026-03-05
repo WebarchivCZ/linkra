@@ -16,7 +16,7 @@ func RegisterRoutes(router *echo.Echo, handlers *handlers.Handlers) {
 	router.GET("/wa/:id", IntoFunc(handlers.RedirectHandler))
 	router.POST("/seeds/save", echo.WrapHandler(handlers.SaveGroupHandler))
 	router.GET("/seed/:id", IntoFunc(handlers.SeedHandler))
-	router.GET("/static/*", echo.WrapHandler(handlers.StaticHandler))
+	router.GET("/static/*", IntoFunc(handlers.StaticHandler))
 }
 
 // Mixed handler to speed up migration to echo
