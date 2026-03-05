@@ -1,24 +1,25 @@
-package generator
+package handlers
 
 import (
 	"linkra/assert"
 	"linkra/entities"
 	"linkra/server/components"
-	"linkra/server/handlers/httperror"
 	"linkra/services"
 	"linkra/utils"
 	"log/slog"
 	"net/http"
+
+	"github.com/labstack/echo/v5"
 )
 
 // The handler for citation generator page
 type GeneratorHandler struct {
 	Log          *slog.Logger
 	SeedService  *services.SeedService
-	ErrorHandler *httperror.ErrorHandler
+	ErrorHandler *ErrorHandler
 }
 
-func NewGeneratorHandler(log *slog.Logger, seedService *services.SeedService, errorHandler *httperror.ErrorHandler) *GeneratorHandler {
+func NewGeneratorHandler(log *slog.Logger, seedService *services.SeedService, errorHandler *ErrorHandler) *GeneratorHandler {
 	assert.Must(log != nil, "NewGeneratorHandler: log can't be nil")
 	assert.Must(seedService != nil, "NewGeneratorHandler: seedService can't be nil")
 	assert.Must(errorHandler != nil, "NewGeneratorHandler: errorHandler can't be nil")
@@ -29,10 +30,10 @@ func NewGeneratorHandler(log *slog.Logger, seedService *services.SeedService, er
 	}
 }
 
-func (handler *GeneratorHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (handler *GeneratorHandler) ServeHTTP(w http.ResponseWriter, r *http.Request, c *echo.Context) {
 	var group *entities.SeedsGroup
 	var err error
-	id := r.PathValue("id")
+	id := c.Param("id")
 	// If path value id is undefined then group will remain nil. That is expected.
 	if id != "" {
 		group, err = handler.SeedService.GetGroup(id)
@@ -52,9 +53,4 @@ func (handler *GeneratorHandler) ServeHTTP(w http.ResponseWriter, r *http.Reques
 
 func (handler *GeneratorHandler) View(w http.ResponseWriter, r *http.Request, data *components.GeneratorViewData) error {
 	return components.GeneratorView(data).Render(r.Context(), w)
-}
-
-func (handler *GeneratorHandler) Routes(mux *http.ServeMux) {
-	mux.Handle("GET /citace/", handler)
-	mux.Handle("GET /citace/{id}", handler)
 }

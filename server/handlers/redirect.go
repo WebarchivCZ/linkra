@@ -1,15 +1,16 @@
-package redirect
+package handlers
 
 import (
 	"errors"
 	"linkra/assert"
 	"linkra/server/components"
-	"linkra/server/handlers/httperror"
+
 	"linkra/services"
 	"linkra/utils"
 	"log/slog"
 	"net/http"
 
+	"github.com/labstack/echo/v5"
 	"gorm.io/gorm"
 )
 
@@ -17,10 +18,10 @@ import (
 type RedirectHandler struct {
 	Log          *slog.Logger
 	SeedService  *services.SeedService
-	ErrorHandler *httperror.ErrorHandler
+	ErrorHandler *ErrorHandler
 }
 
-func NewRedirectHandler(log *slog.Logger, seedService *services.SeedService, errorHandler *httperror.ErrorHandler) *RedirectHandler {
+func NewRedirectHandler(log *slog.Logger, seedService *services.SeedService, errorHandler *ErrorHandler) *RedirectHandler {
 	assert.Must(log != nil, "NewRedirectHandler: log can't be nil")
 	assert.Must(seedService != nil, "NewRedirectHandler: seedService can't be nil")
 	assert.Must(errorHandler != nil, "NewRedirectHandler: errorHandler can't be nil")
@@ -31,8 +32,8 @@ func NewRedirectHandler(log *slog.Logger, seedService *services.SeedService, err
 	}
 }
 
-func (handler *RedirectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	seedId := r.PathValue("id")
+func (handler *RedirectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request, c *echo.Context) {
+	seedId := c.Param("id")
 	seed, err := handler.SeedService.GetSeed(seedId)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		handler.Log.Warn("RedirectHandler.ServeHTTP seed not found", "error", err.Error(), utils.LogRequestInfo(r))
@@ -59,10 +60,6 @@ func (handler *RedirectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request
 	}
 
 	http.Redirect(w, r, seed.ArchivalURL, http.StatusMovedPermanently)
-}
-
-func (handler *RedirectHandler) Routes(mux *http.ServeMux) {
-	mux.Handle("GET /wa/{id}", handler)
 }
 
 func (handler *RedirectHandler) ViewError(w http.ResponseWriter, r *http.Request, data *components.RedirectErrorViewData) error {

@@ -1,9 +1,8 @@
-package group
+package handlers
 
 import (
 	"errors"
 	"linkra/assert"
-	"linkra/server/handlers/httperror"
 	"linkra/services"
 	"linkra/utils"
 	"log/slog"
@@ -14,7 +13,7 @@ func NewSaveGroupHandler(
 	log *slog.Logger,
 	seedService *services.SeedService,
 	captureService *services.CaptureService,
-	errorHandler *httperror.ErrorHandler,
+	errorHandler *ErrorHandler,
 ) *SaveGroupHandler {
 	assert.Must(log != nil, "NewSaveGroupHandler: log can't be nil")
 	assert.Must(seedService != nil, "NewSaveGroupHandler: seedService can't be nil")
@@ -32,7 +31,7 @@ type SaveGroupHandler struct {
 	Log            *slog.Logger
 	SeedService    *services.SeedService
 	CaptureService *services.CaptureService
-	ErrorHandler   *httperror.ErrorHandler
+	ErrorHandler   *ErrorHandler
 }
 
 func (handler *SaveGroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {

@@ -1,5 +1,6 @@
 package handlers
 
+/**
 import (
 	"linkra/assert"
 	"net/http"
@@ -39,3 +40,4 @@ type Handler interface {
 	// This should result in a tree of handlers. Names of the routes should reflect this.
 	Routes(*http.ServeMux)
 }
+**/

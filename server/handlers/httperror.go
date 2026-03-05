@@ -1,4 +1,4 @@
-package httperror
+package handlers
 
 import (
 	"linkra/assert"

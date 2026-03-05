@@ -1,15 +1,15 @@
-package group
+package handlers
 
 import (
 	"errors"
 	"linkra/assert"
 	"linkra/server/components"
-	"linkra/server/handlers/httperror"
 	"linkra/services"
 	"linkra/utils"
 	"log/slog"
 	"net/http"
 
+	"github.com/labstack/echo/v5"
 	"gorm.io/gorm"
 )
 
@@ -18,36 +18,26 @@ type GroupHandler struct {
 	Log            *slog.Logger
 	SeedService    *services.SeedService
 	CaptureService *services.CaptureService
-	ErrorHandler   *httperror.ErrorHandler
-
-	// Subhandlers
-	SaveGroupHandler   *SaveGroupHandler
-	ExportGroupHandler *ExportGroupHandler
+	ErrorHandler   *ErrorHandler
 }
 
 func NewGroupHandler(
 	log *slog.Logger,
 	seedService *services.SeedService,
-	exporterService *services.ExporterService,
-	captureService *services.CaptureService,
-	errorHandler *httperror.ErrorHandler,
+	errorHandler *ErrorHandler,
 ) *GroupHandler {
 	assert.Must(log != nil, "NewGroupHandler: log can't be nil")
 	assert.Must(seedService != nil, "NewGroupHandler: seedService can't be nil")
-	assert.Must(exporterService != nil, "NewGroupHandler: exporterService can't be nil")
-	assert.Must(captureService != nil, "NewGroupHandler: captureService can't be nil")
 	assert.Must(errorHandler != nil, "NewGroupHandler: errorHandler can't be nil")
 	return &GroupHandler{
-		Log:                log,
-		SeedService:        seedService,
-		ErrorHandler:       errorHandler,
-		SaveGroupHandler:   NewSaveGroupHandler(log, seedService, captureService, errorHandler),
-		ExportGroupHandler: NewExportGroupHandler(log, seedService, exporterService, errorHandler),
+		Log:          log,
+		SeedService:  seedService,
+		ErrorHandler: errorHandler,
 	}
 }
 
-func (handler *GroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	requestedID := r.PathValue("id")
+func (handler *GroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Request, c *echo.Context) {
+	requestedID := c.Param("id")
 	group, err := handler.SeedService.GetGroup(requestedID)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		handler.Log.Warn("GroupHandler.ServeHTTP group not found", "error", err.Error(), utils.LogRequestInfo(r))
@@ -70,10 +60,4 @@ func (handler *GroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (handler *GroupHandler) View(w http.ResponseWriter, r *http.Request, data *components.GroupViewData) error {
 	return components.GroupView(data).Render(r.Context(), w)
-}
-
-func (handler *GroupHandler) Routes(mux *http.ServeMux) {
-	mux.Handle("GET /seeds/{id}", handler)
-	mux.Handle("POST /seeds/save/", handler.SaveGroupHandler)
-	mux.Handle("GET /seeds/export/{format}/{id}", handler.ExportGroupHandler)
 }

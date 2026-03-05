@@ -1,16 +1,16 @@
-package group
+package handlers
 
 import (
 	"bytes"
 	"linkra/assert"
 	"linkra/entities"
 	"linkra/server/components"
-	"linkra/server/handlers/httperror"
 	"linkra/services"
 	"linkra/utils"
 	"log/slog"
 	"net/http"
 
+	"github.com/labstack/echo/v5"
 	"gorm.io/gorm"
 )
 
@@ -18,14 +18,14 @@ type ExportGroupHandler struct {
 	Log             *slog.Logger
 	SeedService     *services.SeedService
 	ExporterService *services.ExporterService
-	ErrorHandler    *httperror.ErrorHandler
+	ErrorHandler    *ErrorHandler
 }
 
 func NewExportGroupHandler(
 	log *slog.Logger,
 	seedService *services.SeedService,
 	exporterService *services.ExporterService,
-	errorHandler *httperror.ErrorHandler,
+	errorHandler *ErrorHandler,
 ) *ExportGroupHandler {
 	assert.Must(log != nil, "NewExportGroupHandler: log can't be nil")
 	assert.Must(seedService != nil, "NewExportGroupHandler: seedService can't be nil")
@@ -39,8 +39,8 @@ func NewExportGroupHandler(
 	}
 }
 
-func (handler *ExportGroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	groupId := r.PathValue("id")
+func (handler *ExportGroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Request, c *echo.Context) {
+	groupId := c.Param("id")
 
 	group, err := handler.SeedService.GetGroup(groupId)
 	// TODO: Create common error for services to comunicate that record does not exist so we don't have to break the layer model all the time
@@ -55,7 +55,7 @@ func (handler *ExportGroupHandler) ServeHTTP(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	format := r.PathValue("format")
+	format := c.Param("format")
 	switch format {
 	case "excel":
 		handler.RespondExcel(w, r, group)

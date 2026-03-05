@@ -1,4 +1,4 @@
-package static
+package handlers
 
 import (
 	"io/fs"
@@ -27,8 +27,4 @@ func NewStaticHandler(log *slog.Logger, fs fs.FS) *StaticHandler {
 func (handler *StaticHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	handler.FileServer.ServeHTTP(w, r)
 	slog.Info("StaticHandler responded", utils.LogRequestInfo(r))
-}
-
-func (handler *StaticHandler) Routes(mux *http.ServeMux) {
-	mux.Handle("GET /static/", handler)
 }

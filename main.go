@@ -18,13 +18,17 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/labstack/echo/v5"
 	"github.com/valkey-io/valkey-go"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
 func main() {
-	log := slog.New(slog.Default().Handler())
+	e := echo.New()
+
+	// Use echo logger
+	log := e.Logger
 
 	const defaultDBPath = "storage.db"
 	sqlitePath, ok := os.LookupEnv("DB_PATH")
@@ -111,6 +115,7 @@ func main() {
 		log,
 		serverAddress,
 		initiatedServices,
+		e,
 	)
 
 	// Start the server in new goroutine

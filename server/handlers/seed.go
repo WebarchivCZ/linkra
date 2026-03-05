@@ -1,25 +1,25 @@
-package seed
+package handlers
 
 import (
 	"errors"
 	"linkra/assert"
 	"linkra/server/components"
-	"linkra/server/handlers/httperror"
 	"linkra/services"
 	"linkra/utils"
 	"log/slog"
 	"net/http"
 
+	"github.com/labstack/echo/v5"
 	"gorm.io/gorm"
 )
 
 type SeedHandler struct {
 	Log          *slog.Logger
 	SeedService  *services.SeedService
-	ErrorHandler *httperror.ErrorHandler
+	ErrorHandler *ErrorHandler
 }
 
-func NewSeedHandler(log *slog.Logger, seedService *services.SeedService, errorHandler *httperror.ErrorHandler) *SeedHandler {
+func NewSeedHandler(log *slog.Logger, seedService *services.SeedService, errorHandler *ErrorHandler) *SeedHandler {
 	assert.Must(log != nil, "NewSeedHandler: log can't be nil")
 	assert.Must(seedService != nil, "NewSeedHandler: seedService can't be nil")
 	assert.Must(errorHandler != nil, "NewSeedHandler: errorHandler can't be nil")
@@ -30,8 +30,8 @@ func NewSeedHandler(log *slog.Logger, seedService *services.SeedService, errorHa
 	}
 }
 
-func (handler *SeedHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	requestedID := r.PathValue("id")
+func (handler *SeedHandler) ServeHTTP(w http.ResponseWriter, r *http.Request, c *echo.Context) {
+	requestedID := c.Param("id")
 	seed, err := handler.SeedService.GetSeed(requestedID)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		handler.Log.Warn("SeedHandler.ServeHTTP seed not found", "error", err.Error(), utils.LogRequestInfo(r))
@@ -54,8 +54,4 @@ func (handler *SeedHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (handler *SeedHandler) View(w http.ResponseWriter, r *http.Request, data *components.SeedViewData) error {
 	return components.SeedView(data).Render(r.Context(), w)
-}
-
-func (handler *SeedHandler) Routes(mux *http.ServeMux) {
-	mux.Handle("GET /seed/{id}", handler)
 }
