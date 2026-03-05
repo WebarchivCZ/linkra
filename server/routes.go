@@ -8,7 +8,7 @@ import (
 )
 
 func RegisterRoutes(router *echo.Echo, handlers *handlers.Handlers) {
-	router.GET("/", echo.WrapHandler(handlers.IndexHandler))
+	router.GET("/", IntoFunc(handlers.IndexHandler))
 	router.GET("/seeds/export/:format/:id", partialWrapHandler(handlers.ExportGroupHandler))
 	router.GET("/citace", partialWrapHandler(handlers.GeneratorHandler))
 	router.GET("/citace/:id", partialWrapHandler(handlers.GeneratorHandler))
@@ -29,5 +29,15 @@ func partialWrapHandler(h mixedHandler) echo.HandlerFunc {
 	return func(c *echo.Context) error {
 		h.ServeHTTP(c.Response(), c.Request(), c)
 		return nil
+	}
+}
+
+type EchoHandler interface {
+	ServeHTTP(*echo.Context) error
+}
+
+func IntoFunc(h EchoHandler) echo.HandlerFunc {
+	return func(c *echo.Context) error {
+		return h.ServeHTTP(c)
 	}
 }

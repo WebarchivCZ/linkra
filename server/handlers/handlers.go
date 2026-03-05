@@ -20,7 +20,7 @@ type Handlers struct {
 
 func NewHandlers(log *slog.Logger, services *services.Services, staticFs fs.FS) *Handlers {
 	errorHandler := NewErrorHandler(log)
-	indexHandler := NewIndexHandler(log, errorHandler)
+	indexHandler := NewIndexHandler()
 	seedHandler := NewSeedHandler(log, services.SeedService, errorHandler)
 	redirectHandler := NewRedirectHandler(log, services.SeedService, errorHandler)
 	generatorHandler := NewGeneratorHandler(log, services.SeedService, errorHandler)

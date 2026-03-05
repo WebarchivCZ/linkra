@@ -1,36 +1,25 @@
 package handlers
 
 import (
-	"linkra/assert"
 	"linkra/server/components"
 
 	"linkra/utils"
-	"log/slog"
 	"net/http"
+
+	"github.com/labstack/echo/v5"
 )
 
 // Main handler for routes "/" and "/index.html"
-type IndexHandler struct {
-	Log          *slog.Logger
-	ErrorHandler *ErrorHandler
+type IndexHandler struct{}
+
+func NewIndexHandler() *IndexHandler {
+	return &IndexHandler{}
 }
 
-func NewIndexHandler(log *slog.Logger, errorHandler *ErrorHandler) *IndexHandler {
-	assert.Must(log != nil, "NewIndexHandler: log can't be nil")
-	assert.Must(errorHandler != nil, "NewIndexHandler: errorHandler can't be nil")
-	return &IndexHandler{
-		Log:          log,
-		ErrorHandler: errorHandler,
-	}
-}
-
-func (handler *IndexHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	err := handler.View(w, r)
-	if err != nil {
-		handler.Log.Error("IndexHandler.ServeHTTP failed to render view", "error", err.Error(), utils.LogRequestInfo(r))
-		return
-	}
-	handler.Log.Info("IndexHandler sucessfully responded", utils.LogRequestInfo(r))
+func (handler *IndexHandler) ServeHTTP(c *echo.Context) error {
+	r := c.Request()
+	w := c.Response()
+	return handler.View(w, r)
 }
 
 func (handler *IndexHandler) View(w http.ResponseWriter, r *http.Request) error {
