@@ -2,12 +2,11 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 	"linkra/assert"
 	"linkra/server/components"
 
 	"linkra/services"
-	"linkra/utils"
-	"log/slog"
 	"net/http"
 
 	"github.com/labstack/echo/v5"
@@ -16,50 +15,47 @@ import (
 
 // This handler redirects shortened archival URLs to wayback
 type RedirectHandler struct {
-	Log          *slog.Logger
 	SeedService  *services.SeedService
 	ErrorHandler *ErrorHandler
 }
 
-func NewRedirectHandler(log *slog.Logger, seedService *services.SeedService, errorHandler *ErrorHandler) *RedirectHandler {
-	assert.Must(log != nil, "NewRedirectHandler: log can't be nil")
+func NewRedirectHandler(seedService *services.SeedService, errorHandler *ErrorHandler) *RedirectHandler {
 	assert.Must(seedService != nil, "NewRedirectHandler: seedService can't be nil")
 	assert.Must(errorHandler != nil, "NewRedirectHandler: errorHandler can't be nil")
 	return &RedirectHandler{
-		Log:          log,
 		SeedService:  seedService,
 		ErrorHandler: errorHandler,
 	}
 }
 
-func (handler *RedirectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request, c *echo.Context) {
+func (handler *RedirectHandler) ServeHTTP(c *echo.Context) error {
+	r := c.Request()
+	w := c.Response()
 	seedId := c.Param("id")
 	seed, err := handler.SeedService.GetSeed(seedId)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		handler.Log.Warn("RedirectHandler.ServeHTTP seed not found", "error", err.Error(), utils.LogRequestInfo(r))
 		handler.ErrorHandler.PageNotFound(w, r) // Less scary and more informative than 500
-		return
+		return fmt.Errorf("RedirectHandler.ServeHTTP seed not found; %w", err)
 	}
 	if err != nil {
-		handler.Log.Error("RedirectHandler.ServeHTTP failed to get Seed data from SeedService", "error", err.Error(), utils.LogRequestInfo(r))
 		handler.ErrorHandler.InternalServerError(w, r)
-		return
+		return fmt.Errorf("RedirectHandler.ServeHTTP failed to get Seed data from SeedService; %w", err)
 	}
 
 	if seed.ArchivalURL == "" {
-		handler.Log.Warn("RedirectHandler.ServeHTTP seed is not harvested or archival URL is missing", "seed", seed.ShadowID, utils.LogRequestInfo(r))
+		c.Logger().Warn("RedirectHandler.ServeHTTP seed is not harvested or archival URL is missing", "seed", seed.ShadowID)
 
 		data := components.NewRedirectErrorViewData(seed)
 		err = handler.ViewError(w, r, data)
 		if err != nil {
-			handler.Log.Error("RedirectHandler.ServeHTTP failed to render error page", "error", err.Error(), utils.LogRequestInfo(r))
-			return // Keep this return to prevent mistakes in future
+			return fmt.Errorf("RedirectHandler.ServeHTTP failed to render error page; %w", err)
 		}
 
-		return
+		return nil // We did early serve, don't continue.
 	}
 
 	http.Redirect(w, r, seed.ArchivalURL, http.StatusMovedPermanently)
+	return nil
 }
 
 func (handler *RedirectHandler) ViewError(w http.ResponseWriter, r *http.Request, data *components.RedirectErrorViewData) error {
