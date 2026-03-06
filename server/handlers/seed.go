@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 	"linkra/assert"
 	"linkra/server/components"
 	"linkra/services"
@@ -31,20 +32,17 @@ func (handler *SeedHandler) ServeHTTP(c *echo.Context) error {
 	requestedID := c.Param("id")
 	seed, err := handler.SeedService.GetSeed(requestedID)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		//handler.Log.Warn("SeedHandler.ServeHTTP seed not found", "error", err.Error(), utils.LogRequestInfo(r))
 		handler.ErrorHandler.PageNotFound(w, r) // Less scary and more informative than 500
-		return err
+		return fmt.Errorf("SeedHandler.ServeHTTP seed not found; %w", err)
 	}
 	if err != nil {
-		//handler.Log.Error("SeedHandler.ServeHTTP failed to get Seed data from SeedService", "error", err.Error(), utils.LogRequestInfo(r))
 		handler.ErrorHandler.InternalServerError(w, r)
-		return err
+		return fmt.Errorf("SeedHandler.ServeHTTP failed to get Seed data from SeedService; %w", err)
 	}
 	data := components.NewSeedViewData(seed, "Linkra - Detail "+seed.URL)
 	err = handler.View(w, r, data)
 	if err != nil {
-		//handler.Log.Error("SeedHandler.ServeHTTP failed to render view", "error", err.Error(), utils.LogRequestInfo(r))
-		return err
+		return fmt.Errorf("SeedHandler.ServeHTTP failed to render view; %w", err)
 	}
 	return nil
 }
