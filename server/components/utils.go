@@ -1,9 +1,13 @@
 package components
 
 import (
+	"context"
 	"encoding/json"
 	"linkra/entities"
+	"linkra/server/middleware"
 	"path"
+
+	"golang.org/x/text/language"
 )
 
 func CsvFilename(group *entities.SeedsGroup) string {
@@ -90,4 +94,32 @@ func isCaptureCompleted(group *entities.SeedsGroup) bool {
 		}
 	}
 	return true
+}
+
+// Get language setting from context and return it.
+// Will return default value from Language middleware (probably en-US) if no value is set.
+func getLang(ctx context.Context) language.Tag {
+	defaultLang := middleware.DefaultLanguageTag
+
+	anyLang := ctx.Value(middleware.LanguageKey)
+	if anyLang == nil {
+		return defaultLang
+	}
+
+	lang, ok := anyLang.(language.Tag)
+	if !ok {
+		return defaultLang
+	}
+
+	return lang
+}
+
+// Helper to make translating short strings easier.
+// If lang is language.Czech use czech version otherwise use default_. Default should be english.
+func transCs(lang language.Tag, czech, default_ string) string {
+	if lang == language.Czech {
+		return czech
+	} else {
+		return default_
+	}
 }

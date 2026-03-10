@@ -12,11 +12,13 @@ type LanguageKeyType int
 // The key used to store and obtain the language value from context.Context.
 const LanguageKey = 0
 
+var DefaultLanguageTag = language.AmericanEnglish
+
 // Middleware that extracts user language preferences from requests and stores
 // it in requests context.Context (Instead of echos context. This allows us to pass the context to templ components).
 func Language() echo.MiddlewareFunc {
 	matcher := language.NewMatcher([]language.Tag{
-		language.English,
+		DefaultLanguageTag,
 		language.Czech,
 	})
 

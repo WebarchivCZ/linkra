@@ -3,10 +3,11 @@ package components
 import "path"
 
 templ indexView() {
+	{{ lang := getLang(ctx) }}
 	<div class="flex-content-column">
 		<!-- Vyhledávací / zadávací pole -->
 		<section>
-			<h2>Archivace webových zdrojů</h2>
+			<h2>{ transCs(lang, "Archivace webových zdrojů", "Archiving web resources") }</h2>
 			<form action={ path.Join(Constants().GetGroupPath(), "/save") + "/" } method="post" enctype="multipart/form-data">
 				<div class="margin-b-05"> // don't remove this div. css is garbage and just ignores margin and padding if you don't know the correct incantation
 					<label for="url-list">zadejte jednu nebo více URL adres</label>
