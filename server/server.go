@@ -3,6 +3,7 @@ package server
 import (
 	"context"
 	"linkra/server/handlers"
+	customMiddleware "linkra/server/middleware"
 	"linkra/services"
 	"log/slog"
 	"net"
@@ -22,6 +23,7 @@ func NewServer(ctx context.Context, log *slog.Logger, addr string, services *ser
 	// Root level middleware
 	e.Use(middleware.RequestLogger())
 	e.Use(middleware.Recover())
+	e.Use(customMiddleware.Language())
 
 	// Set error handler
 	e.HTTPErrorHandler = handlers.NewEchoErrorHandler(_handlers.ErrorHandler)

@@ -7,6 +7,7 @@ require (
 	github.com/labstack/echo/v5 v5.0.4
 	github.com/valkey-io/valkey-go v1.0.69
 	github.com/xuri/excelize/v2 v2.10.0
+	golang.org/x/text v0.33.0
 	gorm.io/driver/sqlite v1.6.0
 	gorm.io/gorm v1.31.1
 )
@@ -23,6 +24,5 @@ require (
 	golang.org/x/crypto v0.47.0 // indirect
 	golang.org/x/net v0.49.0 // indirect
 	golang.org/x/sys v0.40.0 // indirect
-	golang.org/x/text v0.33.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
 )
