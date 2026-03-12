@@ -1,5 +1,7 @@
 package components
 
+import "golang.org/x/text/language"
+
 const (
 	defaultTitle = "Webarchiv - Linkra"
 	defaultHeading = "Webarchiv"
@@ -66,21 +68,32 @@ templ header(subHeading string) {
 }
 
 templ nav() {
+	{{ lang := getLang(ctx) }}
 <div class="flex-row nav">
-	<a href="/">Hlavní strana</a>
-	<a href="/citace/">Generátor citací</a>
+	<a href="/">{ transCs(lang, "Hlavní strana", "Main page") }</a>
+	<a href="/citace/">{ transCs(lang, "Generátor citací", "Citation generator") }</a>
 </div>
 }
 
 templ footer() {
+	{{ lang := getLang(ctx) }}
 <hr>
 <div class="flex-row footer">
-	<div>
-		<p>
-			<a href="https://www.webarchiv.cz">Webarchiv</a> je součástí<br>
-			<a href="https://www.nkp.cz">Národní knihovny ČR</a>
-		</p>
-	</div>
+	if lang == language.Czech {
+		<div>
+			<p>
+				<a href="https://www.webarchiv.cz/cs/">Webarchiv</a> je součástí<br>
+				<a href="https://www.nkp.cz">Národní knihovny ČR</a>
+			</p>
+		</div>
+	} else {
+		<div>
+			<p>
+				<a href="https://www.webarchiv.cz/en/">Webarchiv</a> is part of<br>
+				<a href="https://www.nkp.cz">National Library of the Czech Republic</a>
+			</p>
+		</div>
+	}
 	<!-- NK logo -->
 	<a class="logo-nk" href="https://www.nkp.cz">
 		<img src={ fullStaticPath("logo_NK.svg") } alt="Národní knihovna">
