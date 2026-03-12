@@ -49,6 +49,7 @@ func Language() echo.MiddlewareFunc {
 				cookieLang = ""
 				c.SetCookie(&http.Cookie{
 					Name:   "lang",
+					Path:   "/",
 					MaxAge: -1,
 				})
 			} else if queryLang != "" {
@@ -56,6 +57,7 @@ func Language() echo.MiddlewareFunc {
 				c.SetCookie(&http.Cookie{
 					Name:   "lang",
 					Value:  queryLang,
+					Path:   "/",
 					MaxAge: aproxYear,
 				})
 				// TODO: If the cookie feature becomes available to normal users, then the cookie should be resend with every response to reset max-age.
