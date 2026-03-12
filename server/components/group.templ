@@ -3,6 +3,7 @@ package components
 import (
 	"linkra/entities"
 	"path"
+	"golang.org/x/text/language"
 )
 
 type GroupViewData struct {
@@ -17,15 +18,16 @@ func NewGroupViewData(seedsGroup *entities.SeedsGroup) *GroupViewData {
 }
 
 templ groupView(data *GroupViewData) {
+	{{ lang := getLang(ctx) }}
 <div class="flex-content-column">
-	<h2>Stav archivace</h2>
+	<h2>{ transCs(lang ,"Stav archivace", "Capture state") }</h2>
 	<div class="flex-row">
-		<p>Odkaz na stav archivace: <a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a></p>
-		<button type="button" id="copy-group-link">Kopírovat odkaz</button>
+		<p>{ transCs(lang, "Odkaz na stav archivace: ", "Capture state link: ") }<a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a></p>
+		<button type="button" id="copy-group-link">{ transCs(lang, "Kopírovat odkaz", "Copy link") }</button>
 	</div>
 	<div>
 		<p>
-			Exportovat do:
+			{ transCs(lang, "Exportovat jako:", "Export as:") }
 			<a download={ ExcelFilename(data.Group) } href={ path.Join(Constants().GetGroupPath(), "/export/excel/", data.Group.ShadowID) }>Excel</a>
 			<a download={ CsvFilename(data.Group) } href={ path.Join(Constants().GetGroupPath(), "/export/csv/", data.Group.ShadowID) }>CSV</a>
 		</p>
@@ -34,8 +36,8 @@ templ groupView(data *GroupViewData) {
 		<thead>
 			<tr>
 				<th>URL</th>
-				<th>Zkrácená archivní URL</th>
-				<th>Stav*</th>
+				<th>{ transCs(lang, "Zkrácená archivní URL", "Shortened archival URL") }</th>
+				<th>{ transCs(lang, "Stav*", "State*") }</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -45,30 +47,35 @@ templ groupView(data *GroupViewData) {
 				<td><a href={ seed.URL } target="_blank">{ seed.URL }</a></td>
 				<td><a href={ shortWaybackLink(seed) }>{ shortWaybackLink(seed) }</a></td>
 				<td>{ prettyPrintCaptureState(seed.State) }</td>
-				<td><a href={ seedViewLink(seed) }>Detail</a></td>
+				<td><a href={ seedViewLink(seed) }>{ transCs(lang, "Detail", "Detail") }</a></td>
 			</tr>
 		}
 		</tbody>
 		<tfoot>
 			<tr>
-				<td><button type="button" id="copy-urls">Kopírovat adresy</button></td>
-				<td><button type="button" id="copy-ids">Kopírovat adresy</button></td>
+				<td><button type="button" id="copy-urls">{ transCs(lang, "Kopírovat adresy", "Copy addresses") }</button></td>
+				<td><button type="button" id="copy-ids">{ transCs(lang, "Kopírovat adresy", "Copy addresses") }</button></td>
 				<td></td>
 				<td></td>
 			</tr>
 		</tfoot>
 	</table>
-	<p>*<i>Pokud vidíte Úspěšně archivováno, znamená to, že link již můžete použít, ale v archivu se objeví až po indexaci.</i></p>
+	if lang == language.Czech {
+		<p>*<i>Pokud vidíte Úspěšně archivováno, znamená to, že link již můžete použít, ale v archivu se objeví až po indexaci.</i></p>
+	} else {
+		// TODO: Replace Úspěšně archivováno
+		<p>*<i>If you see Úspěšně archivováno, than the link can be copied and used, but the captured page will be available after indexing.</i></p>
+	}
 	if isCaptureCompleted(data.Group) {
-		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">Pokračovat na generátor citací</a>
-		<!-- If this script exists then we won't try to reload the page to fetch new data. Otherwise the page should automatically reload after a while. -->
+		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">{ transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator") }</a>
+		<!-- If this script exists, then we won't try to reload the page to fetch new data. Otherwise the page should automatically reload after a while. -->
 		<script type="application/json" id="capture-completed"></script>
 	} else {
-		<button disabled type="button">Pokračovat na generátor citací</button>
+		<button disabled type="button">{ transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator") }</button>
 		<p>
-			Odkaz na generátor citací se zpřístupní, až budou všechny zdroje archivované.
+			{ transCs(lang, "Odkaz na generátor citací se zpřístupní, až budou všechny zdroje archivované.", "The link will be made available when all sources are archived.") }
 			<br>
-			Na tuto stránku se vrátíte tímto odkazem: <a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a>.
+			{ transCs(lang, "Na tuto stránku se vrátíte tímto odkazem:", "You can return to this page with this link:") } <a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a>.
 		</p>
 	}
 </div>
