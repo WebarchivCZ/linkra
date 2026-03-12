@@ -9,6 +9,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import "path"
+import "golang.org/x/text/language"
 
 func indexView() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -39,7 +40,7 @@ func indexView() templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Archivace webových zdrojů", "Archiving web resources"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/index.templ`, Line: 10, Col: 80}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/index.templ`, Line: 11, Col: 80}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -52,15 +53,125 @@ func indexView() templ.Component {
 		var templ_7745c5c3_Var3 templ.SafeURL
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(path.Join(Constants().GetGroupPath(), "/save") + "/")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/index.templ`, Line: 11, Col: 70}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/index.templ`, Line: 12, Col: 70}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" method=\"post\" enctype=\"multipart/form-data\"><div class=\"margin-b-05\"><label for=\"url-list\">zadejte jednu nebo více URL adres</label></div><textarea name=\"url-list\" id=\"url-list\" placeholder=\"https://example.com\" required wrap=\"off\" class=\"margin-b-05\"></textarea> <button type=\"submit\">Odeslat</button></form><script>\n\t\t\t\t// Workaround for multiline placeholder\n\t\t\t\tconst textarea = document.querySelector(\"textarea\");\n\t\t\t\ttextarea.setAttribute(\"placeholder\", \"https://www.webarchiv.cz/cs/o-webarchivu\\nhttps://example.com/example\");\n\t\t\t</script></section><section><h2>O Aplikaci</h2><p>Aplikace Linkra umožňuje ukládání webových zdrojů do webového archivu a vytvoření jejich citačního záznamu, který zahrnuje archivní URL adresu. Je navržena k archivaci stránek/dokumentů, jako je například odborný článek (1 page/1 URL). Pro hlubší archivaci celého média (více URL na 1 zdroj) je možné navrhnout web k archivaci prostřednictvím formuláře do českého <a href=\"https://www.webarchiv.cz/cs/pridat-web\">Webarchivu</a>.</p><p>Více o specifikách a limitech archivace webu se dočtete <a href=\"https://www.webarchiv.cz/cs/faq\">zde</a>. Další informace, technická dokumentace a uživatelský manuál je k dispozici v repozitáři na <a href=\"https://github.com/WebarchivCZ/linkra\">GitHubu</a>.</p></section><section><p><i>Realizováno v rámci institucionálního výzkumu Národní knihovny České republiky financovaného Ministerstvem kultury ČR v rámci Dlouhodobého koncepčního rozvoje výzkumné organizace.</i></p></section></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" method=\"post\" enctype=\"multipart/form-data\"><div class=\"margin-b-05\"><label for=\"url-list\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "zadejte jednu nebo více URL adres", "enter one or more URL addresses"))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/index.templ`, Line: 14, Col: 115}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</label></div><textarea name=\"url-list\" id=\"url-list\" placeholder=\"https://example.com\" required wrap=\"off\" class=\"margin-b-05\"></textarea> <button type=\"submit\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Odeslat", "Send"))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/index.templ`, Line: 17, Col: 60}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</button></form><script>\n\t\t\t\t// Workaround for multiline placeholder\n\t\t\t\tconst textarea = document.querySelector(\"textarea\");\n\t\t\t\ttextarea.setAttribute(\"placeholder\", \"https://www.webarchiv.cz/cs/o-webarchivu\\nhttps://example.com/example\");\n\t\t\t</script></section>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = aboutSection(lang).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = dedicationSection(lang).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func aboutSection(lang language.Tag) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var6 == nil {
+			templ_7745c5c3_Var6 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		if lang == language.Czech {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<section><h2>O Aplikaci</h2><p>Aplikace Linkra umožňuje ukládání webových zdrojů do webového archivu a vytvoření jejich citačního záznamu, který zahrnuje archivní URL adresu. Je navržena k archivaci stránek/dokumentů, jako je například odborný článek (1 page/1 URL). Pro hlubší archivaci celého média (více URL na 1 zdroj) je možné navrhnout web k archivaci prostřednictvím formuláře do českého <a href=\"https://www.webarchiv.cz/cs/pridat-web\">Webarchivu</a>.</p><p>Více o specifikách a limitech archivace webu se dočtete <a href=\"https://www.webarchiv.cz/cs/faq\">zde</a>. Další informace, technická dokumentace a uživatelský manuál je k dispozici v repozitáři na <a href=\"https://github.com/WebarchivCZ/linkra\">GitHubu</a>.</p></section>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<section><h2>About</h2><p>The Linkra application allows users to save web resources to a web archive and create a citation record that includes the archive URL address.  It is designed to archive pages/documents such as professional articles (1 page/1 URL). For deeper archiving of entire media (multiple URLs per source), it is possible to submit a website for archiving via a form to the Czech <a href=\"https://www.webarchiv.cz/en/add\">Webarchive</a>.</p><p>You can read more about the specifics and limitations of web archiving <a href=\"https://www.webarchiv.cz/en/faq\">here</a>. Further information, technical documentation, and a user manual are available in <a href=\"https://github.com/WebarchivCZ/linkra\">GitHub</a>.</p></section>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		return nil
+	})
+}
+
+func dedicationSection(lang language.Tag) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var7 == nil {
+			templ_7745c5c3_Var7 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		if lang == language.Czech {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<section><p><i>Realizováno v rámci institucionálního výzkumu Národní knihovny České republiky financovaného Ministerstvem kultury ČR v rámci Dlouhodobého koncepčního rozvoje výzkumné organizace.</i></p></section>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<section><p><i>Implemented as part of institutional research by the National Library of the Czech Republic, funded by the Ministry of Culture of the Czech Republic as part of the Long-Term Conceptual Development of a Research Organization.</i></p></section>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 		}
 		return nil
 	})

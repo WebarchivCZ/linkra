@@ -1,6 +1,7 @@
 package components
 
 import "path"
+import "golang.org/x/text/language"
 
 templ indexView() {
 	{{ lang := getLang(ctx) }}
@@ -10,10 +11,10 @@ templ indexView() {
 			<h2>{ transCs(lang, "Archivace webových zdrojů", "Archiving web resources") }</h2>
 			<form action={ path.Join(Constants().GetGroupPath(), "/save") + "/" } method="post" enctype="multipart/form-data">
 				<div class="margin-b-05"> // don't remove this div. css is garbage and just ignores margin and padding if you don't know the correct incantation
-					<label for="url-list">zadejte jednu nebo více URL adres</label>
+					<label for="url-list">{ transCs(lang, "zadejte jednu nebo více URL adres", "enter one or more URL addresses") }</label>
 				</div>
 				<textarea name="url-list" id="url-list" placeholder="https://example.com" required wrap="off" class="margin-b-05"></textarea>
-				<button type="submit">Odeslat</button>
+				<button type="submit">{ transCs(lang, "Odeslat", "Send") }</button>
 			</form>
 			<script>
 				// Workaround for multiline placeholder
@@ -21,6 +22,13 @@ templ indexView() {
 				textarea.setAttribute("placeholder", "https://www.webarchiv.cz/cs/o-webarchivu\nhttps://example.com/example");
 			</script>
 		</section>
+		@aboutSection(lang)
+		@dedicationSection(lang)
+	</div>
+}
+
+templ aboutSection(lang language.Tag) {
+	if lang == language.Czech {
 		<section>
 			<h2>O Aplikaci</h2>
 			<p>
@@ -33,10 +41,34 @@ templ indexView() {
 				Další informace, technická dokumentace a uživatelský manuál je k dispozici v repozitáři na <a href="https://github.com/WebarchivCZ/linkra">GitHubu</a>.
 			</p>
 		</section>
+	} else {
+		<section>
+			<h2>About</h2>
+			<p>
+				The Linkra application allows users to save web resources to a web archive and create a citation record that includes the archive URL address. 
+				It is designed to archive pages/documents such as professional articles (1 page/1 URL).
+				For deeper archiving of entire media (multiple URLs per source), it is possible to submit a website for archiving via a form to the Czech <a href="https://www.webarchiv.cz/en/add">Webarchive</a>.
+			</p>
+			<p>
+				You can read more about the specifics and limitations of web archiving <a href="https://www.webarchiv.cz/en/faq">here</a>.
+				Further information, technical documentation, and a user manual are available in <a href="https://github.com/WebarchivCZ/linkra">GitHub</a>.
+			</p>
+		</section>
+	}
+}
+
+templ dedicationSection(lang language.Tag) {
+	if lang == language.Czech {
 		<section>
 			<p><i>
 				Realizováno v rámci institucionálního výzkumu Národní knihovny České republiky financovaného Ministerstvem kultury ČR v rámci Dlouhodobého koncepčního rozvoje výzkumné organizace.
 			</i></p>
 		</section>
-	</div>
+	} else {
+		<section>
+			<p><i>
+				Implemented as part of institutional research by the National Library of the Czech Republic, funded by the Ministry of Culture of the Czech Republic as part of the Long-Term Conceptual Development of a Research Organization.
+			</i></p>
+		</section>
+	}
 }
