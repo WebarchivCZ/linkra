@@ -1,6 +1,7 @@
 package components
 
 import "linkra/entities"
+import "golang.org/x/text/language"
 
 type GeneratorViewData struct {
 	Group *entities.SeedsGroup
@@ -14,46 +15,57 @@ func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
 }
 
 templ generatorView(data *GeneratorViewData) {
+	{{ lang := getLang(ctx) }}
 	<div class="flex-content-column">
-		<h2>Generátor citací</h2>
+		<h2>{ transCs(lang, "Generátor citací", "Citation generator") }</h2>
 	</div>
 	<!-- Output -->
 	if data.Group != nil {
 		<div class="flex-content-column">
-			<a class="return-to-group-link" href={ groupViewLink(data.Group) } target="_blank">Vrátit se na stav archivace</a>
+			<a class="return-to-group-link" href={ groupViewLink(data.Group) } target="_blank">
+				{ transCs(lang, "Vrátit se na stav archivace", "Back to capture state") }
+			</a>
 		</div>
 	}
 	<div id="output-div" class="flex-content-column citation">
-		<span><h4>Citace: </h4><p class="expl"></p></span>
-		<span class="output-box"><p id="citation"></p><button type="button" id="copy-citation">Kopírovat</button></span>
+		<span><h4>{ transCs(lang, "Citace: ", "Citation: ") }</h4><p class="expl"></p></span>
+		<span class="output-box"><p id="citation"></p><button type="button" id="copy-citation">{ transCs(lang, "Kopírovat", "Copy") }</button></span>
 		<!-- Template -->
-		<span><label for="template-select"><h4>Šablona: </h4></label><p class="expl"></p></span>
+		<span><label for="template-select"><h4>{ transCs(lang, "Šablona: ", "Template: ") }</h4></label><p class="expl"></p></span>
 		// This input is now hidden, but the script still relies on it's existence. Also it may be again used in the future.
 		<input hidden disabled type="text" id="template" value="Pokud vidíte tuto zprávu tak se nepovedlo spustit javascript potřebný pro funkcionalitu této stránky.">
 		<select id="template-select">
-			@templateOptions()
-			<option value="custom">Uživatelská - Upravte existující šablonu nebo vytvořte novou</option>
+			@templateOptions(lang)
+			<option value="custom">
+				{ transCs(lang, "Uživatelská - Upravte existující šablonu nebo vytvořte novou", "Custom - Change existing template or create a new one") }
+			</option>
 		</select>
 	</div>
 	<div class="flex-content-column">
 		<div class="margin-b-2">
-			<button type="button" id="export-citations-html">Exportovat citace do HTML (s formátováním)</button>
-			<button type="button" id="export-citations-text">Exportovat citace do TXT</button>
+			<button type="button" id="export-citations-html">
+				{ transCs(lang, "Exportovat citace do HTML (s formátováním)", "Export citations into HTML (with formatting)") }
+			</button>
+			<button type="button" id="export-citations-text">
+				{ transCs(lang, "Exportovat citace do TXT", "Export citations into TXT") }
+			</button>
 		</div>
 		
 		// <span class="inline-step"><i>A. Doplňte data a zobrazí se vám citace podle předpřipravené šablony</i></span>
-		<h2>Metadata citace</h2>
-		<p>Zde vyplňte metadata citace pro vaše webové zdroje.</p>
+		<h2>{ transCs(lang, "Metadata citace" , "Citation metadata") }</h2>
+		<p>
+			{ transCs(lang, "Zde vyplňte metadata citace pro vaše webové zdroje.", "Fill out citation metadata for your sources.") }
+		</p>
 		<section>
 			<form id="generator">
 				<!-- Controls -->
 				<div class="flex-row form-controls" id="form-controls">
-					<button type="button" id="prev">Předchozí citace</button>
-					<p><span id="cit-data-num"></span> citace z <span id="cit-data-count"></span></p>
-					<button type="button" id="next">Další citace</button>
+					<button type="button" id="prev">{ transCs(lang, "Předchozí citace", "Previous citation") }</button>
+					<p><span id="cit-data-num"></span>{ transCs(lang, " citace z ", " citation out of ") }<span id="cit-data-count"></span></p>
+					<button type="button" id="next">{ transCs(lang, "Další citace", "Next citation") }</button>
 				</div>
 				<span>
-					<button type="button" id="add-author">Přidat autora</button>
+					<button type="button" id="add-author">{ transCs(lang, "Přidat dalšího autora", "Add another author") }</button>
 				</span>
 				<!-- Data -->
 				<div id="authors">
@@ -73,39 +85,39 @@ templ generatorView(data *GeneratorViewData) {
 				</div>
 
 				<div class="flex-column flex-start data-form">
-					<label for="název">Název webového zdroje:</label>
+					<label for="název">{ transCs(lang, "Název webového zdroje:", "Name of web page:") }</label>
 					<input type="text" id="název" data-citationfield="název">
 
 					<label for="součást">Název zdroje / periodikum:</label>
 					<input type="text" id="součást" data-citationfield="součást">
 
-					<label for="místo-vydání">Místo vydání:</label>
+					<label for="místo-vydání">{ transCs(lang, "Místo vydání:", "Place of publication:") }</label>
 					<input type="text" id="místo-vydání" data-citationfield="místo-vydání">
 
-					<label for="datum-vydání">Datum vydání:</label>
+					<label for="datum-vydání">{ transCs(lang, "Datum vydání:", "Date of publication:") }</label>
 					<span class="flex-row max-flex">
-						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-vydání" data-citationfield="datum-vydání">
+						<input type="text" placeholder={ transCs(lang, "Vyberte nebo vyplňte hodnotu", "Fill or choose a value") } id="datum-vydání" data-citationfield="datum-vydání">
 						<input type="datetime-local" step="1" id="datum-vydání-datetime">
 					</span>
 
-					<label for="url">URL webového zdroje:</label>
+					<label for="url">{ transCs(lang, "URL webového zdroje:", "Web page URL:") }</label>
 					<input type="text" id="url" data-citationfield="url">
 
-					<label for="url">Webový archiv:</label>
+					<label for="url">{ transCs(lang, "Webový archiv:", "Webarchive:") }</label>
 					<input type="text" id="webarchiv" data-citationfield="webarchiv">
 
-					<label for="archivní-url">URL archivní kopie:</label>
+					<label for="archivní-url">{ transCs(lang, "URL archivní kopie:", "Archived page URL:") }</label>
 					<input type="text" id="archivní-url" data-citationfield="archivní-url">
 
-					<label for="datum-archivace">Datum archivace:</label>
+					<label for="datum-archivace">{ transCs(lang, "Datum archivace:", "Date of capture:") }</label>
 					<span class="flex-row max-flex">
-						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-archivace" data-citationfield="datum-archivace">
+						<input type="text" placeholder={ transCs(lang, "Vyberte nebo vyplňte hodnotu", "Fill or choose a value") } id="datum-archivace" data-citationfield="datum-archivace">
 						<input type="datetime-local" step="1" id="datum-archivace-datetime">
 					</span>
 
-					<label for="datum-citace">Datum citace:</label>
+					<label for="datum-citace">{ transCs(lang, "Datum citace:", "Citation date:") }</label>
 					<span class="flex-row max-flex">
-						<input type="text" placeholder="Vyberte nebo vyplňte hodnotu" id="datum-citace" data-citationfield="datum-citace">
+						<input type="text" placeholder={ transCs(lang, "Vyberte nebo vyplňte hodnotu", "Fill or choose a value") } id="datum-citace" data-citationfield="datum-citace">
 						<input type="datetime-local" step="1" id="datum-citace-datetime">
 					</span>
 					<script>
@@ -115,50 +127,55 @@ templ generatorView(data *GeneratorViewData) {
 					</script>
 				</div>
 			</form>
-			<i>Není nutné vyplnit všechna pole.</i>
+			<i>{ transCs(lang, "Není nutné vyplnit všechna pole.", "It is not necessary to fill all fields.") }</i>
 		</section>
 
 		<section id="builder-section" hidden>
-			// <span class="inline-step"><i>B. Upravte si šablonu podle potřeby. Upravte existující pole, nebo přidejte nová. Šablonu použijete tlačítkem níže.</i></span>
-			<h2>Šablona</h2>
-			// <p>Pro změnu struktury citace můžete použít předpřipravenou šablonu:</p>
-			// <p><button id="use-iso690">Použít ISO 690</button></p>
-			<p>Zde můžete vytvořit vlastní šablonu.</p>
+			<h2>{ transCs(lang, "Šablona", "Template") }</h2>
+			<p>{ transCs(lang, "Zde můžete vytvořit vlastní šablonu.", "This form allows you to create custom template.") }</p>
 			<p>
-				Můžete přidávat nové části, mazat existující nebo třeba jen upravovat předpřipravenou šablonu.
-				Pořadí jednotlivých částí je možné měnit přetažením myší.
-				Použití šablony je potřeba potvrdit tlačítkem <b>Použít vlastní šablonu</b>.
+				if lang == language.Czech {
+					Můžete přidávat nové části, mazat existující nebo třeba jen upravovat předpřipravenou šablonu.
+					Pořadí jednotlivých částí je možné měnit přetažením myší.
+					Použití šablony je potřeba potvrdit tlačítkem <b>Použít vlastní šablonu</b>.
+				} else {
+					You can add new parts, delete existing ones or edit default template.
+					The order of parts can be changed by dragging them with mouse.
+					To confirm that you want to use the template click the <b>Use custom template</b> button.
+				}
 			</p>
 			<form id="builder-controls" class="flex-row">
 				<div class="flex-row field-chooser">
 					<select id="field-type">
-						<option> -- Vyberte, jakou část šablony přidat do citace -- </option>
-						<option value="autoři">Autoři</option>
+						<option>
+							{ transCs(lang, " -- Vyberte, jakou část šablony přidat do citace -- ", " -- Select which part of the template should be added -- ") }
+						</option>
+						<option value="autoři">{ transCs(lang, "Autoři", "Authors:") }</option>
 						// <option value="příjmení">Příjmení</option>
 						// <option value="jméno">Jméno</option>
-						<option value="název">Název webového zdroje</option>
+						<option value="název">{ transCs(lang, "Název webového zdroje:", "Name of web page:") }</option>
 						<option value="součást">Název zdroje / periodikum</option>
-						<option value="místo-vydání">Místo vydání</option>
-						<option value="datum-vydání">Datum vydání</option>
-						<option value="url">URL webového zdroje</option>
-						<option value="webarchiv">Webový archiv</option>
-						<option value="archivní-url">URL archivní kopie</option>
-						<option value="datum-archivace">Datum archivace</option>
-						<option value="datum-citace">Datum citace</option>
+						<option value="místo-vydání">{ transCs(lang, "Místo vydání:", "Place of publication:") }</option>
+						<option value="datum-vydání">{ transCs(lang, "Datum vydání:", "Date of publication:") }</option>
+						<option value="url">{ transCs(lang, "URL webového zdroje:", "Web page URL:") }</option>
+						<option value="webarchiv">{ transCs(lang, "Webový archiv:", "Webarchive:") }</option>
+						<option value="archivní-url">{ transCs(lang, "URL archivní kopie:", "Archived page URL:") }</option>
+						<option value="datum-archivace">{ transCs(lang, "Datum archivace:", "Date of capture:") }</option>
+						<option value="datum-citace">{ transCs(lang, "Datum citace:", "Citation date:") }</option>
 						<option value="text">Text</option>
 					</select>
-					<button type="button" id="add-field">Přidat</button>
+					<button type="button" id="add-field">{ transCs(lang, "Přidat", "Add") }</button>
 				</div>
 				<select id="prepared-templates">
-					<option> -- Předpřipravené šablony -- </option>
-					@templateOptions()
+					<option>{ transCs(lang, " -- Předpřipravené šablony -- ", " -- Default templates -- ") }</option>
+					@templateOptions(lang)
 				</select>
-				<button type="button" id="remove-all-fields">Odebrat vše</button>
+				<button type="button" id="remove-all-fields">{ transCs(lang, "Odebrat vše", "Remove all") }</button>
 			</form>
 			<div id="builder">
-				<i id="builder-placeholder">Tady budou vidět přidaná pole</i>
+				<i id="builder-placeholder">{ transCs(lang, "Tady budou vidět přidaná pole", "Here will be visible added parts") }</i>
 			</div>
-				<button type="button" id="build-template" form="builder-controls">Použít vlastní šablonu</button>
+				<button type="button" id="build-template" form="builder-controls">{ transCs(lang, "Použít vlastní šablonu", "Use custom template") }</button>
 		</section>
 	</div>
 
@@ -182,7 +199,7 @@ templ generatorView(data *GeneratorViewData) {
 	<script src={ fullStaticPath("generator.js") }></script>
 }
 
-templ templateOptions() {
-	<option value="iso690">ČSN ISO 690</option>
+templ templateOptions(lang language.Tag) {
+	<option value="iso690">{ transCs(lang, "ČSN ISO 690", "ISO 690") }</option>
 	<option value="apa">APA</option>
 }
