@@ -4,11 +4,10 @@ import "golang.org/x/text/language"
 
 const (
 	defaultTitle = "Webarchiv - Linkra"
-	defaultHeading = "Webarchiv"
 )
 
 type PageComponents struct {
-	Title string
+	Title *Translations
 	Header templ.Component
 	Navigation templ.Component
 	Main templ.Component
@@ -16,11 +15,11 @@ type PageComponents struct {
 }
 
 func Assemble(components *PageComponents) templ.Component {
-	if components.Title == "" {
-		components.Title = defaultTitle
+	if components.Title == nil {
+		components.Title = &Translations{Czech: defaultTitle, English: defaultTitle}
 	}
 	if components.Header == nil {
-		components.Header = header(defaultHeading)
+		components.Header = header(nil)
 	}
 	if components.Navigation == nil {
 		components.Navigation = nav()
@@ -32,12 +31,13 @@ func Assemble(components *PageComponents) templ.Component {
 }
 
 templ page(components *PageComponents) {
+	{{ lang := getLang(ctx) }}
 <!DOCTYPE html>
-<html lang="en">
+<html lang={ lang.String() }>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{ components.Title }</title>
+	<title>{ components.Title.Get(lang) }</title>
 	<link rel="stylesheet" href={ fullStaticPath("style.css") }>
 </head>
 <body>
@@ -57,11 +57,12 @@ templ page(components *PageComponents) {
 </html>
 }
 
-templ header(subHeading string) {
+templ header(subHeading *Translations) {
+	{{ lang := getLang(ctx) }}
 <div class="header">
 	<h1 class="spaced-header"><a href="https://www.webarchiv.cz">Webarchiv</a> <span class="blue-text">4😀4</span> <span>Linkra</span></h1>
-	if subHeading != "" {
-		<p>{ subHeading }</p>
+	if subHeading != nil {
+		<p>{ subHeading.Get(lang) }</p>
 	}
 </div>
 <hr class="no-bottom-margin">

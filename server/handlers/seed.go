@@ -39,7 +39,10 @@ func (handler *SeedHandler) ServeHTTP(c *echo.Context) error {
 		handler.ErrorHandler.InternalServerError(w, r)
 		return fmt.Errorf("SeedHandler.ServeHTTP failed to get Seed data from SeedService; %w", err)
 	}
-	data := components.NewSeedViewData(seed, "Linkra - Detail "+seed.URL)
+	data := components.NewSeedViewData(seed, &components.Translations{
+		Czech:   "Linkra - Detail " + seed.URL,
+		English: "Linkra - Detail " + seed.URL,
+	})
 	err = handler.View(w, r, data)
 	if err != nil {
 		return fmt.Errorf("SeedHandler.ServeHTTP failed to render view; %w", err)

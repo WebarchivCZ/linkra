@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"linkra/assert"
+	"linkra/server/components"
 	"linkra/services"
 	"net/http"
 
@@ -41,7 +42,19 @@ func (handler *SaveGroupHandler) ServeHTTP(c *echo.Context) error {
 	group, err := handler.SeedService.Save(seedURL, true)
 	// TODO: Return different error pages/messages when different errors are received. This should help user understand what they did wrong.
 	if errors.Is(err, services.ErrEmptyList) {
-		handler.ErrorHandler.ServeError(w, r, "Prázdný požadavek", 400, "Prázdný požadavek", "Požadavek který jsme obdrželi obsahoval jen prázdné řádky. Prosím vraťte se na hlavní stránku a zadejte platnou URL adresu.")
+		title := &components.Translations{
+			Czech:   "400 - Prázdný požadavek",
+			English: "400 - Empty request",
+		}
+		desc := &components.Translations{
+			Czech:   "Prázdný požadavek",
+			English: "Empty request",
+		}
+		message := &components.Translations{
+			Czech:   "Požadavek který jsme obdrželi obsahoval jen prázdné řádky. Prosím vraťte se na hlavní stránku a zadejte platnou URL adresu.",
+			English: "Request we received contained only empty rows. Please return to the main page and enter a valid URL address.",
+		}
+		handler.ErrorHandler.ServeError(w, r, title, 400, desc, message)
 		return errors.New("SaveGroupHandler.ServeHTTP received empty seed list")
 	}
 	if err != nil {

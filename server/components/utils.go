@@ -115,11 +115,25 @@ func getLang(ctx context.Context) language.Tag {
 }
 
 // Helper to make translating short strings easier.
-// If lang is language.Czech use czech version otherwise use default_. Default should be english.
-func transCs(lang language.Tag, czech, default_ string) string {
+// If lang is language.Czech uses czech version otherwise uses english.
+func transCs(lang language.Tag, czech, english string) string {
 	if lang == language.Czech {
 		return czech
 	} else {
-		return default_
+		return english
+	}
+}
+
+// Hold strings in different languages for later translation.
+type Translations struct {
+	Czech   string
+	English string
+}
+
+func (t *Translations) Get(lang language.Tag) string {
+	if lang == language.Czech {
+		return t.Czech
+	} else {
+		return t.English
 	}
 }

@@ -1,13 +1,13 @@
 package components
 
 type ErrorViewData struct {
-	Title string
+	Title *Translations
 	Code string
-	Description string
-	ShortMessage string
+	Description *Translations
+	ShortMessage *Translations
 }
 
-func NewErrorViewData(title, code, description, shortMessage string) *ErrorViewData {
+func NewErrorViewData(title *Translations, code string, description, shortMessage *Translations) *ErrorViewData {
 	return &ErrorViewData{
 		Title: title,
 		Code: code,
@@ -17,8 +17,9 @@ func NewErrorViewData(title, code, description, shortMessage string) *ErrorViewD
 }
 
 templ errorView(data *ErrorViewData) {
+	{{ lang := getLang(ctx) }}
 	<div class="flex-content-column">
-		<h2>{ data.Code } { data.Description }</h2>
-		<p>{ data.ShortMessage }</p>
+		<h2>{ data.Code } { data.Description.Get(lang) }</h2>
+		<p>{ data.ShortMessage.Get(lang) }</p>
 	</div>
 }

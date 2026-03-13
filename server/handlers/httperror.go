@@ -49,20 +49,15 @@ func NewEchoErrorHandler(errorHandler *ErrorHandler) echo.HTTPErrorHandler {
 		} else if code == 500 {
 			cErr = errorHandler.InternalServerError(c.Response(), c.Request())
 		} else {
-			// TODO: Add special handling for more client errors (400, 401, 413, 414, etc.). Other server error are usually produced by proxy in situations where responding is not possible anyway.
-			desc := http.StatusText(code)
-			cErr = errorHandler.ServeError(
-				c.Response(),
-				c.Request(),
-				desc,
-				code,
-				desc,
-				"Try again later.",
-			)
+			// TODO: Add special handling for more client errors (400, 401, 413, 414, etc.). Other server errors are usually produced by proxy in situations where responding is not possible anyway.
+			cErr = errorHandler.ServeError(c.Response(), c.Request(), nil, code, nil, &components.Translations{
+				Czech:   "Zkuste to prosím později.",
+				English: "Please try again later.",
+			})
 		}
 
 		var uce *UnusualStatusCodeError
-		if errors.As(err, &uce) {
+		if errors.As(cErr, &uce) {
 			c.Logger().Warn("POTENTIAL BUG", "error", uce)
 		} else if cErr != nil {
 			c.Logger().Error("serving error page failed", "error", errors.Join(cErr, err))
@@ -85,33 +80,64 @@ func NewErrorHandler(log *slog.Logger) *ErrorHandler {
 
 // Serve 404 page.
 func (handler *ErrorHandler) PageNotFound(w http.ResponseWriter, r *http.Request) error {
-	title := "404 - Stránka nenalezena"
+	title := &components.Translations{
+		Czech:   "404 - Stránka nenalezena",
+		English: "404 - Page Not Found",
+	}
 	code := http.StatusNotFound
-	description := "Stránka nenalezena"
-	message := "Vámi hledaná adresa: '" + r.Host + r.URL.Path + "' neexistuje. " +
-		"Zkontrolujte zda je adresa správně zadaná a zkuste ji vyhledat znovu. " +
-		"Případně se vraťte na předchozí stranu."
+	description := &components.Translations{
+		Czech:   "Stránka nenalezena",
+		English: "Page Not Found",
+	}
+	message := &components.Translations{
+		Czech: "Vámi hledaná stránka: '" + r.Host + r.URL.Path + "' neexistuje. " +
+			"Zkontrolujte zda je adresa správně zadaná a zkuste ji vyhledat znovu. " +
+			"Případně se vraťte na předchozí stranu.",
+		English: "The page you are looking for: '" + r.Host + r.URL.Path + "' does not exist. " +
+			"Please check that you entered the correct address and try again. " +
+			"Otherwise return to previous page.",
+	}
 	return handler.ServeError(w, r, title, code, description, message)
 }
 
 // Serve 405 page.
 func (handler *ErrorHandler) MethodNotAllowed(w http.ResponseWriter, r *http.Request) error {
-	title := "405 - Metoda nepodporována"
+	title := &components.Translations{
+		Czech:   "405 - Metoda nepodporována",
+		English: "405 - Method Not Allowed",
+	}
 	code := http.StatusMethodNotAllowed
-	description := "Metoda nepodporována"
-	message := "HTTP metoda: '" + r.Method + "' není podporována pro tento endpoint." +
-		"Pokud vidíte tuto zprávu po odeslání formuláře, tak se může jednat o chybu aplikace." +
-		"Prosím kontaktujte provozovatele stránek a popište co se stalo."
+	description := &components.Translations{
+		Czech:   "Metoda nepodporována",
+		English: "Method Not Allowed",
+	}
+	message := &components.Translations{
+		Czech: "HTTP metoda: '" + r.Method + "' není podporována pro tento endpoint. " +
+			"Pokud vidíte tuto zprávu po odeslání formuláře, tak se může jednat o chybu aplikace. " +
+			"Prosím kontaktujte provozovatele stránek a popište co se stalo.",
+		English: "The HTTP method: '" + r.Method + "' is not supported for this endpoint. " +
+			"If you see this message after submitting a form then it may be error in the application. " +
+			"Please contact us and describe what happened.",
+	}
 	return handler.ServeError(w, r, title, code, description, message)
 }
 
 // Serve 500 page.
 func (handler *ErrorHandler) InternalServerError(w http.ResponseWriter, r *http.Request) error {
 	// This will likely have special handling in the future, so don't use ServeError and handle the request directly
-	title := "500 - Chyba"
+	title := &components.Translations{
+		Czech:   "500 - Chyba",
+		English: "500 - Error",
+	}
 	code := strconv.Itoa(http.StatusInternalServerError)
-	description := "Chyba na straně serveru"
-	message := "Omlouváme se, došlo k chybě a nebyli jsme schopni splnit váš požadavek. Zkuste to prosím později."
+	description := &components.Translations{
+		Czech:   "Chyba na straně serveru",
+		English: "Server error",
+	}
+	message := &components.Translations{
+		Czech:   "Omlouváme se, došlo k chybě a nebyli jsme schopni splnit váš požadavek. Zkuste to prosím později.",
+		English: "There was an error and we could't complete your request. Please try again later.",
+	}
 	data := components.NewErrorViewData(title, code, description, message)
 	err := handler.View(w, r, data)
 	if err != nil {
@@ -125,8 +151,13 @@ func (handler *ErrorHandler) InternalServerError(w http.ResponseWriter, r *http.
 // 'code' must be the http response code of the error.
 // 'description' should contain human readable description of the error (Like: Page Not Found).
 // 'message' short explanation of what happened and instructions on how to proceed (if possible) for user.
-func (handler *ErrorHandler) ServeError(w http.ResponseWriter, r *http.Request, title string, code int, description, message string) error {
-	var warnStatusCode *UnusualStatusCodeError
+func (handler *ErrorHandler) ServeError(w http.ResponseWriter, r *http.Request, title *components.Translations, code int, description, message *components.Translations) error {
+	// Don't dop this. This will mean that the return value of this function is always non nil, but also not really.
+	// https://www.adityathebe.com/golang-nil-interface-check/
+	// https://go.dev/doc/faq#nil_error
+	//var warnStatusCode *UnusualStatusCodeError
+
+	var warnStatusCode error
 	if code < 200 || code > 599 {
 		warnStatusCode = &UnusualStatusCodeError{
 			Message: "ErrorHandler.ServeError received unusual error code, this may be bug pls fix!",
@@ -134,12 +165,20 @@ func (handler *ErrorHandler) ServeError(w http.ResponseWriter, r *http.Request, 
 		}
 	}
 	strcode := strconv.Itoa(code)
-	if title == "" {
-		title = strcode + " - Chyba"
+	if title == nil {
+		title = &components.Translations{
+			Czech:   strcode + " - Chyba",
+			English: strcode + " - Error",
+		}
 	}
-	if description == "" {
-		description = "Něco se pokazilo :("
+	if description == nil {
+		description = &components.Translations{
+			Czech:   "Něco se pokazilo",
+			English: "Something went wrong",
+		}
 	}
+	w.Header().Set(utils.ContentType, utils.TextHTML)
+	w.WriteHeader(code)
 	data := components.NewErrorViewData(title, strcode, description, message)
 	err := handler.View(w, r, data)
 	if err != nil {
@@ -149,7 +188,6 @@ func (handler *ErrorHandler) ServeError(w http.ResponseWriter, r *http.Request, 
 }
 
 func (handler *ErrorHandler) View(w http.ResponseWriter, r *http.Request, data *components.ErrorViewData) error {
-	w.Header().Set(utils.ContentType, utils.TextHTML)
 	return components.ErrorView(data).Render(r.Context(), w)
 }
 

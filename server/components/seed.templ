@@ -5,11 +5,11 @@ import (
 )
 
 type SeedViewData struct {
-	Title string
+	Title *Translations
 	Seed *entities.Seed
 }
 
-func NewSeedViewData(seed *entities.Seed, title string) *SeedViewData {
+func NewSeedViewData(seed *entities.Seed, title *Translations) *SeedViewData {
 	return &SeedViewData{
 		Title: title,
 		Seed: seed,
