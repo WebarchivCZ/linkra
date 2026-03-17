@@ -28,7 +28,7 @@ templ seedView(data *SeedViewData) {
 			</tr>
 			<tr>
 				<td>{ transCs(lang, "Stav:", "State:") }</td>
-				<td>{ prettyPrintCaptureState(data.Seed.State) }</td>
+				<td>{ prettyPrintCaptureState(data.Seed.State, lang) }</td>
 				// TODO: Add other messages for cases where there was error during crawl.
 			</tr>
 			<tr>

@@ -70,7 +70,7 @@ func (service ExporterService) GroupToExcel(group *entities.SeedsGroup, w io.Wri
 
 		// fmt.Println("string:", detailLink.String(), "host:", detailLink.Host, "path:", detailLink.Path)
 
-		state := entities.PrettyPrintCaptureState(seed.State)
+		state := entities.PrettyPrintCaptureState(seed.State, lang)
 
 		row := []any{
 			possibleLink{IsLink: true, Value: seed.URL, Link: seed.URL},                 // URL
@@ -161,7 +161,7 @@ func (service *ExporterService) GroupToCsv(group *entities.SeedsGroup, writer io
 			seed.URL,
 			waybackShortLink,
 			detailLink,
-			entities.PrettyPrintCaptureState(seed.State),
+			entities.PrettyPrintCaptureState(seed.State, lang),
 			seed.ArchivalURL,
 		}
 

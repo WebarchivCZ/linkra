@@ -1,5 +1,7 @@
 package entities
 
+import "golang.org/x/text/language"
+
 // Information necessary for capturing/crawling a page.
 type CaptureRequest struct {
 	// The URL address we want to capture.
@@ -56,16 +58,32 @@ type CaptureMetadata struct {
 	CapturedUrl string `json:"capturedUrl"`
 }
 
-func PrettyPrintCaptureState(state CaptureState) string {
-	switch state {
-	case NotEnqueued:
-		return "Nezařazeno"
-	case Pending:
-		return "Čeká na archivaci"
-	case DoneSuccess:
-		return "Úspěšně archivováno"
-	case DoneFailure:
-		return "Chyba při archivaci"
+func PrettyPrintCaptureState(state CaptureState, lang language.Tag) string {
+	czechStates := map[CaptureState]string{
+		NotEnqueued: "Nezařazeno",
+		Pending:     "Čeká na archivaci",
+		DoneSuccess: "Úspěšně archivováno",
+		DoneFailure: "Chyba při archivaci",
 	}
-	return "Neznámý stav"
+	englishStates := map[CaptureState]string{
+		NotEnqueued: "Not enqueued",
+		Pending:     "Waiting for capture",
+		DoneSuccess: "Success",
+		DoneFailure: "Failure",
+	}
+
+	var prettyMap map[CaptureState]string
+	var unknown string
+	if lang == language.Czech {
+		prettyMap = czechStates
+		unknown = "Neznámý stav"
+	} else {
+		prettyMap = englishStates
+		unknown = "Unknown state"
+	}
+
+	if pretty, ok := prettyMap[state]; ok {
+		return pretty
+	}
+	return unknown
 }

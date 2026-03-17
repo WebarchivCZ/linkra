@@ -46,7 +46,7 @@ templ groupView(data *GroupViewData) {
 			<tr>
 				<td><a href={ seed.URL } target="_blank">{ seed.URL }</a></td>
 				<td><a href={ shortWaybackLink(seed) }>{ shortWaybackLink(seed) }</a></td>
-				<td>{ prettyPrintCaptureState(seed.State) }</td>
+				<td>{ prettyPrintCaptureState(seed.State, lang) }</td>
 				<td><a href={ seedViewLink(seed) }>{ transCs(lang, "Detail", "Detail") }</a></td>
 			</tr>
 		}
@@ -61,10 +61,10 @@ templ groupView(data *GroupViewData) {
 		</tfoot>
 	</table>
 	if lang == language.Czech {
-		<p>*<i>Pokud vidíte Úspěšně archivováno, znamená to, že link již můžete použít, ale v archivu se objeví až po indexaci.</i></p>
+		<p>*<i>Pokud vidíte { prettyPrintCaptureState(entities.DoneSuccess, lang) }, znamená to, že link již můžete použít, ale v archivu se objeví až po indexaci.</i></p>
 	} else {
 		// TODO: Replace Úspěšně archivováno
-		<p>*<i>If you see Úspěšně archivováno, than the link can be copied and used, but the captured page will be available after indexing.</i></p>
+		<p>*<i>If you see { prettyPrintCaptureState(entities.DoneSuccess, lang) }, than the link can be copied and used, but the captured page will be available after indexing.</i></p>
 	}
 	if isCaptureCompleted(data.Group) {
 		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">{ transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator") }</a>
