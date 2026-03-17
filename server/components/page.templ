@@ -39,6 +39,11 @@ templ page(components *PageComponents) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{ components.Title.Get(lang) }</title>
 	<link rel="stylesheet" href={ fullStaticPath("style.css") }>
+	if lang == language.Czech {
+		<script id="page-lang" type="application/json">{"lang": "cs"}</script>
+	} else {
+		<script id="page-lang" type="application/json">{"lang": "en"}</script>
+	}
 </head>
 <body>
 	<header class="flex-content-column">

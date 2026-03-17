@@ -6,6 +6,59 @@
     prepareCitationGenerator();
   }
 
+  // --- prepare lang ---
+  // language tag for internalization send from server
+
+  class Lang {
+    value = "";
+
+    /**
+     * @param {string} value
+     */
+    constructor(value) {
+      // Normalize value
+      this.value = value.slice(0, 2).toLowerCase();
+    }
+
+    /**
+     * @param {string} czech
+     * @param {string} english
+     * @returns {string}
+     */
+    trans(czech, english) {
+      if (this.value === "cs") {
+        return czech;
+      } else {
+        return english;
+      }
+    }
+  }
+
+  const lang = getLang();
+
+  /**
+   * @returns {Lang}
+   */
+  function getLang() {
+    const defaultTag = "en";
+    const langJsonScript = document.getElementById("page-lang");
+    if (!(langJsonScript instanceof HTMLScriptElement)) {
+      console.warn(
+        `Element 'page-lang' does not exist or is not a script element. Using default lang: ${defaultTag}`,
+      );
+      return new Lang(defaultTag);
+    }
+    try {
+      const langValue = JSON.parse(langJsonScript.text).lang;
+      return new Lang(langValue);
+    } catch {
+      console.warn(
+        `Parsing lang json failed. Using default lang: ${defaultTag}`,
+      );
+      return new Lang(defaultTag);
+    }
+  }
+
   // --- Template builder ---
   // Builds template from user defined fields
 
@@ -21,7 +74,7 @@
       e.preventDefault();
     });
     templateBuilder.addEventListener("drop", (e) =>
-      dropHandler(e, templateBuilder)
+      dropHandler(e, templateBuilder),
     );
 
     const fieldTypeSelect = document.getElementById("field-type");
@@ -48,7 +101,7 @@
       throw new Error("Element with id 'remove-all-fields' must exist");
     }
     removeAllFieldsBtn.addEventListener("click", () =>
-      setToPlaceholderText(templateBuilder)
+      setToPlaceholderText(templateBuilder),
     );
 
     const templateInputElement = document.getElementById("template");
@@ -290,7 +343,7 @@
     initField(field);
 
     const removeBtn = document.createElement("button");
-    removeBtn.append("Odebrat");
+    removeBtn.append(lang.trans("Odebrat", "Remove"));
     removeBtn.addEventListener("click", () => {
       const templateBuilder = field.parentElement;
       field.remove();
@@ -430,7 +483,7 @@
     stopElementFromBeingDragged(field.elements.namedItem("f-oddělovač"), field);
     stopElementFromBeingDragged(
       field.elements.namedItem("a-intjmeno-prvni"),
-      field
+      field,
     );
     stopElementFromBeingDragged(field.elements.namedItem("a-intjmeno"), field);
     stopElementFromBeingDragged(field.elements.namedItem("a-intautor"), field);
@@ -458,7 +511,7 @@
             // If you see this warning then check the HTML template above.
             console.warn(
               "initAuthorsField found input with name without 'a-' prefix. Got:",
-              key
+              key,
             );
             continue;
           }
@@ -491,7 +544,7 @@
       field,
       "Jméno&nbsp;autora",
       "jméno",
-      false
+      false,
     );
   }
 
@@ -503,7 +556,7 @@
       field,
       "Příjmení&nbsp;autora",
       "příjmení",
-      false
+      false,
     );
   }
 
@@ -515,7 +568,7 @@
       field,
       "Název webového zdroje",
       "název",
-      true
+      true,
     );
   }
 
@@ -527,7 +580,7 @@
       field,
       "Název zdroje / periodikum",
       "součást",
-      true
+      true,
     );
   }
 
@@ -539,7 +592,7 @@
       field,
       "Místo&nbsp;vydání",
       "místo-vydání",
-      true
+      true,
     );
   }
 
@@ -565,7 +618,7 @@
       field,
       "Webový archiv",
       "webarchiv",
-      true
+      true,
     );
   }
 
@@ -600,7 +653,7 @@
     field,
     readableName,
     exprName,
-    skipIfEmpty
+    skipIfEmpty,
   ) {
     field.innerHTML = `
       <span class="f-start">${readableName}:</span>
@@ -896,7 +949,7 @@
       const field = createNewField(
         "autoři",
         createFieldId(localFieldNumber),
-        initAuthorsField
+        initAuthorsField,
       );
       field.elements.namedItem("f-oddělovač").value = ".";
       templateBuilder.append(field);
@@ -908,7 +961,7 @@
       const field = createNewField(
         "název",
         createFieldId(localFieldNumber),
-        initWebNameField
+        initWebNameField,
       );
       field.elements.namedItem("f-kurziva").checked = true;
       field.elements.namedItem("f-oddělovač").value = ".";
@@ -921,7 +974,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "Online. ";
       templateBuilder.append(field);
@@ -933,7 +986,7 @@
       const field = createNewField(
         "součást",
         createFieldId(localFieldNumber),
-        initPartOfField
+        initPartOfField,
       );
       field.elements.namedItem("f-oddělovač").value = ".";
       templateBuilder.append(field);
@@ -945,7 +998,7 @@
       const field = createNewField(
         "místo-vydání",
         createFieldId(localFieldNumber),
-        initPlaceOfPublicationField
+        initPlaceOfPublicationField,
       );
       field.elements.namedItem("f-oddělovač").value = ".";
       templateBuilder.append(field);
@@ -957,11 +1010,10 @@
       const field = createNewField(
         "datum-vydání",
         createFieldId(localFieldNumber),
-        initDateOfPublicationField
+        initDateOfPublicationField,
       );
-      field.elements
-        .namedItem("f-date-format")
-        .namedItem("rok").selected = true;
+      field.elements.namedItem("f-date-format").namedItem("rok").selected =
+        true;
       field.elements.namedItem("f-oddělovač").value = ".";
       templateBuilder.append(field);
       localFieldNumber++;
@@ -972,7 +1024,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "Dostupné z: ";
       templateBuilder.append(field);
@@ -984,7 +1036,7 @@
       const field = createNewField(
         "url",
         createFieldId(localFieldNumber),
-        initUrlField
+        initUrlField,
       );
       field.elements.namedItem("f-oddělovač").value = ".";
       templateBuilder.append(field);
@@ -996,7 +1048,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "Archivní kopie dostupná z: ";
       templateBuilder.append(field);
@@ -1008,7 +1060,7 @@
       const field = createNewField(
         "archiv",
         createFieldId(localFieldNumber),
-        initArchiveField
+        initArchiveField,
       );
       field.elements.namedItem("f-oddělovač").value = ",";
       templateBuilder.append(field);
@@ -1020,7 +1072,7 @@
       const field = createNewField(
         "archivní-url",
         createFieldId(localFieldNumber),
-        initArchivalUrlField
+        initArchivalUrlField,
       );
       field.elements.namedItem("f-oddělovač").value = "";
       templateBuilder.append(field);
@@ -1032,7 +1084,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "[arch. ";
       templateBuilder.append(field);
@@ -1044,11 +1096,10 @@
       const field = createNewField(
         "datum-archivace",
         createFieldId(localFieldNumber),
-        initDateOfHarvestField
+        initDateOfHarvestField,
       );
-      field.elements
-        .namedItem("f-date-format")
-        .namedItem("iso").selected = true;
+      field.elements.namedItem("f-date-format").namedItem("iso").selected =
+        true;
       field.elements.namedItem("f-oddělovač").value = "].";
       templateBuilder.append(field);
       localFieldNumber++;
@@ -1059,7 +1110,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "[cit. ";
       templateBuilder.append(field);
@@ -1071,11 +1122,10 @@
       const field = createNewField(
         "datum-citace",
         createFieldId(localFieldNumber),
-        initDateCitationField
+        initDateCitationField,
       );
-      field.elements
-        .namedItem("f-date-format")
-        .namedItem("iso-date").selected = true;
+      field.elements.namedItem("f-date-format").namedItem("iso-date").selected =
+        true;
       field.elements.namedItem("f-oddělovač").value = "].";
       templateBuilder.append(field);
       localFieldNumber++;
@@ -1102,7 +1152,7 @@
       const field = createNewField(
         "autoři",
         createFieldId(localFieldNumber),
-        initAuthorsField
+        initAuthorsField,
       );
       field.elements.namedItem("a-formatjmeno-prvni").value = "iniciala";
       field.elements.namedItem("a-formatprijmeni-prvni").value = "prvnivelke";
@@ -1123,7 +1173,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "(";
       templateBuilder.append(field);
@@ -1135,11 +1185,10 @@
       const field = createNewField(
         "datum-vydání",
         createFieldId(localFieldNumber),
-        initDateOfPublicationField
+        initDateOfPublicationField,
       );
-      field.elements
-        .namedItem("f-date-format")
-        .namedItem("apa").selected = true;
+      field.elements.namedItem("f-date-format").namedItem("apa").selected =
+        true;
       field.elements.namedItem("f-oddělovač").value = "";
       field.elements.namedItem("f-add-space").checked = false;
       templateBuilder.append(field);
@@ -1151,7 +1200,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "). ";
       templateBuilder.append(field);
@@ -1163,7 +1212,7 @@
       const field = createNewField(
         "název",
         createFieldId(localFieldNumber),
-        initWebNameField
+        initWebNameField,
       );
       field.elements.namedItem("f-kurziva").checked = true;
       field.elements.namedItem("f-oddělovač").value = ".";
@@ -1176,7 +1225,7 @@
       const field = createNewField(
         "součást",
         createFieldId(localFieldNumber),
-        initPartOfField
+        initPartOfField,
       );
       field.elements.namedItem("f-oddělovač").value = ".";
       templateBuilder.append(field);
@@ -1188,7 +1237,7 @@
       const field = createNewField(
         "url",
         createFieldId(localFieldNumber),
-        initUrlField
+        initUrlField,
       );
       field.elements.namedItem("f-oddělovač").value = ".";
       templateBuilder.append(field);
@@ -1200,7 +1249,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "Archivováno: ";
       templateBuilder.append(field);
@@ -1212,7 +1261,7 @@
       const field = createNewField(
         "archiv",
         createFieldId(localFieldNumber),
-        initArchiveField
+        initArchiveField,
       );
       field.elements.namedItem("f-oddělovač").value = ",";
       templateBuilder.append(field);
@@ -1224,7 +1273,7 @@
       const field = createNewField(
         "archivní-url",
         createFieldId(localFieldNumber),
-        initArchivalUrlField
+        initArchivalUrlField,
       );
       field.elements.namedItem("f-oddělovač").value = "";
       templateBuilder.append(field);
@@ -1236,7 +1285,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = "(";
       templateBuilder.append(field);
@@ -1248,11 +1297,10 @@
       const field = createNewField(
         "datum-archivace",
         createFieldId(localFieldNumber),
-        initDateOfHarvestField
+        initDateOfHarvestField,
       );
-      field.elements
-        .namedItem("f-date-format")
-        .namedItem("apa").selected = true;
+      field.elements.namedItem("f-date-format").namedItem("apa").selected =
+        true;
       field.elements.namedItem("f-oddělovač").value = "";
       field.elements.namedItem("f-add-space").checked = false;
       templateBuilder.append(field);
@@ -1264,7 +1312,7 @@
       const field = createNewField(
         "text",
         createFieldId(localFieldNumber),
-        initTextField
+        initTextField,
       );
       field.elements.namedItem("f-value").value = ") ";
       templateBuilder.append(field);
@@ -1290,7 +1338,7 @@
     const generatorForm = document.getElementById("generator");
     if (!(generatorForm instanceof HTMLFormElement)) {
       throw new Error(
-        "Element with id 'generator' must exist and be HTMLFormElement"
+        "Element with id 'generator' must exist and be HTMLFormElement",
       );
     }
 
@@ -1303,7 +1351,7 @@
     const templateElement = document.getElementById("template");
     if (!(templateElement instanceof HTMLInputElement)) {
       throw new Error(
-        "Element with id 'template' must exist and be HTMLInputElement"
+        "Element with id 'template' must exist and be HTMLInputElement",
       );
     }
 
@@ -1318,7 +1366,7 @@
       try {
         if (inputDataElement.type !== "application/json") {
           throw new Error(
-            "Element #input-data must be script with type 'application/json'"
+            "Element #input-data must be script with type 'application/json'",
           );
         }
         const inputData = JSON.parse(inputDataElement.text);
@@ -1327,7 +1375,7 @@
         }
         if (inputData.length <= 0) {
           throw new Error(
-            "There should be present at least one object in input data even if empty. For proper rendering of the form it should contain an authors field."
+            "There should be present at least one object in input data even if empty. For proper rendering of the form it should contain an authors field.",
           );
         }
 
@@ -1337,7 +1385,7 @@
           authorsDiv,
           templateElement,
           citationOutput,
-          inputData
+          inputData,
         );
       } catch (err) {
         console.error(err);
@@ -1349,11 +1397,11 @@
 
     // Render the template any time when user inputs data.
     generatorForm.addEventListener("input", () =>
-      generateCitation(generatorForm, templateElement, citationOutput)
+      generateCitation(generatorForm, templateElement, citationOutput),
     );
     // Also when template is changed
     templateElement.addEventListener("input", () =>
-      generateCitation(generatorForm, templateElement, citationOutput)
+      generateCitation(generatorForm, templateElement, citationOutput),
     );
 
     // Render the template first time on page load.
@@ -1373,7 +1421,7 @@
     authorsDiv,
     templateElement,
     citationOutput,
-    citationData
+    citationData,
   ) {
     const formControls = document.getElementById("form-controls");
     if (formControls === null) {
@@ -1440,7 +1488,7 @@
     });
 
     const exportCitationsTextBtn = document.getElementById(
-      "export-citations-text"
+      "export-citations-text",
     );
     if (exportCitationsTextBtn === null) {
       throw new Error("Element with id 'export-citations-text' must exist");
@@ -1453,7 +1501,7 @@
     });
 
     const exportCitationsHTMLBtn = document.getElementById(
-      "export-citations-html"
+      "export-citations-html",
     );
     if (exportCitationsHTMLBtn === null) {
       throw new Error("Element with id 'export-citations-html' must exist");
@@ -1470,7 +1518,7 @@
       throw new Error("Element with id 'copy-citation' must exist");
     }
     copyCitationBtn.addEventListener("click", () =>
-      copyHtmlAndTextToClipboard(citationOutput.innerHTML, copyCitationBtn)
+      copyHtmlAndTextToClipboard(citationOutput.innerHTML, copyCitationBtn),
     );
   }
 
@@ -1566,7 +1614,7 @@
         template.value = inputData.template;
       } else {
         console.error(
-          "Element with id template must exist and be HTMLInputElement"
+          "Element with id template must exist and be HTMLInputElement",
         );
       }
     }
@@ -1642,7 +1690,7 @@
     const removeBtn = authorElement.elements.namedItem("remove");
     if (!removeBtn) {
       throw new Error(
-        "The innerHTML of author element is missing it's remove button!"
+        "The innerHTML of author element is missing it's remove button!",
       );
     }
     removeBtn.addEventListener("click", () => {
@@ -1735,7 +1783,7 @@
    */
   function exportCitationsText(data, templateElement) {
     const citations = exportCitationsHTML(data, templateElement).map(
-      (htmlCitation) => htmlToText(htmlCitation)
+      (htmlCitation) => htmlToText(htmlCitation),
     );
     return citations;
   }
@@ -1789,7 +1837,8 @@
     });
     navigator.clipboard.write([clipItem]).then(
       () => showCopied(btn),
-      (reason) => console.error("Could not copy citation to clipboard:", reason)
+      (reason) =>
+        console.error("Could not copy citation to clipboard:", reason),
     );
   }
 
@@ -2179,7 +2228,7 @@
         return parsedDate.toLocaleString(luxon.DateTime.DATE_FULL);
       default:
         console.error(
-          `formatDateHelper recieved invalid format argument: ${format}`
+          `formatDateHelper recieved invalid format argument: ${format}`,
         );
         return date; // Return date so user sees something.
     }
