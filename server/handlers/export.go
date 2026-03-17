@@ -6,6 +6,7 @@ import (
 	"linkra/assert"
 	"linkra/entities"
 	"linkra/server/components"
+	"linkra/server/middleware"
 	"linkra/services"
 	"linkra/utils"
 	"net/http"
@@ -70,7 +71,7 @@ func (handler *ExportGroupHandler) RespondExcel(c *echo.Context, group *entities
 	r := c.Request()
 	w := c.Response()
 	buffer := new(bytes.Buffer)
-	err := handler.ExporterService.GroupToExcel(group, buffer)
+	err := handler.ExporterService.GroupToExcel(group, buffer, middleware.GetLang(r.Context()))
 	if err != nil {
 		handler.ErrorHandler.InternalServerError(w, r)
 		return fmt.Errorf("ExportGroupHandler.ServeHTTP got error from exporter service; %w", err)
@@ -90,7 +91,7 @@ func (handler *ExportGroupHandler) RespondCsv(c *echo.Context, group *entities.S
 	r := c.Request()
 	w := c.Response()
 	buffer := new(bytes.Buffer)
-	err := handler.ExporterService.GroupToCsv(group, buffer)
+	err := handler.ExporterService.GroupToCsv(group, buffer, middleware.GetLang(r.Context()))
 	if err != nil {
 		handler.ErrorHandler.InternalServerError(w, r)
 		return fmt.Errorf("ExportGroupHandler.ServeHTTP got error from exporter service; %w", err)

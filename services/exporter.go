@@ -9,6 +9,7 @@ import (
 	"path"
 
 	"github.com/xuri/excelize/v2"
+	"golang.org/x/text/language"
 )
 
 type ExporterService struct {
@@ -27,8 +28,14 @@ func NewExporterService(settings *ServiceSettings) *ExporterService {
 
 // Convert SeedsGroup to nice excel sheet for users to keep track of their submited seeds.
 // The excel data will be written to the provided io.Writer.
-func (service ExporterService) GroupToExcel(group *entities.SeedsGroup, w io.Writer /*seedUrlPrefix *url.URL*/) error {
-	header := []any{"URL", "Zkrácený odkaz do Webarchivu", "Odkaz na detail", "Stav", "Odkaz do Webarchivu"}
+func (service ExporterService) GroupToExcel(group *entities.SeedsGroup, w io.Writer, lang language.Tag) error {
+	var header []any
+	if lang == language.Czech {
+		header = []any{"URL", "Zkrácený odkaz do Webarchivu", "Odkaz na detail", "Stav", "Odkaz do Webarchivu"}
+	} else {
+		header = []any{"URL", "Short wayback link", "Detail link", "State", "Wayback link"}
+	}
+
 	const sheet = "Export"
 
 	f := excelize.NewFile()
@@ -68,7 +75,7 @@ func (service ExporterService) GroupToExcel(group *entities.SeedsGroup, w io.Wri
 		row := []any{
 			possibleLink{IsLink: true, Value: seed.URL, Link: seed.URL},                 // URL
 			possibleLink{IsLink: true, Value: waybackShortLink, Link: waybackShortLink}, // Zkrácený odkaz do waybacku
-			possibleLink{IsLink: true, Value: seed.ShadowID, Link: detailLink},          // Odkaz na detail
+			possibleLink{IsLink: true, Value: detailLink, Link: detailLink},             // Odkaz na detail
 			possibleLink{IsLink: false, Value: state},                                   // Stav
 			possibleLink{IsLink: true, Value: seed.ArchivalURL, Link: seed.ArchivalURL}, // Odkaz do Webarchivu
 		}
@@ -102,7 +109,7 @@ func (service ExporterService) writeExcelRow(f *excelize.File, sheet string, row
 			return err
 		}
 
-		// There is definetly a way to do this more cleanly. I am certain of it. But who cares actually? If you do then please open an issue.
+		// There is definitely a way to do this more cleanly. I am certain of it. But who cares actually? If you do then please open an issue.
 		if cellValue, ok := row[i].(possibleLink); ok {
 			err = f.SetCellValue(sheet, cellName, cellValue.Value)
 			if err != nil {
@@ -124,8 +131,13 @@ func (service ExporterService) writeExcelRow(f *excelize.File, sheet string, row
 	return nil
 }
 
-func (service *ExporterService) GroupToCsv(group *entities.SeedsGroup, writer io.Writer) error {
-	header := []string{"URL", "Zkrácený odkaz do Webarchivu", "Odkaz na detail", "Stav", "Odkaz do Webarchivu"}
+func (service *ExporterService) GroupToCsv(group *entities.SeedsGroup, writer io.Writer, lang language.Tag) error {
+	var header []string
+	if lang == language.Czech {
+		header = []string{"URL", "Zkrácený odkaz do Webarchivu", "Odkaz na detail", "Stav", "Odkaz do Webarchivu"}
+	} else {
+		header = []string{"URL", "Short wayback link", "Detail link", "State", "Wayback link"}
+	}
 
 	csvWriter := csv.NewWriter(writer)
 
