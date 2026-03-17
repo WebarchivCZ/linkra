@@ -74,3 +74,21 @@ func Language() echo.MiddlewareFunc {
 		}
 	}
 }
+
+// Get language setting from context and return it.
+// Will return default value from Language middleware (probably en-US) if no value is set.
+func GetLang(ctx context.Context) language.Tag {
+	defaultLang := DefaultLanguageTag
+
+	anyLang := ctx.Value(LanguageKey)
+	if anyLang == nil {
+		return defaultLang
+	}
+
+	lang, ok := anyLang.(language.Tag)
+	if !ok {
+		return defaultLang
+	}
+
+	return lang
+}

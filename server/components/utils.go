@@ -99,19 +99,7 @@ func isCaptureCompleted(group *entities.SeedsGroup) bool {
 // Get language setting from context and return it.
 // Will return default value from Language middleware (probably en-US) if no value is set.
 func getLang(ctx context.Context) language.Tag {
-	defaultLang := middleware.DefaultLanguageTag
-
-	anyLang := ctx.Value(middleware.LanguageKey)
-	if anyLang == nil {
-		return defaultLang
-	}
-
-	lang, ok := anyLang.(language.Tag)
-	if !ok {
-		return defaultLang
-	}
-
-	return lang
+	return middleware.GetLang(ctx)
 }
 
 // Helper to make translating short strings easier.
