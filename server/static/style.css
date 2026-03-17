@@ -291,7 +291,6 @@ tbody > tr:nth-of-type(odd) {
 /* nav */
 .nav {
     margin: 1rem 0;
-    width: var(--paragraph-width);
     justify-content: center;
 }
 .nav > a {
@@ -495,4 +494,9 @@ fieldset {
     flex-direction: row;
     gap: 2.5rem;
     align-content: space-between;
+}
+
+.nav-wrapper {
+    justify-content: space-between;
+    width: 100%
 }
