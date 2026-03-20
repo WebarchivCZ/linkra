@@ -368,7 +368,7 @@
    */
   function initTextField(field) {
     field.innerHTML = `
-      <span class="f-start">Textové&nbsp;pole:</span>
+      <span class="f-start">${lang.trans("Textové pole:", "Text field:")}</span>
       <div class="flex-row max-flex f-middle">
         <label class="flex-row max-flex"><input class="max-flex" type="text" name="f-value"></label>
         ${fieldFormatFormControls}
@@ -388,88 +388,88 @@
   function initAuthorsField(field) {
     // Create the HTML representing the element
     field.innerHTML = `
-      <span class="f-start">Autoři:</span>
+      <span class="f-start">${lang.trans("Autoři:", "Authors:")}</span>
       <div class="flex-column f-middle authors-field">
         <div class="flex-row case-controls">
-          <b>První autor</b>
+          <b>${lang.trans("První autor", "First author")}</b>
         </div>
         <div class="case-controls">
-          Velikost písma – Jméno:
-          <label><input type="radio" name="a-formatjmeno-prvni" value="vychozi">Výchozí</label>
-          <label><input type="radio" name="a-formatjmeno-prvni" value="male">Malé</label>
-          <label><input type="radio" name="a-formatjmeno-prvni" value="velke">Velké</label>
-          <label><input type="radio" name="a-formatjmeno-prvni" value="prvnivelke" checked>První&nbsp;velké</label>
-          <label><input type="radio" name="a-formatjmeno-prvni" value="iniciala">Iniciála</label>
+          ${lang.trans("Velikost písma – Jméno:", "Font capitalization – First name:")}
+          <label><input type="radio" name="a-formatjmeno-prvni" value="vychozi">${lang.trans("Výchozí", "Default")}</label>
+          <label><input type="radio" name="a-formatjmeno-prvni" value="male">${lang.trans("Malé", "Lowercase")}</label>
+          <label><input type="radio" name="a-formatjmeno-prvni" value="velke">${lang.trans("Velké", "Uppercase")}</label>
+          <label><input type="radio" name="a-formatjmeno-prvni" value="prvnivelke" checked>${lang.trans("První velké", "Capitalized")}</label>
+          <label><input type="radio" name="a-formatjmeno-prvni" value="iniciala">${lang.trans("Iniciála", "Initial")}</label>
         </div>
         <div class="flex-row case-controls">
-          Velikost písma – Příjmení:
-          <label><input type="radio" name="a-formatprijmeni-prvni" value="vychozi">Výchozí</label>
-          <label><input type="radio" name="a-formatprijmeni-prvni" value="male">Malé</label>
-          <label><input type="radio" name="a-formatprijmeni-prvni" value="velke" checked>Velké</label>
-          <label><input type="radio" name="a-formatprijmeni-prvni" value="prvnivelke">První&nbsp;velké</label>
-          <label><input type="radio" name="a-formatprijmeni-prvni" value="iniciala">Iniciála</label>
+          ${lang.trans("Velikost písma – Příjmení:", "Font capitalization – Last name:")}
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="vychozi">${lang.trans("Výchozí", "Default")}</label>
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="male">${lang.trans("Malé", "Lowercase")}</label>
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="velke" checked>${lang.trans("Velké", "Uppercase")}</label>
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="prvnivelke">${lang.trans("První velké", "Capitalized")}</label>
+          <label><input type="radio" name="a-formatprijmeni-prvni" value="iniciala">${lang.trans("Iniciála", "Initial")}</label>
         </div>
         <div class="flex-row case-controls">
-          Pořadí jména a příjmení:
-          <label><input type="radio" name="a-poradi-prvni" value="jmeno">První jméno</label>
-          <label><input type="radio" name="a-poradi-prvni" value="prijmeni" checked>První příjmení</label>
+          ${lang.trans("Pořadí jména a příjmení:", "Order:")}
+          <label><input type="radio" name="a-poradi-prvni" value="jmeno">${lang.trans("První jméno", "First name - Last name")}</label>
+          <label><input type="radio" name="a-poradi-prvni" value="prijmeni" checked>${lang.trans("První příjmení", "Last name - First name")}</label>
         </div>
         <div class="flex-row case-controls">
-          <label>Interpunkce mezi jménem a příjmením:<input class="max-flex" type="text" value="," name="a-intjmeno-prvni"></label>
-        </div>
-        <hr class="max-flex">
-        <div class="flex-row case-controls">
-          <b>Další autoři</b>
-        </div>
-        <div class="flex-row case-controls">
-          Velikost písma – Jméno:
-          <label><input type="radio" name="a-formatjmeno" value="vychozi">Výchozí</label>
-          <label><input type="radio" name="a-formatjmeno" value="male">Malé</label>
-          <label><input type="radio" name="a-formatjmeno" value="velke">Velké</label>
-          <label><input type="radio" name="a-formatjmeno" value="prvnivelke" checked>První&nbsp;velké</label>
-          <label><input type="radio" name="a-formatjmeno" value="iniciala">Iniciála</label>
-        </div>
-        <div class="flex-row case-controls">
-          Velikost písma – Příjmení:
-          <label><input type="radio" name="a-formatprijmeni" value="vychozi">Výchozí</label>
-          <label><input type="radio" name="a-formatprijmeni" value="male">Malé</label>
-          <label><input type="radio" name="a-formatprijmeni" value="velke" checked>Velké</label>
-          <label><input type="radio" name="a-formatprijmeni" value="prvnivelke">První&nbsp;velké</label>
-          <label><input type="radio" name="a-formatprijmeni" value="iniciala">Iniciála</label>
-        </div>
-        <div class="flex-row case-controls">
-          Pořadí jména a příjmení:
-          <label><input type="radio" name="a-poradi" value="jmeno">První jméno</label>
-          <label><input type="radio" name="a-poradi" value="prijmeni" checked>První příjmení</label>
-        </div>
-        <div class="flex-row case-controls">
-          <label>Interpunkce mezi jménem a příjmením:<input class="max-flex" type="text" value="," name="a-intjmeno"></label>
+          <label>${lang.trans("Interpunkce mezi jménem a příjmením:", "Punctuation between first name and last name:")}<input class="max-flex" type="text" value="," name="a-intjmeno-prvni"></label>
         </div>
         <hr class="max-flex">
         <div class="flex-row case-controls">
-          <label>Interpunkce mezi autory:<input class="max-flex" type="text" value=";" name="a-intautor"></label>
+          <b>${lang.trans("Další autoři", "Other authors")}</b>
         </div>
         <div class="flex-row case-controls">
-          Spojka před posledním autorem:
-          <label><input type="radio" name="a-a" value="a" checked>a</label>
+          ${lang.trans("Velikost písma – Jméno:", "Font capitalization – First name:")}
+          <label><input type="radio" name="a-formatjmeno" value="vychozi">${lang.trans("Výchozí", "Default")}</label>
+          <label><input type="radio" name="a-formatjmeno" value="male">${lang.trans("Malé", "Lowercase")}</label>
+          <label><input type="radio" name="a-formatjmeno" value="velke">${lang.trans("Velké", "Uppercase")}</label>
+          <label><input type="radio" name="a-formatjmeno" value="prvnivelke" checked>${lang.trans("První velké", "Capitalized")}</label>
+          <label><input type="radio" name="a-formatjmeno" value="iniciala">${lang.trans("Iniciála", "Initial")}</label>
+        </div>
+        <div class="flex-row case-controls">
+          ${lang.trans("Velikost písma – Příjmení:", "Font capitalization – Last name:")}
+          <label><input type="radio" name="a-formatprijmeni" value="vychozi">${lang.trans("Výchozí", "Default")}</label>
+          <label><input type="radio" name="a-formatprijmeni" value="male">${lang.trans("Malé", "Lowercase")}</label>
+          <label><input type="radio" name="a-formatprijmeni" value="velke" checked>${lang.trans("Velké", "Uppercase")}</label>
+          <label><input type="radio" name="a-formatprijmeni" value="prvnivelke">${lang.trans("První velké", "Capitalized")}</label>
+          <label><input type="radio" name="a-formatprijmeni" value="iniciala">${lang.trans("Iniciála", "Initial")}</label>
+        </div>
+        <div class="flex-row case-controls">
+          ${lang.trans("Pořadí jména a příjmení:", "Order:")}
+          <label><input type="radio" name="a-poradi" value="jmeno">${lang.trans("Jméno - Příjmení", "First name - Last name")}</label>
+          <label><input type="radio" name="a-poradi" value="prijmeni" checked>${lang.trans("Příjmení - Jméno", "Last name - First name")}</label>
+        </div>
+        <div class="flex-row case-controls">
+          <label>${lang.trans("Interpunkce mezi jménem a příjmením:", "Punctuation between first name and last name:")}<input class="max-flex" type="text" value="," name="a-intjmeno"></label>
+        </div>
+        <hr class="max-flex">
+        <div class="flex-row case-controls">
+          <label>${lang.trans("Interpunkce mezi autory:", "Punctuation between authors:")}<input class="max-flex" type="text" value=";" name="a-intautor"></label>
+        </div>
+        <div class="flex-row case-controls">
+          ${lang.trans("Spojka před posledním autorem:", "Separator before last author:")}
+          <label><input type="radio" name="a-a" value="a" ${lang.trans("checked", "")}>a</label>
           <label><input type="radio" name="a-a" value="&amp;">&amp;</label>
-          <label><input type="radio" name="a-a" value="and">and</label>
+          <label><input type="radio" name="a-a" value="and" ${lang.trans("", "checked")}>and</label>
         </div>
         <div class="flex-row case-controls">
-          Použít spojku vždy, když je více než jeden autor:
-          <label><input type="radio" name="a-vzdya" value="" checked>Ne</label>
-          <label><input type="radio" name="a-vzdya" value="1">Ano</label>
+          ${lang.trans("Použít spojku vždy, když je více než jeden autor:", "Always use separator when there are multiple authors:")}
+          <label><input type="radio" name="a-vzdya" value="" checked>${lang.trans("Ne", "No")}</label>
+          <label><input type="radio" name="a-vzdya" value="1">${lang.trans("Ano", "Yes")}</label>
         </div>
         <div class="flex-row case-controls">
-          Použít interpunkci i mezi posledním a předposledním autorem:
-          <label><input type="radio" name="a-vzdyintautor" value="" checked>Ne</label>
-          <label><input type="radio" name="a-vzdyintautor" value="1">Ano</label>
+          ${lang.trans("Použít interpunkci i mezi posledním a předposledním autorem:", "Use punctuation even when using separator before last author:")}
+          <label><input type="radio" name="a-vzdyintautor" value="" checked>${lang.trans("Ne", "No")}</label>
+          <label><input type="radio" name="a-vzdyintautor" value="1">${lang.trans("Ano", "Yes")}</label>
         </div>
         <div class="flex-row case-controls">
-          <label>Maximální&nbsp;počet&nbsp;autorů:<input class="max-flex" type="number" min="1" step="1" value="5" name="a-max"></label>
+          <label>${lang.trans("Maximální počet autorů:", "Max number of authors:")}<input class="max-flex" type="number" min="1" step="1" value="5" name="a-max"></label>
         </div>
         <div class="flex-row case-controls">
-          <label>Přípona (a další):<input class="max-flex" type="text" value="et al." name="a-etal"></label>
+          <label>${lang.trans("Et al. (a další):", "Et al. (and others):")}<input class="max-flex" type="text" value="et al." name="a-etal"></label>
         </div>
         <hr class="max-flex">
         <div class="flex-row max-flex">
@@ -566,7 +566,7 @@
   function initWebNameField(field) {
     initGenericFormatAndSeparatorField(
       field,
-      "Název webového zdroje",
+      lang.trans("Název webového zdroje", "Name of web page"),
       "název",
       true,
     );
@@ -590,7 +590,7 @@
   function initPlaceOfPublicationField(field) {
     initGenericFormatAndSeparatorField(
       field,
-      "Místo&nbsp;vydání",
+      lang.trans("Místo vydání", "Place of publication"),
       "místo-vydání",
       true,
     );
@@ -600,7 +600,11 @@
    * @param {HTMLFormElement} field
    */
   function initDateOfPublicationField(field) {
-    initGenericTimeField(field, "Datum&nbsp;vydání", "datum-vydání");
+    initGenericTimeField(
+      field,
+      lang.trans("Datum vydání", "Date of publication"),
+      "datum-vydání",
+    );
   }
 
   /**
@@ -616,7 +620,7 @@
   function initArchiveField(field) {
     initGenericFormatAndSeparatorField(
       field,
-      "Webový archiv",
+      lang.trans("Webový archiv", "Webarchive"),
       "webarchiv",
       true,
     );
@@ -626,21 +630,33 @@
    * @param {HTMLFormElement} field
    */
   function initArchivalUrlField(field) {
-    initGenericUrlField(field, "URL archivní kopie", "archivní-url");
+    initGenericUrlField(
+      field,
+      lang.trans("URL archivní kopie", "Archived page URL"),
+      "archivní-url",
+    );
   }
 
   /**
    * @param {HTMLFormElement} field
    */
   function initDateOfHarvestField(field) {
-    initGenericTimeField(field, "Datum archivace", "datum-archivace");
+    initGenericTimeField(
+      field,
+      lang.trans("Datum archivace", "Date of capture"),
+      "datum-archivace",
+    );
   }
 
   /**
    * @param {HTMLFormElement} field
    */
   function initDateCitationField(field) {
-    initGenericTimeField(field, "Datum citace", "datum-citace");
+    initGenericTimeField(
+      field,
+      lang.trans("Datum citace", "Citation date"),
+      "datum-citace",
+    );
   }
 
   /**
@@ -659,7 +675,7 @@
       <span class="f-start">${readableName}:</span>
       <div class="flex-column max-flex f-middle">
         <div class="flex-row max-flex">
-            <b>Písmo:</b>
+            <b>${lang.trans("Písmo:", "Font:")}</b>
           ${fieldFormatFormControls}
           ${fieldCaseFormControls}
         </div>
@@ -694,14 +710,14 @@
       <div class="flex-column max-flex f-middle">
         <div class="flex-row max-flex">
           <select class="flex-row" name="f-date-format">
-            <option name="default" value="rok"> -- Prosím zvolte požadovaný formát -- </option>
-            <option name="rok" value="rok">2025 (Jen rok)</option>
-            <option name="iso-date" value="iso-date">2025-01-31 (Rok - Měsíc - Den)</option>
+            <option name="default" value="rok">${lang.trans(" -- Zvolte požadovaný formát -- ", " -- Choose a format -- ")}</option>
+            <option name="rok" value="rok">${lang.trans("2025 (Jen rok)", "2025 (Year only)")}</option>
+            <option name="iso-date" value="iso-date">${lang.trans("2025-01-31 (Rok - Měsíc - Den)", "2025-01-31 (Year - Month - Day)")}</option>
             <option name="iso" value="iso">2025-01-31T00:00:00+01:00 (ISO 8601)</option>
-            <option name="rfc" value="rfc">2025-01-31 00:00:00+01:00 (ISO 8601 s mezerou)</option>
-            <option name="apa" value="apa">2025, leden 31 (APA styl)</option>
-            <option name="human" value="human">Podle nastavené lokalizace</option>
-            <option name="bez-formatu" value="bez-formatu">Neměnit formát (použije se uživatelem zadaná hodnota)</option>
+            <option name="rfc" value="rfc">${lang.trans("2025-01-31 00:00:00+01:00 (ISO 8601 s mezerou)", "2025-01-31 00:00:00+01:00 (ISO 8601 with space as separator)")}</option>
+            <option name="apa" value="apa">${lang.trans("2025, leden 31 (APA styl)", "2025, january 31 (APA style)")}</option>
+            <option name="human" value="human">${lang.trans("Podle nastavené lokalizace", "Use user locale setting")}</option>
+            <option name="bez-formatu" value="bez-formatu">${lang.trans("Neměnit formát (použije se uživatelem zadaná hodnota)", "Keep format (use input value as is")}</option>
           </select>
           <label class="flex-row"><input type="checkbox" name="f-utc">UTC</label>
         </div>
@@ -784,7 +800,7 @@
     return expr;
   }
 
-  const addSpaceFormControls = `<label class="flex-row"><input type="checkbox" name="f-add-space" checked>Přidat&nbsp;mezeru</label>`;
+  const addSpaceFormControls = `<label class="flex-row"><input type="checkbox" name="f-add-space" checked>${lang.trans("Přidat mezeru", "Add space")}</label>`;
   /**
    * Will append space at the end of expr if f-add-space is checked.
    * @param {string} expr
@@ -817,7 +833,7 @@
   }
 
   const fieldSeparatorFormControls = `
-    <label class="flex-row"><b>Interpunkce:</b><input type="text" name="f-oddělovač"></label>
+    <label class="flex-row"><b>${lang.trans("Interpunkce:", "Punctuation:")}</b><input type="text" name="f-oddělovač"></label>
   `;
   /**
    * Will append separator at the end of expr.
@@ -835,8 +851,8 @@
 
   const fieldFormatFormControls = `
   <span class="flex-row format-controls">
-    <label class="flex-row"><input type="checkbox" name="f-tučně">Tučně</label>
-    <label class="flex-row"><input type="checkbox" name="f-kurziva">Kurzivou</label>
+    <label class="flex-row"><input type="checkbox" name="f-tučně">${lang.trans("Tučně", "Bold")}</label>
+    <label class="flex-row"><input type="checkbox" name="f-kurziva">${lang.trans("Kurzivou", "Italic")}</label>
   </span>
   `;
   /**
@@ -880,10 +896,10 @@
 
   const fieldCaseFormControls = `
   <span class="flex-row case-controls">
-    <label class="flex-row"><input type="radio" name="f-case" value="no-change" checked>Výchozí</label>
-    <label class="flex-row"><input type="radio" name="f-case" value="small">Malé</label>
-    <label class="flex-row"><input type="radio" name="f-case" value="capital">Velké</label>
-    <label class="flex-row"><input type="radio" name="f-case" value="first-capital">První&nbsp;velké</label>
+    <label class="flex-row"><input type="radio" name="f-case" value="no-change" checked>${lang.trans("Výchozí", "Default")}</label>
+    <label class="flex-row"><input type="radio" name="f-case" value="small">${lang.trans("Malé", "Lowercase")}</label>
+    <label class="flex-row"><input type="radio" name="f-case" value="capital">${lang.trans("Velké", "Uppercase")}</label>
+    <label class="flex-row"><input type="radio" name="f-case" value="first-capital">${lang.trans("První velké", "Capitalized")}</label>
   </span>
   `;
   /**
@@ -1026,7 +1042,10 @@
         createFieldId(localFieldNumber),
         initTextField,
       );
-      field.elements.namedItem("f-value").value = "Dostupné z: ";
+      field.elements.namedItem("f-value").value = lang.trans(
+        "Dostupné z: ",
+        "Available from: ",
+      );
       templateBuilder.append(field);
       localFieldNumber++;
     }
@@ -1050,7 +1069,10 @@
         createFieldId(localFieldNumber),
         initTextField,
       );
-      field.elements.namedItem("f-value").value = "Archivní kopie dostupná z: ";
+      field.elements.namedItem("f-value").value = lang.trans(
+        "Archivní kopie dostupná z: ",
+        "Archived at: ",
+      );
       templateBuilder.append(field);
       localFieldNumber++;
     }
@@ -1251,7 +1273,10 @@
         createFieldId(localFieldNumber),
         initTextField,
       );
-      field.elements.namedItem("f-value").value = "Archivováno: ";
+      field.elements.namedItem("f-value").value = lang.trans(
+        "Archivováno: ",
+        "Archived: ",
+      );
       templateBuilder.append(field);
       localFieldNumber++;
     }
@@ -1725,16 +1750,16 @@
   function createAuthorHTML(author, id) {
     return `
       <div class="flex-row cit-gen-fields">
-        <legend>Autor ${id + 1}</legend>
+        <legend>${lang.trans("Autor", "Author")} ${id + 1}</legend>
         <div class="flex-column">
-          <label for="příjmení">Příjmení (nebo korporace):</label>
+          <label for="příjmení">${lang.trans("Příjmení (nebo korporace):", "Last name (or corporation):")}</label>
           <input type="text" name="příjmení" value=${author.příjmení}>
         </div>
         <div class="flex-column">
-          <label for="jméno">Jméno:</label>
+          <label for="jméno">${lang.trans("Jméno:", "First name:")}</label>
           <input type="text" name="jméno" value=${author.jméno}>
         </div>
-        <button type="button" name="remove">Odebrat</button>
+        <button type="button" name="remove">${lang.trans("Odebrat", "Remove")}</button>
       </div>
     `;
   }
@@ -1847,7 +1872,7 @@
    */
   function showCopied(target) {
     const tmp = target.textContent;
-    target.textContent = "Zkopírováno";
+    target.textContent = lang.trans("Zkopírováno", "Copied");
     setTimeout(() => (target.textContent = tmp), 1000);
   }
 
