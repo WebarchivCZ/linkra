@@ -3,6 +3,7 @@ package components
 import (
 	"linkra/entities"
 	"strings"
+	"golang.org/x/text/language"
 )
 
 type RedirectErrorViewData struct {
@@ -16,16 +17,31 @@ func NewRedirectErrorViewData(seed *entities.Seed) *RedirectErrorViewData {
 }
 
 templ redirectErrorView(data *RedirectErrorViewData) {
+	{{ lang := getLang(ctx) }}
 	<div class="flex-content-column">
-	<h2>Chyba při přesměrování</h2>
+	<h2>{ transCs(lang, "Chyba při přesměrování", "Redirection error") }</h2>
 	if data.Seed.State  == entities.DoneFailure {
-		<p>Při archivaci webového zdroje <a href={ data.Seed.URL }>{ data.Seed.URL }</a> došlo k chybě proto nelze zobrazit archivní kopii.</p>
-		<p>Je možné že webový zdroj v době archivace neexistoval, měl výpadek nebo byla jeho URL adresa zadána nesprávně.</p>
+		if lang == language.Czech {
+			<p>Při archivaci webového zdroje <a href={ data.Seed.URL }>{ data.Seed.URL }</a> došlo k chybě proto nelze zobrazit archivní kopii.</p>
+			<p>Je možné že webový zdroj v době archivace neexistoval, měl výpadek nebo byla jeho URL adresa zadána nesprávně.</p>
+		} else {
+			<p>There was an error while capturing <a href={ data.Seed.URL }>{ data.Seed.URL }</a> and we are unable to display the archived copy.</p>
+			<p>It is possible that the resource did not exist, the provider had an outage or the URL address is incorrect.</p>
+		}
 	} else {
-		<p>Vámi požadovaný zdroj <a href={ data.Seed.URL }>{ data.Seed.URL }</a> stále čeká na archivaci.
-		Až bude archivace dokončena, povede link na archivní kopii webového zdroje ve <a href="https://webarchiv.cz">Webarchivu</a></p>
+		if lang == language.Czech {
+			<p>Vámi požadovaný zdroj <a href={ data.Seed.URL }>{ data.Seed.URL }</a> stále čeká na archivaci.
+			Až bude archivace dokončena, povede link na archivní kopii webového zdroje ve <a href="https://webarchiv.cz">Webarchivu</a>.</p>
+		} else {
+			<p>Requested resource <a href={ data.Seed.URL }>{ data.Seed.URL }</a> is still waiting to be archived.
+			When archiving is complete, a link will be provided to the archived copy of the web resource in the <a href="https://webarchiv.cz">Webarchive</a>.</p>
+		}
 	}
+	if lang == language.Czech {
 		<p>Pokud si přejete vidět ostatní archivní verze tohoto zdroje, můžete přejít na <a href={ "https://wayback.webarchiv.cz/wayback/*/" + removeProtocol(data.Seed.URL) }>{ "https://wayback.webarchiv.cz/wayback/*/" + data.Seed.URL }</a></p>
+	} else {
+		<p>If you wish to see other archived versions of this resource, you can go to <a href={ "https://wayback.webarchiv.cz/wayback/*/" + removeProtocol(data.Seed.URL) }>{ "https://wayback.webarchiv.cz/wayback/*/" + data.Seed.URL }</a></p>
+	}
 	</div>
 }
 

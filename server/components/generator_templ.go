@@ -145,9 +145,9 @@ func generatorView(data *GeneratorViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var8 string
-		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Uživatelská - Upravte existující šablonu nebo vytvořte novou", "Custom - Change existing template or create a new one"))
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Uživatelská - Upravte existující šablonu nebo vytvořte novou", "Custom - Edit existing template or create a new one"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 40, Col: 146}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 40, Col: 144}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -158,9 +158,9 @@ func generatorView(data *GeneratorViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var9 string
-		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Exportovat citace do HTML (s formátováním)", "Export citations into HTML (with formatting)"))
+		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Exportovat citace do HTML (s formátováním)", "Export citations to HTML (with formatting)"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 47, Col: 116}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 47, Col: 114}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {
@@ -171,9 +171,9 @@ func generatorView(data *GeneratorViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var10 string
-		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Exportovat citace do TXT", "Export citations into TXT"))
+		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Exportovat citace do TXT", "Export citations to TXT"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 50, Col: 76}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 50, Col: 74}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -197,9 +197,9 @@ func generatorView(data *GeneratorViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var12 string
-		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Zde vyplňte metadata citace pro vaše webové zdroje.", "Fill out citation metadata for your sources."))
+		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Zde vyplňte metadata citace pro vaše webové zdroje.", "Fill in citation metadata for your web resources here."))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 57, Col: 124}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 57, Col: 134}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 		if templ_7745c5c3_Err != nil {
@@ -262,355 +262,381 @@ func generatorView(data *GeneratorViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var17 string
-		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Název webového zdroje:", "Name of web page:"))
+		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Název webového zdroje:", "Web resource title:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 88, Col: 89}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 88, Col: 91}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "</label> <input type=\"text\" id=\"název\" data-citationfield=\"název\"> <label for=\"součást\">Název zdroje / periodikum:</label> <input type=\"text\" id=\"součást\" data-citationfield=\"součást\"> <label for=\"místo-vydání\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "</label> <input type=\"text\" id=\"název\" data-citationfield=\"název\"> <label for=\"součást\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var18 string
-		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Místo vydání:", "Place of publication:"))
+		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Název zdroje / periodikum:", "Source title / Journal:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 94, Col: 94}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 91, Col: 101}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "</label> <input type=\"text\" id=\"místo-vydání\" data-citationfield=\"místo-vydání\"> <label for=\"datum-vydání\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "</label> <input type=\"text\" id=\"součást\" data-citationfield=\"součást\"> <label for=\"místo-vydání\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var19 string
-		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum vydání:", "Date of publication:"))
+		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Místo vydání:", "Place of publication:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 97, Col: 91}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 94, Col: 94}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "</label> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "</label> <input type=\"text\" id=\"místo-vydání\" data-citationfield=\"místo-vydání\"> <label for=\"datum-vydání\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var20 string
-		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Vyberte nebo vyplňte hodnotu", "Fill or choose a value"))
+		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum vydání:", "Date of publication:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 99, Col: 111}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 97, Col: 91}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "\" id=\"datum-vydání\" data-citationfield=\"datum-vydání\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-vydání-datetime\"></span> <label for=\"url\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "</label> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var21 string
-		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "URL webového zdroje:", "Web page URL:"))
+		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Vyberte nebo vyplňte hodnotu", "Select or fill in a value"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 103, Col: 79}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 99, Col: 114}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var21))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "</label> <input type=\"text\" id=\"url\" data-citationfield=\"url\"> <label for=\"url\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "\" id=\"datum-vydání\" data-citationfield=\"datum-vydání\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-vydání-datetime\"></span> <label for=\"url\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var22 string
-		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Webový archiv:", "Webarchive:"))
+		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "URL webového zdroje:", "Web resource URL:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 106, Col: 71}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 103, Col: 83}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, "</label> <input type=\"text\" id=\"webarchiv\" data-citationfield=\"webarchiv\"> <label for=\"archivní-url\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, "</label> <input type=\"text\" id=\"url\" data-citationfield=\"url\"> <label for=\"url\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var23 string
-		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "URL archivní kopie:", "Archived page URL:"))
+		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Webový archiv:", "Web archive:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 109, Col: 93}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 106, Col: 72}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var23))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "</label> <input type=\"text\" id=\"archivní-url\" data-citationfield=\"archivní-url\"> <label for=\"datum-archivace\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "</label> <input type=\"text\" id=\"webarchiv\" data-citationfield=\"webarchiv\"> <label for=\"archivní-url\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var24 string
-		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum archivace:", "Date of capture:"))
+		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "URL archivní kopie:", "Archived URL:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 112, Col: 89}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 109, Col: 88}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var24))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, "</label> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, "</label> <input type=\"text\" id=\"archivní-url\" data-citationfield=\"archivní-url\"> <label for=\"datum-archivace\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var25 string
-		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Vyberte nebo vyplňte hodnotu", "Fill or choose a value"))
+		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum archivace:", "Date of archiving:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 114, Col: 111}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 112, Col: 91}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 28, "\" id=\"datum-archivace\" data-citationfield=\"datum-archivace\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-archivace-datetime\"></span> <label for=\"datum-citace\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 28, "</label> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var26 string
-		templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum citace:", "Citation date:"))
+		templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Vyberte nebo vyplňte hodnotu", "Select or fill in a value"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 118, Col: 81}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 114, Col: 114}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var26))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "</label> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "\" id=\"datum-archivace\" data-citationfield=\"datum-archivace\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-archivace-datetime\"></span> <label for=\"datum-citace\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var27 string
-		templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Vyberte nebo vyplňte hodnotu", "Fill or choose a value"))
+		templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum citace:", "Date of citation:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 120, Col: 111}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 118, Col: 84}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var27))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 30, "\" id=\"datum-citace\" data-citationfield=\"datum-citace\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-citace-datetime\"></span><script>\n\t\t\t\t\t\tconst input = document.getElementById(\"datum-citace\");\n\t\t\t\t\t\tinput.value = (new Date).toLocaleDateString(\"en-CA\");\n\t\t\t\t\t\t// Don't question this. This is what gods of javascript wanted. Please give me TemporalAPI soon.\n\t\t\t\t\t</script></div></form><i>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 30, "</label> <span class=\"flex-row max-flex\"><input type=\"text\" placeholder=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var28 string
-		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Není nutné vyplnit všechna pole.", "It is not necessary to fill all fields."))
+		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Vyberte nebo vyplňte hodnotu", "Select or fill in a value"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 130, Col: 103}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 120, Col: 114}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 31, "</i></section><section id=\"builder-section\" hidden><h2>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 31, "\" id=\"datum-citace\" data-citationfield=\"datum-citace\"> <input type=\"datetime-local\" step=\"1\" id=\"datum-citace-datetime\"></span><script>\n\t\t\t\t\t\tconst input = document.getElementById(\"datum-citace\");\n\t\t\t\t\t\tinput.value = (new Date).toLocaleDateString(\"en-CA\");\n\t\t\t\t\t\t// Don't question this. This is what gods of javascript wanted. Please give me TemporalAPI soon.\n\t\t\t\t\t</script></div></form><i>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var29 string
-		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Šablona", "Template"))
+		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Není nutné vyplnit všechna pole.", "It is not necessary to fill all fields."))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 134, Col: 46}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 130, Col: 103}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 32, "</h2><p>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 32, "</i></section><section id=\"builder-section\" hidden><h2>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var30 string
-		templ_7745c5c3_Var30, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Zde můžete vytvořit vlastní šablonu.", "This form allows you to create custom template."))
+		templ_7745c5c3_Var30, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Šablona", "Template"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 135, Col: 117}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 134, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var30))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 33, "</p><p>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		if lang == language.Czech {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 34, "Můžete přidávat nové části, mazat existující nebo třeba jen upravovat předpřipravenou šablonu. Pořadí jednotlivých částí je možné měnit přetažením myší. Použití šablony je potřeba potvrdit tlačítkem <b>Použít vlastní šablonu</b>.")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 35, "You can add new parts, delete existing ones or edit default template. The order of parts can be changed by dragging them with mouse. To confirm that you want to use the template click the <b>Use custom template</b> button.")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 36, "</p><form id=\"builder-controls\" class=\"flex-row\"><div class=\"flex-row field-chooser\"><select id=\"field-type\"><option>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 33, "</h2><p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var31 string
-		templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, " -- Vyberte, jakou část šablony přidat do citace -- ", " -- Select which part of the template should be added -- "))
+		templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Zde můžete vytvořit vlastní šablonu.", "This form allows you to create a custom template."))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 151, Col: 143}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 135, Col: 119}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 37, "</option> <option value=\"autoři\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 34, "</p><p>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if lang == language.Czech {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 35, "Můžete přidávat nové části, mazat existující nebo třeba jen upravovat předpřipravenou šablonu. Pořadí jednotlivých částí je možné měnit přetažením myší. Použití šablony je potřeba potvrdit tlačítkem <b>Použít vlastní šablonu</b>.")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 36, "You can add new parts, delete existing ones, or edit default template. The order of parts can be changed by dragging them with a mouse. To confirm that you want to use the template, click the <b>Use custom template</b> button.")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 37, "</p><form id=\"builder-controls\" class=\"flex-row\"><div class=\"flex-row field-chooser\"><select id=\"field-type\"><option>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var32 string
-		templ_7745c5c3_Var32, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Autoři", "Authors:"))
+		templ_7745c5c3_Var32, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, " -- Vyberte, jakou část šablony přidat do citace -- ", " -- Select which part of the template should be added -- "))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 153, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 151, Col: 143}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var32))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 38, "</option><option value=\"název\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 38, "</option> <option value=\"autoři\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var33 string
-		templ_7745c5c3_Var33, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Název webového zdroje:", "Name of web page:"))
+		templ_7745c5c3_Var33, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Autoři", "Authors:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 156, Col: 93}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 153, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var33))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 39, "</option> <option value=\"součást\">Název zdroje / periodikum</option> <option value=\"místo-vydání\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 39, "</option><option value=\"název\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var34 string
-		templ_7745c5c3_Var34, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Místo vydání:", "Place of publication:"))
+		templ_7745c5c3_Var34, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Název webového zdroje", "Web resource title"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 158, Col: 98}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 156, Col: 93}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var34))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 40, "</option> <option value=\"datum-vydání\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 40, "</option> <option value=\"součást\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var35 string
-		templ_7745c5c3_Var35, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum vydání:", "Date of publication:"))
+		templ_7745c5c3_Var35, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Název zdroje / periodikum", "Source title / Journal"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 159, Col: 95}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 157, Col: 103}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var35))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 41, "</option> <option value=\"url\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 41, "</option> <option value=\"místo-vydání\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var36 string
-		templ_7745c5c3_Var36, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "URL webového zdroje:", "Web page URL:"))
+		templ_7745c5c3_Var36, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Místo vydání", "Place of publication"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 160, Col: 83}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 158, Col: 96}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var36))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 42, "</option> <option value=\"webarchiv\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 42, "</option> <option value=\"datum-vydání\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var37 string
-		templ_7745c5c3_Var37, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Webový archiv:", "Webarchive:"))
+		templ_7745c5c3_Var37, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum vydání", "Date of publication"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 161, Col: 81}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 159, Col: 93}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var37))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 43, "</option> <option value=\"archivní-url\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 43, "</option> <option value=\"url\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var38 string
-		templ_7745c5c3_Var38, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "URL archivní kopie:", "Archived page URL:"))
+		templ_7745c5c3_Var38, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "URL webového zdroje", "Web resource URL"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 162, Col: 97}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 160, Col: 85}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var38))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 44, "</option> <option value=\"datum-archivace\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 44, "</option> <option value=\"webarchiv\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var39 string
-		templ_7745c5c3_Var39, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum archivace:", "Date of capture:"))
+		templ_7745c5c3_Var39, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Webový archiv", "Web archive"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 163, Col: 93}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 161, Col: 80}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var39))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 45, "</option> <option value=\"datum-citace\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 45, "</option> <option value=\"archivní-url\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var40 string
-		templ_7745c5c3_Var40, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum citace:", "Citation date:"))
+		templ_7745c5c3_Var40, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "URL archivní kopie", "Archived URL"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 164, Col: 85}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 162, Col: 90}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var40))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 46, "</option> <option value=\"text\">Text</option></select> <button type=\"button\" id=\"add-field\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 46, "</option> <option value=\"datum-archivace\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var41 string
-		templ_7745c5c3_Var41, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Přidat", "Add"))
+		templ_7745c5c3_Var41, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum archivace", "Date of archiving"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 167, Col: 75}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 163, Col: 93}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var41))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 47, "</button></div><select id=\"prepared-templates\"><option>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 47, "</option> <option value=\"datum-citace\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var42 string
-		templ_7745c5c3_Var42, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, " -- Předpřipravené šablony -- ", " -- Default templates -- "))
+		templ_7745c5c3_Var42, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum citace", "Date of citation"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 170, Col: 95}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 164, Col: 86}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var42))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 48, "</option>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 48, "</option> <option value=\"text\">Text</option></select> <button type=\"button\" id=\"add-field\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var43 string
+		templ_7745c5c3_Var43, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Přidat", "Add"))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 167, Col: 75}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var43))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 49, "</button></div><select id=\"prepared-templates\"><option>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var44 string
+		templ_7745c5c3_Var44, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, " -- Předpřipravené šablony -- ", " -- Default templates -- "))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 170, Col: 95}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var44))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 50, "</option>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -618,51 +644,51 @@ func generatorView(data *GeneratorViewData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 49, "</select> <button type=\"button\" id=\"remove-all-fields\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var43 string
-		templ_7745c5c3_Var43, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Odebrat vše", "Remove all"))
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 173, Col: 94}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var43))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 50, "</button></form><div id=\"builder\"><i id=\"builder-placeholder\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var44 string
-		templ_7745c5c3_Var44, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Tady budou vidět přidaná pole", "Here will be visible added parts"))
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 176, Col: 119}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var44))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 51, "</i></div><button type=\"button\" id=\"build-template\" form=\"builder-controls\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 51, "</select> <button type=\"button\" id=\"remove-all-fields\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var45 string
-		templ_7745c5c3_Var45, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Použít vlastní šablonu", "Use custom template"))
+		templ_7745c5c3_Var45, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Odebrat vše", "Remove all"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 178, Col: 138}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 173, Col: 94}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var45))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 52, "</button></section></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 52, "</button></form><div id=\"builder\"><i id=\"builder-placeholder\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var46 string
+		templ_7745c5c3_Var46, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Tady budou vidět přidaná pole", "Here will be visible added parts"))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 176, Col: 119}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var46))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 53, "</i></div><button type=\"button\" id=\"build-template\" form=\"builder-controls\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var47 string
+		templ_7745c5c3_Var47, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Použít vlastní šablonu", "Use custom template"))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 178, Col: 138}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var47))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 54, "</button></section></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		if data.Group == nil {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 53, "<script type=\"application/json\" id=\"input-data\">\n\t\t\t[{\n\t\t\t\t\"autoři\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"příjmení\": \"\",\n\t\t\t\t\t\t\"jméno\": \"\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}]\n\t\t</script>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 55, "<script type=\"application/json\" id=\"input-data\">\n\t\t\t[{\n\t\t\t\t\"autoři\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"příjmení\": \"\",\n\t\t\t\t\t\t\"jméno\": \"\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}]\n\t\t</script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -672,46 +698,46 @@ func generatorView(data *GeneratorViewData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 54, "<script src=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var46 string
-		templ_7745c5c3_Var46, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("handlebars.min-v4.7.8.js"))
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 197, Col: 57}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var46))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 55, "\"></script><script src=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var47 string
-		templ_7745c5c3_Var47, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("luxon.min.js"))
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 198, Col: 45}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var47))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 56, "\"></script><script src=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 56, "<script src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var48 string
-		templ_7745c5c3_Var48, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("generator.js"))
+		templ_7745c5c3_Var48, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("handlebars.min-v4.7.8.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 199, Col: 45}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 197, Col: 57}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var48))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 57, "\"></script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 57, "\"></script><script src=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var49 string
+		templ_7745c5c3_Var49, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("luxon.min.js"))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 198, Col: 45}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var49))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 58, "\"></script><script src=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var50 string
+		templ_7745c5c3_Var50, templ_7745c5c3_Err = templ.JoinStringErrs(fullStaticPath("generator.js"))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 199, Col: 45}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var50))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 59, "\"></script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -735,25 +761,25 @@ func templateOptions(lang language.Tag) templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var49 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var49 == nil {
-			templ_7745c5c3_Var49 = templ.NopComponent
+		templ_7745c5c3_Var51 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var51 == nil {
+			templ_7745c5c3_Var51 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 58, "<option value=\"iso690\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 60, "<option value=\"iso690\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var50 string
-		templ_7745c5c3_Var50, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "ČSN ISO 690", "ISO 690"))
+		var templ_7745c5c3_Var52 string
+		templ_7745c5c3_Var52, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "ČSN ISO 690", "ISO 690"))
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 203, Col: 66}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var50))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var52))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 59, "</option> <option value=\"apa\">APA</option>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 61, "</option> <option value=\"apa\">APA</option>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

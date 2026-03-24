@@ -20,9 +20,9 @@ func NewGroupViewData(seedsGroup *entities.SeedsGroup) *GroupViewData {
 templ groupView(data *GroupViewData) {
 	{{ lang := getLang(ctx) }}
 <div class="flex-content-column">
-	<h2>{ transCs(lang ,"Stav archivace", "Capture state") }</h2>
+	<h2>{ transCs(lang ,"Stav archivace", "Current progress") }</h2>
 	<div class="flex-row">
-		<p>{ transCs(lang, "Odkaz na stav archivace: ", "Capture state link: ") }<a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a></p>
+		<p>{ transCs(lang, "Odkaz na stav archivace: ", "Progress link: ") }<a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a></p>
 		<button type="button" id="copy-group-link">{ transCs(lang, "Kopírovat odkaz", "Copy link") }</button>
 	</div>
 	<div>
@@ -37,7 +37,7 @@ templ groupView(data *GroupViewData) {
 			<tr>
 				<th>URL</th>
 				<th>{ transCs(lang, "Zkrácená archivní URL", "Shortened archival URL") }</th>
-				<th>{ transCs(lang, "Stav*", "State*") }</th>
+				<th>{ transCs(lang, "Stav*", "Report*") }</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -64,7 +64,7 @@ templ groupView(data *GroupViewData) {
 		<p>*<i>Pokud vidíte { prettyPrintCaptureState(entities.DoneSuccess, lang) }, znamená to, že link již můžete použít, ale v archivu se objeví až po indexaci.</i></p>
 	} else {
 		// TODO: Replace Úspěšně archivováno
-		<p>*<i>If you see { prettyPrintCaptureState(entities.DoneSuccess, lang) }, than the link can be copied and used, but the captured page will be available after indexing.</i></p>
+		<p>*<i>If you see { prettyPrintCaptureState(entities.DoneSuccess, lang) }, then the link can be copied and used, but the captured page will be available after indexing.</i></p>
 	}
 	if isCaptureCompleted(data.Group) {
 		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">{ transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator") }</a>
@@ -73,7 +73,7 @@ templ groupView(data *GroupViewData) {
 	} else {
 		<button disabled type="button">{ transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator") }</button>
 		<p>
-			{ transCs(lang, "Odkaz na generátor citací se zpřístupní, až budou všechny zdroje archivované.", "The link will be made available when all sources are archived.") }
+			{ transCs(lang, "Odkaz na generátor citací se zpřístupní, až budou všechny zdroje archivované.", "The link will be made available when all resources are archived.") }
 			<br>
 			{ transCs(lang, "Na tuto stránku se vrátíte tímto odkazem:", "You can return to this page with this link:") } <a href={ groupViewLink(data.Group) } id="group-link">{ groupViewLink(data.Group) }</a>.
 		</p>

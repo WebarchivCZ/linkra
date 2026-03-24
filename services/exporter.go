@@ -33,7 +33,7 @@ func (service ExporterService) GroupToExcel(group *entities.SeedsGroup, w io.Wri
 	if lang == language.Czech {
 		header = []any{"URL", "Zkrácený odkaz do Webarchivu", "Odkaz na detail", "Stav", "Odkaz do Webarchivu"}
 	} else {
-		header = []any{"URL", "Short wayback link", "Detail link", "State", "Wayback link"}
+		header = []any{"URL", "Short wayback link", "Detail link", "Report", "Link to Webarchiv"}
 	}
 
 	const sheet = "Export"
@@ -136,7 +136,7 @@ func (service *ExporterService) GroupToCsv(group *entities.SeedsGroup, writer io
 	if lang == language.Czech {
 		header = []string{"URL", "Zkrácený odkaz do Webarchivu", "Odkaz na detail", "Stav", "Odkaz do Webarchivu"}
 	} else {
-		header = []string{"URL", "Short wayback link", "Detail link", "State", "Wayback link"}
+		header = []string{"URL", "Short wayback link", "Detail link", "Report", "Link to Webarchiv"}
 	}
 
 	csvWriter := csv.NewWriter(writer)

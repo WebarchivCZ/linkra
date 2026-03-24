@@ -51,9 +51,9 @@ func seedView(data *SeedViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Detail archivovaného zdroje", "Detail of archived source"))
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Detail archivovaného zdroje", "Detail of archived resource"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 22, Col: 81}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 22, Col: 83}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -90,9 +90,9 @@ func seedView(data *SeedViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Stav:", "State:"))
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Stav:", "Report:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 30, Col: 42}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 30, Col: 43}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -116,9 +116,9 @@ func seedView(data *SeedViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var7 string
-		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Zkrácená archivní URL:", "Shortened archival URL:"))
+		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Zkrácená archivní URL:", "Short archived URL:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 35, Col: 79}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 35, Col: 75}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -161,7 +161,7 @@ func seedView(data *SeedViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var10 string
-		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Archivní URL:", "Archival URL:"))
+		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Archivní URL:", "Archived URL:"))
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 42, Col: 59}
 		}
@@ -210,9 +210,9 @@ func seedView(data *SeedViewData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var13 string
-			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Archivace zatím neproběhla", "The source is yet to be captured"))
+			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Archivace zatím neproběhla", "The resource is yet to be archived"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 47, Col: 93}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 47, Col: 95}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 			if templ_7745c5c3_Err != nil {
@@ -228,9 +228,9 @@ func seedView(data *SeedViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var14 string
-		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum archivace:", "Capture date:"))
+		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Datum archivace:", "Date of archiving:"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 52, Col: 61}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 52, Col: 66}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {
@@ -264,9 +264,9 @@ func seedView(data *SeedViewData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var16 string
-			templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Archivace zatím neproběhla", "The source is yet to be captured"))
+			templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Archivace zatím neproběhla", "The resource is yet to be archived"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 57, Col: 93}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/seed.templ`, Line: 57, Col: 95}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 			if templ_7745c5c3_Err != nil {
