@@ -439,8 +439,8 @@
         </div>
         <div class="flex-row case-controls">
           ${lang.trans("Pořadí jména a příjmení:", "Order:")}
-          <label><input type="radio" name="a-poradi" value="jmeno">${lang.trans("Jméno – Příjmení", "First name - Last name")}</label>
-          <label><input type="radio" name="a-poradi" value="prijmeni" checked>${lang.trans("Příjmení – Jméno", "Last name - First name")}</label>
+          <label><input type="radio" name="a-poradi" value="jmeno">${lang.trans("Jméno – Příjmení", "First name – Last name")}</label>
+          <label><input type="radio" name="a-poradi" value="prijmeni" checked>${lang.trans("Příjmení – Jméno", "Last name – First name")}</label>
         </div>
         <div class="flex-row case-controls">
           <label>${lang.trans("Interpunkce mezi jménem a příjmením:", "Punctuation between first name and last name:")}<input class="max-flex" type="text" value="," name="a-intjmeno"></label>
@@ -712,7 +712,7 @@
           <select class="flex-row" name="f-date-format">
             <option name="default" value="rok">${lang.trans(" -- Zvolte požadovaný formát -- ", " -- Choose a format -- ")}</option>
             <option name="rok" value="rok">${lang.trans("2025 (Jen rok)", "2025 (Year only)")}</option>
-            <option name="iso-date" value="iso-date">${lang.trans("2025-01-31 (Rok - Měsíc - Den)", "2025-01-31 (Year - Month - Day)")}</option>
+            <option name="iso-date" value="iso-date">${lang.trans("2025-01-31 (Rok – Měsíc – Den)", "2025-01-31 (Year – Month – Day)")}</option>
             <option name="iso" value="iso">2025-01-31T00:00:00+01:00 (ISO 8601)</option>
             <option name="rfc" value="rfc">${lang.trans("2025-01-31 00:00:00+01:00 (ISO 8601 s mezerou)", "2025-01-31 00:00:00+01:00 (ISO 8601 with space as separator)")}</option>
             <option name="apa" value="apa">${lang.trans("2025, leden 31 (APA styl)", "2025, january 31 (APA style)")}</option>

@@ -145,9 +145,9 @@ func generatorView(data *GeneratorViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var8 string
-		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Uživatelská - Upravte existující šablonu nebo vytvořte novou", "Custom - Edit existing template or create a new one"))
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Uživatelská – Upravte existující šablonu nebo vytvořte novou", "Custom – Edit existing template or create a new one"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 40, Col: 144}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 40, Col: 148}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -418,9 +418,9 @@ func generatorView(data *GeneratorViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var29 string
-		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Není nutné vyplnit všechna pole.", "It is not necessary to fill all fields."))
+		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Není nutné vyplnit všechna pole.", "It is not necessary to fill in all fields."))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 130, Col: 103}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 130, Col: 106}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 		if templ_7745c5c3_Err != nil {
@@ -462,7 +462,7 @@ func generatorView(data *GeneratorViewData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 36, "You can add new parts, delete existing ones, or edit default template. The order of parts can be changed by dragging them with a mouse. To confirm that you want to use the template, click the <b>Use custom template</b> button.")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 36, "You can add new parts, delete existing ones, or edit the default template. The order of parts can be changed by dragging them with a mouse. To confirm that you want to use the template, click the <b>Use custom template</b> button.")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

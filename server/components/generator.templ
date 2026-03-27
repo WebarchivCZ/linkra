@@ -37,7 +37,7 @@ templ generatorView(data *GeneratorViewData) {
 		<select id="template-select">
 			@templateOptions(lang)
 			<option value="custom">
-				{ transCs(lang, "Uživatelská - Upravte existující šablonu nebo vytvořte novou", "Custom - Edit existing template or create a new one") }
+				{ transCs(lang, "Uživatelská – Upravte existující šablonu nebo vytvořte novou", "Custom – Edit existing template or create a new one") }
 			</option>
 		</select>
 	</div>
@@ -127,7 +127,7 @@ templ generatorView(data *GeneratorViewData) {
 					</script>
 				</div>
 			</form>
-			<i>{ transCs(lang, "Není nutné vyplnit všechna pole.", "It is not necessary to fill all fields.") }</i>
+			<i>{ transCs(lang, "Není nutné vyplnit všechna pole.", "It is not necessary to fill in all fields.") }</i>
 		</section>
 
 		<section id="builder-section" hidden>
@@ -139,7 +139,7 @@ templ generatorView(data *GeneratorViewData) {
 					Pořadí jednotlivých částí je možné měnit přetažením myší.
 					Použití šablony je potřeba potvrdit tlačítkem <b>Použít vlastní šablonu</b>.
 				} else {
-					You can add new parts, delete existing ones, or edit default template.
+					You can add new parts, delete existing ones, or edit the default template.
 					The order of parts can be changed by dragging them with a mouse.
 					To confirm that you want to use the template, click the <b>Use custom template</b> button.
 				}
