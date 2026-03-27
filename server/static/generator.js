@@ -611,7 +611,7 @@
    * @param {HTMLFormElement} field
    */
   function initUrlField(field) {
-    initGenericUrlField(field, "URL", "Web resource URL");
+    initGenericUrlField(field, lang.trans("URL", "Web resource URL"), "url");
   }
 
   /**
