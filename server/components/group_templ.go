@@ -390,7 +390,7 @@ func groupView(data *GroupViewData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var26 string
-			templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator"))
+			templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Pokračovat na generátor citací", "Continue to Citation Generator"))
 			if templ_7745c5c3_Err != nil {
 				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 70, Col: 171}
 			}
@@ -408,7 +408,7 @@ func groupView(data *GroupViewData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var27 string
-			templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator"))
+			templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Pokračovat na generátor citací", "Continue to Citation Generator"))
 			if templ_7745c5c3_Err != nil {
 				return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/group.templ`, Line: 74, Col: 119}
 			}

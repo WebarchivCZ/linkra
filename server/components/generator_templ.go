@@ -49,7 +49,7 @@ func generatorView(data *GeneratorViewData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Generátor citací", "Citation generator"))
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(transCs(lang, "Generátor citací", "Citation Generator"))
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/components/generator.templ`, Line: 20, Col: 65}
 		}

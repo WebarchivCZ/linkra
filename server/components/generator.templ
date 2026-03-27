@@ -17,7 +17,7 @@ func NewGeneratorViewData(group *entities.SeedsGroup) *GeneratorViewData {
 templ generatorView(data *GeneratorViewData) {
 	{{ lang := getLang(ctx) }}
 	<div class="flex-content-column">
-		<h2>{ transCs(lang, "Generátor citací", "Citation generator") }</h2>
+		<h2>{ transCs(lang, "Generátor citací", "Citation Generator") }</h2>
 	</div>
 	<!-- Output -->
 	if data.Group != nil {

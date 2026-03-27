@@ -67,11 +67,11 @@ templ groupView(data *GroupViewData) {
 		<p>*<i>If you see { prettyPrintCaptureState(entities.DoneSuccess, lang) }, then the link can be copied and used, but the captured page will be available after indexing.</i></p>
 	}
 	if isCaptureCompleted(data.Group) {
-		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">{ transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator") }</a>
+		<a href={ path.Join("/citace/", data.Group.ShadowID) } target="_blank" class="btn">{ transCs(lang, "Pokračovat na generátor citací", "Continue to Citation Generator") }</a>
 		<!-- If this script exists, then we won't try to reload the page to fetch new data. Otherwise the page should automatically reload after a while. -->
 		<script type="application/json" id="capture-completed"></script>
 	} else {
-		<button disabled type="button">{ transCs(lang, "Pokračovat na generátor citací", "Continue to citation generator") }</button>
+		<button disabled type="button">{ transCs(lang, "Pokračovat na generátor citací", "Continue to Citation Generator") }</button>
 		<p>
 			{ transCs(lang, "Odkaz na generátor citací se zpřístupní, až budou všechny zdroje archivované.", "The link will be made available when all resources are archived.") }
 			<br>
