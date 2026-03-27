@@ -76,6 +76,7 @@ templ header(subHeading *Translations) {
 templ nav() {
 	{{ lang := getLang(ctx) }}
 	<div class="flex-row nav-wrapper">
+		<span>&nbsp;</span>
 		<span class="nav">
 			<a href="/">{ transCs(lang, "Hlavní strana", "Home page") }</a>
 			<a href="/citace/">{ transCs(lang, "Generátor citací", "Citation generator") }</a>
