@@ -422,7 +422,7 @@
           <b>${lang.trans("Další autoři", "Other authors")}</b>
         </div>
         <div class="flex-row case-controls">
-          ${lang.trans("Velikost písma – Jméno:", "Font capitalization – First name:")}
+          ${lang.trans("Velikost písma – Jméno:", "Font case – First name:")}
           <label><input type="radio" name="a-formatjmeno" value="vychozi">${lang.trans("Výchozí", "Default")}</label>
           <label><input type="radio" name="a-formatjmeno" value="male">${lang.trans("Malé", "Lowercase")}</label>
           <label><input type="radio" name="a-formatjmeno" value="velke">${lang.trans("Velké", "Uppercase")}</label>
@@ -430,7 +430,7 @@
           <label><input type="radio" name="a-formatjmeno" value="iniciala">${lang.trans("Iniciála", "Initial")}</label>
         </div>
         <div class="flex-row case-controls">
-          ${lang.trans("Velikost písma – Příjmení:", "Font capitalization – Last name:")}
+          ${lang.trans("Velikost písma – Příjmení:", "Font case – Last name:")}
           <label><input type="radio" name="a-formatprijmeni" value="vychozi">${lang.trans("Výchozí", "Default")}</label>
           <label><input type="radio" name="a-formatprijmeni" value="male">${lang.trans("Malé", "Lowercase")}</label>
           <label><input type="radio" name="a-formatprijmeni" value="velke" checked>${lang.trans("Velké", "Uppercase")}</label>
