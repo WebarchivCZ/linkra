@@ -97,7 +97,7 @@ Nastavení serveru se mění pomocí proměnných prostředí. Pokud některá h
 | `VALKEY_ADDR` | `localhost` | Adresa, na které běží Valkey databáze |
 | `VALKEY_PORT` | `6379` | Port, na kterém běží Valkey databáze |
 | `SERVER_ADDRESS` | `localhost:8080` | Adresa a port, na kterém běží webové rozhraní serveru |
-| `SERVER_HOST` | `http://localhost:8080` | Protokol, adresa a host, na kterém je webové rozhraní dostupné z internetu. Může být stejné jako `SERVER_ADDRESS`, pokud je vyžadován jen lokální přístup. |
+| `SERVER_HOST` | `http://localhost:8080` | Protokol, adresa a port, na kterém je webové rozhraní dostupné z internetu. Může být stejné jako `SERVER_ADDRESS`, pokud je vyžadován jen lokální přístup. |
 
 ### Nastavení workerů
 
@@ -105,8 +105,8 @@ Nastavení workerů se provádí pomocí JSON souboru. Vzorový soubor se nachá
 
 Musí to být JSON objekt, který obsahuje následující klíče:
 
-| Parametr | Typ | Popis |
-|----------|-----|-------|
+| Klíč | Typ | Popis |
+|------|-----|-------|
 | `outputDir` | String | Cesta k adresáři, kam má worker ukládat archivní soubory. |
 | `discardArchiveFiles` | Boolean | Pokud je `true`, worker přeskočí ukládání archivních soubory. Vhodné při testování, pokud nás zajímají pouze metadata sklizně. |
 | `valkeyUrl` | String | Adresa a port Valkey databáze pro komunikaci se serverem. |
