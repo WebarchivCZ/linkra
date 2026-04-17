@@ -34,16 +34,16 @@ elif [ $# -eq 1 ]; then
 # env variables used for running as native process.
 
 # --- Server configuration ---
-# Where to mount the DB file
-SQLITE_DB_MOUNT="./storage.db"
+# Where to mount the DB file (relative to docker-compose.yaml)
+SQLITE_DB_MOUNT="../../storage.db"
 # Where will be the app accessed (public URL)
 SERVER_HOST="http://localhost:8080"
 # Port
 SERVER_PORT="8080"
 
 # --- Worker configuration ---
-# Where to store captures
-CAPTURES_MOUNT="./captures/"
+# Where to store captures (relative to docker-compose.yaml)
+CAPTURES_MOUNT="../../captures/"
 # Do we want to discard captures
 DISCARD_ARCHIVE_FILES="false"
 # Settings for Scoop
