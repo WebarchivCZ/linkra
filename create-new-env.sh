@@ -47,7 +47,9 @@ CAPTURES_MOUNT="../../captures/"
 # Do we want to discard captures
 DISCARD_ARCHIVE_FILES="false"
 # Settings for Scoop
-CAPTURE_SETTINGS='{}'
+CAPTURE_SETTINGS='{
+    "chromiumSandbox": false
+  }'
 
 # ------------------------------------------------------------------------------
 elif [ $# -eq 2 ]; then
@@ -93,6 +95,7 @@ services:
       - VALKEY_PORT=6379
       - SERVER_ADDRESS=0.0.0.0:8080
       - SERVER_HOST=$SERVER_HOST
+    restart: on-failure:3
 
   linkra-worker:
     build:
@@ -105,6 +108,10 @@ services:
     depends_on:
       - valkey
     restart: on-failure:3
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
 
   valkey:
     image: valkey/valkey:8.0-alpine

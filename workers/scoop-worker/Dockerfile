@@ -6,6 +6,11 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 # -----------------------------------------------------------
 
+# Where should playwright look for browsers
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+
+RUN mkdir -p /ms-playwright && chmod 755 /ms-playwright
+
 WORKDIR /app
 
 COPY package.json ./
@@ -16,7 +21,20 @@ RUN npx playwright install-deps chromium
 
 COPY main.js ./
 
-# Please mount apropriate config file in docker compose or on command line
+# Please mount appropriate config file in docker compose or on command line
 #COPY config.json ./
+
+# Create non-root user
+RUN groupadd -r scoop && useradd -r -g scoop -m -d /home/scoop scoop
+
+# Set ownership
+RUN chown -R scoop:scoop /app /home/scoop /ms-playwright
+
+RUN chmod 555 /ms-playwright
+
+# Switch user
+USER scoop
+
+WORKDIR /app
 
 ENTRYPOINT ["/tini", "--" ,"node", "main.js", "run"]
