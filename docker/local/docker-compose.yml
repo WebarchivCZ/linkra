@@ -24,6 +24,9 @@ services:
   linkra-worker:
     build:
       context: ../../workers/scoop-worker
+      args:
+        TARGET_UID: 1111
+        TARGET_GID: 1111
     volumes:
       - ./worker-config.json:/app/config.json:ro
       - ./captures:/app/captures/:rw

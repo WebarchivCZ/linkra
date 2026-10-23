@@ -84,9 +84,6 @@ services:
   linkra-server:
     build:
       context: ../..
-      args:
-        TARGET_UID: ${HOST_UID}
-        TARGET_GID: ${HOST_GID}
     ports:
       - $SERVER_PORT:8080
     volumes:
@@ -106,6 +103,9 @@ services:
   linkra-worker:
     build:
       context: ../../workers/scoop-worker
+      args:
+        TARGET_UID: ${HOST_UID}
+        TARGET_GID: ${HOST_GID}
     volumes:
       - ./worker-config.json:/app/config.json:ro
       - $CAPTURES_MOUNT:/app/captures/:rw
