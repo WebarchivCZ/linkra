@@ -41,6 +41,9 @@ SERVER_HOST="http://localhost:8080"
 # Port
 SERVER_PORT="8080"
 
+HOST_UID="1000"
+HOST_GID="1000"
+
 # --- Worker configuration ---
 # Where to store captures (relative to docker-compose.yaml)
 CAPTURES_MOUNT="../../captures/"
@@ -81,6 +84,9 @@ services:
   linkra-server:
     build:
       context: ../..
+      args:
+        TARGET_UID: ${HOST_UID}
+        TARGET_GID: ${HOST_GID}
     ports:
       - $SERVER_PORT:8080
     volumes:
