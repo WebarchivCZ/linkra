@@ -1,0 +1,8 @@
+{
+  "discardArchiveFiles": false,
+  "outputDir": "/app/captures/",
+  "valkeyUrl": "redis://queue:6379",
+  "captureSettings": {
+    "chromiumSandbox": false
+  }
+}
